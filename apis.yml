@@ -1,0 +1,32 @@
+aid: edamam-recipes
+name: Edamam recipes
+description: "Recipe Search"
+url: https://developer.edamam.com/edamam-docs-recipe-api
+specificationVersion: '0.20'
+created: '2026-05-28'
+modified: '2026-05-28'
+x-source: public-apis/public-apis
+x-category: "Food & Drink"
+x-tier: 3
+x-tier-reason: bulk-registered-from-public-apis
+tags:
+  - Food And Drink
+  - Public APIs
+apis:
+  - name: Edamam recipes
+    description: "Recipe Search"
+    humanURL: https://developer.edamam.com/edamam-docs-recipe-api
+    baseURL: https://developer.edamam.com/edamam-docs-recipe-api
+    tags:
+      - Food And Drink
+    properties:
+      - type: Documentation
+        url: https://developer.edamam.com/edamam-docs-recipe-api
+common:
+  - type: Website
+    url: https://developer.edamam.com/edamam-docs-recipe-api
+  - type: PublicAPIsListing
+    url: https://github.com/public-apis/public-apis
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
