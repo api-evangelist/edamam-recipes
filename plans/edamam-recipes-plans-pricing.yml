@@ -1,0 +1,189 @@
+apiCommonsPlans: "0.1"
+
+info:
+  name: Edamam Plans and Pricing
+  description: >-
+    Commercial pricing for Edamam's Recipe Search, Nutrition Analysis, Food Database, and Meal Planner APIs.
+    All paid plans require attribution ("powered by Edamam" + logo) and prohibit automated data collection.
+    Caching of nutrient data is limited; on subscription cancellation, cached data must be deleted.
+  url: https://www.edamam.com/
+  documentation: https://developer.edamam.com/edamam-recipe-api
+  termsOfService: https://www.edamam.com/page/api-terms-and-conditions
+  contact:
+    email: api@edamam.com
+  currency: USD
+  billingInterval: monthly
+  created: '2026-05-30'
+  modified: '2026-05-30'
+
+products:
+
+  - id: recipe-search
+    name: Recipe Search API
+    description: Search and retrieve recipes from a 2M+ recipe index with 30+ filters (diet, health, cuisine, meal, dish, nutrients, time, CO2e).
+    documentation: https://developer.edamam.com/edamam-docs-recipe-api
+    openapi: https://api.edamam.com/doc/open-api/recipe-search-v2.yaml
+    plans:
+      - id: recipe-enterprise-basic
+        name: Enterprise Basic
+        price: 9
+        billingInterval: monthly
+        trial:
+          length: 10
+          unit: day
+        commercialUse: true
+        contentScope: third-party web recipes
+        features:
+          - 10000 API calls / month
+          - 10 calls / minute throttle
+          - Attribution required
+          - No caching beyond macro nutrients
+
+      - id: recipe-enterprise-core
+        name: Enterprise Core
+        price: 99
+        billingInterval: monthly
+        commercialUse: true
+        contentScope: third-party web recipes
+        features:
+          - 500000 API calls / month
+          - 100 calls / minute throttle
+          - Attribution required
+          - Limited macro-nutrient caching
+
+      - id: recipe-enterprise-plus
+        name: Enterprise Plus
+        price: 399
+        billingInterval: monthly
+        trial:
+          length: 10
+          unit: day
+        commercialUse: true
+        contentScope: Edamam-owned recipes with cooking instructions
+        features:
+          - 1000000 API calls / month
+          - 300 calls / minute throttle
+          - Owned recipe content (instructions included)
+          - Carbon footprint (CO2e) data available
+
+      - id: recipe-enterprise-unlimited
+        name: Enterprise Unlimited
+        price: null
+        priceNote: Custom — contact sales
+        commercialUse: true
+        contentScope: Custom recipe content + custom integrations
+        features:
+          - Unlimited API calls
+          - Custom throttling
+          - Custom SLA and support
+
+  - id: nutrition-analysis
+    name: Nutrition Analysis API
+    description: NLP-driven nutrient analysis for recipes and individual ingredient text lines.
+    documentation: https://developer.edamam.com/edamam-docs-nutrition-api
+    openapi: https://api.edamam.com/doc/open-api/nutrition-analysis-v1.yaml
+    plans:
+      - id: nutrition-developer
+        name: Developer
+        price: 0
+        billingInterval: monthly
+        commercialUse: false
+        features:
+          - Free developer key
+          - Limited throughput (typically 10 calls / minute, 10000 / month)
+          - Non-commercial use only
+      - id: nutrition-enterprise
+        name: Enterprise
+        price: null
+        priceNote: Custom — contact sales
+        commercialUse: true
+        features:
+          - Commercial use license
+          - Custom volume and throughput
+          - SLA and support
+
+  - id: food-database
+    name: Food Database API
+    description: Food parsing by keyword, brand, UPC/EAN; nutrient lookup; AI Vision food recognition; autocomplete.
+    documentation: https://developer.edamam.com/food-database-api-docs
+    openapi: https://api.edamam.com/doc/open-api/food-db-v2.yaml
+    plans:
+      - id: food-basic-vision
+        name: Basic Vision
+        price: 14
+        billingInterval: monthly
+        commercialUse: true
+        features:
+          - 100000 API calls / month
+          - 500 AI Vision requests / month
+          - Includes MCP server access at mcp.edamam.com/mcp/food
+
+      - id: food-core
+        name: Core
+        price: 69
+        billingInterval: monthly
+        commercialUse: true
+        features:
+          - 750000 API calls / month
+          - Pay-as-you-go AI Vision
+          - MCP server access
+
+      - id: food-plus
+        name: Plus
+        price: 299
+        billingInterval: monthly
+        commercialUse: true
+        features:
+          - 5000000 API calls / month
+          - 10000 AI Vision requests / month
+          - MCP server access
+
+      - id: food-enterprise
+        name: Enterprise
+        price: null
+        priceNote: Custom — contact sales
+        commercialUse: true
+        features:
+          - Custom volume
+          - Custom AI Vision allotment
+          - SLA and support
+
+  - id: meal-planner
+    name: Meal Planner API
+    description: Generate personalized meal plans (up to 2 weeks) based on nutritional goals, diet, and health labels.
+    documentation: https://developer.edamam.com/meal-planner-api
+    plans:
+      - id: meal-developer
+        name: Developer
+        price: 0
+        billingInterval: monthly
+        commercialUse: false
+        features:
+          - 10 MAU
+          - 20 meal plan calls / day
+          - 300 recipe calls / minute
+          - No caching
+      - id: meal-enterprise-core
+        name: Enterprise Core
+        price: 300
+        billingInterval: monthly
+        trial:
+          length: 10
+          unit: day
+        commercialUse: true
+        features:
+          - 1000 MAU
+          - 30 meal plan calls / day
+          - 5000 recipe calls / minute
+          - Macro-nutrient caching allowed
+          - Instacart integration
+          - Recipe replacement
+      - id: meal-enterprise-custom
+        name: Enterprise Custom
+        price: null
+        priceNote: Custom — starts at $300/mo
+        commercialUse: true
+        features:
+          - Custom MAU
+          - Custom meal-plan throughput
+          - Custom integrations

@@ -1,0 +1,94 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://api-evangelist.com/edamam-recipes/json-structure/edamam-recipe-structure.json",
+  "name": "EdamamRecipe",
+  "description": "A recipe returned by the Edamam Recipe Search API v2.",
+  "type": "object",
+  "required": ["uri", "label"],
+  "properties": {
+    "uri": {"type": "uri"},
+    "label": {"type": "string"},
+    "image": {"type": "uri"},
+    "images": {
+      "type": "object",
+      "properties": {
+        "THUMBNAIL": {"$ref": "#/definitions/ImageInfo"},
+        "SMALL": {"$ref": "#/definitions/ImageInfo"},
+        "REGULAR": {"$ref": "#/definitions/ImageInfo"},
+        "LARGE": {"$ref": "#/definitions/ImageInfo"}
+      }
+    },
+    "source": {"type": "string"},
+    "url": {"type": "uri"},
+    "shareAs": {"type": "uri"},
+    "yield": {"type": "double"},
+    "dietLabels": {"type": "array", "items": {"type": "string"}},
+    "healthLabels": {"type": "array", "items": {"type": "string"}},
+    "cautions": {"type": "array", "items": {"type": "string"}},
+    "ingredientLines": {"type": "array", "items": {"type": "string"}},
+    "ingredients": {"type": "array", "items": {"$ref": "#/definitions/Ingredient"}},
+    "calories": {"type": "double"},
+    "glycemicIndex": {"type": "double"},
+    "inflammatoryIndex": {"type": "double"},
+    "totalCO2Emissions": {"type": "double"},
+    "co2EmissionsClass": {"type": "string", "enum": ["A+", "A", "B", "C", "D", "E", "F", "G"]},
+    "totalWeight": {"type": "double"},
+    "totalTime": {"type": "double"},
+    "cuisineType": {"type": "array", "items": {"type": "string"}},
+    "mealType": {"type": "array", "items": {"type": "string"}},
+    "dishType": {"type": "array", "items": {"type": "string"}},
+    "instructionLines": {"type": "array", "items": {"type": "string"}},
+    "tags": {"type": "array", "items": {"type": "string"}},
+    "externalId": {"type": "string"},
+    "totalNutrients": {"$ref": "#/definitions/NutrientsInfo"},
+    "totalDaily": {"$ref": "#/definitions/NutrientsInfo"},
+    "digest": {"type": "array", "items": {"$ref": "#/definitions/DigestEntry"}}
+  },
+  "definitions": {
+    "Ingredient": {
+      "type": "object",
+      "properties": {
+        "text": {"type": "string"},
+        "quantity": {"type": "double"},
+        "measure": {"type": "string"},
+        "food": {"type": "string"},
+        "weight": {"type": "double"},
+        "foodId": {"type": "string"}
+      }
+    },
+    "NutrientsInfo": {
+      "type": "object",
+      "additionalProperties": {"$ref": "#/definitions/NutrientInfo"}
+    },
+    "NutrientInfo": {
+      "type": "object",
+      "required": ["label", "quantity", "unit"],
+      "properties": {
+        "label": {"type": "string"},
+        "quantity": {"type": "double"},
+        "unit": {"type": "string"}
+      }
+    },
+    "DigestEntry": {
+      "type": "object",
+      "properties": {
+        "label": {"type": "string"},
+        "tag": {"type": "string"},
+        "schemaOrgTag": {"type": "string"},
+        "total": {"type": "double"},
+        "hasRDI": {"type": "boolean"},
+        "daily": {"type": "double"},
+        "unit": {"type": "string"},
+        "sub": {"type": "array", "items": {"$ref": "#/definitions/DigestEntry"}}
+      }
+    },
+    "ImageInfo": {
+      "type": "object",
+      "properties": {
+        "url": {"type": "uri"},
+        "width": {"type": "int32"},
+        "height": {"type": "int32"}
+      }
+    }
+  }
+}

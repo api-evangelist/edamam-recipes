@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.com/edamam-recipes/json-schema/edamam-food-schema.json",
+  "title": "Edamam Food",
+  "description": "A food entity returned by the Food Database API v2 parser/nutrients endpoints.",
+  "type": "object",
+  "required": ["foodId"],
+  "properties": {
+    "foodId": {"type": "string"},
+    "label": {"type": "string"},
+    "knownAs": {"type": "string"},
+    "brand": {"type": "string"},
+    "category": {"type": "string"},
+    "categoryLabel": {"type": "string", "enum": ["food", "meal"]},
+    "foodContentsLabel": {"type": "string"},
+    "image": {"type": "string", "format": "uri"},
+    "nutrients": {
+      "type": "object",
+      "additionalProperties": {"type": "number"},
+      "description": "Per-100g nutrient values keyed by Edamam nutrient code (ENERC_KCAL, PROCNT, FAT, CHOCDF, FIBTG, etc.)."
+    },
+    "servingSizes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "uri": {"type": "string"},
+          "label": {"type": "string"},
+          "quantity": {"type": "number"}
+        }
+      }
+    },
+    "servingsPerContainer": {"type": "number"}
+  }
+}

@@ -1,0 +1,104 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.com/edamam-recipes/json-schema/edamam-recipe-schema.json",
+  "title": "Edamam Recipe",
+  "description": "A recipe returned by the Edamam Recipe Search API v2.",
+  "type": "object",
+  "required": ["uri", "label"],
+  "properties": {
+    "uri": {
+      "type": "string",
+      "format": "uri",
+      "description": "Edamam ontology URI for the recipe (http://www.edamam.com/ontologies/edamam.owl#recipe_<hash>)."
+    },
+    "label": {"type": "string", "description": "Display title."},
+    "image": {"type": "string", "format": "uri"},
+    "images": {
+      "type": "object",
+      "properties": {
+        "THUMBNAIL": {"$ref": "#/$defs/ImageInfo"},
+        "SMALL": {"$ref": "#/$defs/ImageInfo"},
+        "REGULAR": {"$ref": "#/$defs/ImageInfo"},
+        "LARGE": {"$ref": "#/$defs/ImageInfo"}
+      }
+    },
+    "source": {"type": "string", "description": "Provider/source name."},
+    "url": {"type": "string", "format": "uri"},
+    "shareAs": {"type": "string", "format": "uri"},
+    "yield": {"type": "number", "minimum": 0},
+    "dietLabels": {"type": "array", "items": {"type": "string"}},
+    "healthLabels": {"type": "array", "items": {"type": "string"}},
+    "cautions": {"type": "array", "items": {"type": "string"}},
+    "ingredientLines": {"type": "array", "items": {"type": "string"}},
+    "ingredients": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/Ingredient"}
+    },
+    "calories": {"type": "number", "minimum": 0},
+    "glycemicIndex": {"type": "number"},
+    "inflammatoryIndex": {"type": "number"},
+    "totalCO2Emissions": {"type": "number", "minimum": 0},
+    "co2EmissionsClass": {
+      "type": "string",
+      "enum": ["A+", "A", "B", "C", "D", "E", "F", "G"]
+    },
+    "totalWeight": {"type": "number", "minimum": 0},
+    "totalTime": {"type": "number", "minimum": 0},
+    "cuisineType": {"type": "array", "items": {"type": "string"}},
+    "mealType": {"type": "array", "items": {"type": "string"}},
+    "dishType": {"type": "array", "items": {"type": "string"}},
+    "instructionLines": {"type": "array", "items": {"type": "string"}},
+    "tags": {"type": "array", "items": {"type": "string"}},
+    "externalId": {"type": "string"},
+    "totalNutrients": {"$ref": "#/$defs/NutrientsInfo"},
+    "totalDaily": {"$ref": "#/$defs/NutrientsInfo"},
+    "digest": {"type": "array", "items": {"$ref": "#/$defs/DigestEntry"}}
+  },
+  "$defs": {
+    "Ingredient": {
+      "type": "object",
+      "properties": {
+        "text": {"type": "string"},
+        "quantity": {"type": "number"},
+        "measure": {"type": "string"},
+        "food": {"type": "string"},
+        "weight": {"type": "number"},
+        "foodId": {"type": "string"}
+      }
+    },
+    "NutrientsInfo": {
+      "type": "object",
+      "additionalProperties": {"$ref": "#/$defs/NutrientInfo"}
+    },
+    "NutrientInfo": {
+      "type": "object",
+      "required": ["label", "quantity", "unit"],
+      "properties": {
+        "label": {"type": "string"},
+        "quantity": {"type": "number"},
+        "unit": {"type": "string"}
+      }
+    },
+    "DigestEntry": {
+      "type": "object",
+      "properties": {
+        "label": {"type": "string"},
+        "tag": {"type": "string"},
+        "schemaOrgTag": {"type": "string"},
+        "total": {"type": "number"},
+        "hasRDI": {"type": "boolean"},
+        "daily": {"type": "number"},
+        "unit": {"type": "string"},
+        "sub": {"type": "array", "items": {"$ref": "#/$defs/DigestEntry"}}
+      }
+    },
+    "ImageInfo": {
+      "type": "object",
+      "properties": {
+        "url": {"type": "string", "format": "uri"},
+        "width": {"type": "integer"},
+        "height": {"type": "integer"}
+      }
+    }
+  }
+}

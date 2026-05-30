@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://api-evangelist.com/edamam-recipes/json-structure/edamam-food-structure.json",
+  "name": "EdamamFood",
+  "description": "Food entity from the Edamam Food Database API v2.",
+  "type": "object",
+  "required": ["foodId"],
+  "properties": {
+    "foodId": {"type": "string"},
+    "label": {"type": "string"},
+    "knownAs": {"type": "string"},
+    "brand": {"type": "string"},
+    "category": {"type": "string"},
+    "categoryLabel": {"type": "string", "enum": ["food", "meal"]},
+    "foodContentsLabel": {"type": "string"},
+    "image": {"type": "uri"},
+    "nutrients": {
+      "type": "object",
+      "additionalProperties": {"type": "double"}
+    },
+    "servingSizes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "uri": {"type": "uri"},
+          "label": {"type": "string"},
+          "quantity": {"type": "double"}
+        }
+      }
+    },
+    "servingsPerContainer": {"type": "double"}
+  }
+}

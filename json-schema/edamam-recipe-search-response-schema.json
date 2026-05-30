@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.com/edamam-recipes/json-schema/edamam-recipe-search-response-schema.json",
+  "title": "Edamam Recipe Search Response",
+  "description": "Paged response from Recipe Search API v2.",
+  "type": "object",
+  "properties": {
+    "from": {"type": "integer", "minimum": 1},
+    "to": {"type": "integer", "minimum": 1},
+    "count": {"type": "integer", "minimum": 0},
+    "_links": {
+      "type": "object",
+      "properties": {
+        "self": {"$ref": "#/$defs/Link"},
+        "next": {"$ref": "#/$defs/Link"}
+      }
+    },
+    "hits": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "recipe": {"$ref": "edamam-recipe-schema.json"},
+          "_links": {
+            "type": "object",
+            "properties": {"self": {"$ref": "#/$defs/Link"}}
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "Link": {
+      "type": "object",
+      "required": ["href"],
+      "properties": {
+        "href": {"type": "string", "format": "uri"},
+        "title": {"type": "string"}
+      }
+    }
+  }
+}

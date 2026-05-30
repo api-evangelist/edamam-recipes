@@ -1,0 +1,75 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "https://api.edamam.com/api/recipes/v2",
+    "query": {
+      "type": "public",
+      "q": "chicken curry",
+      "app_id": "YOUR_APP_ID",
+      "app_key": "YOUR_APP_KEY",
+      "diet": "high-protein",
+      "health": "gluten-free",
+      "cuisineType": "Indian",
+      "mealType": "Dinner",
+      "calories": "300-700",
+      "time": "10-60",
+      "imageSize": "REGULAR",
+      "random": false
+    },
+    "headers": {
+      "Accept": "application/json",
+      "Accept-Encoding": "gzip",
+      "Edamam-Account-User": "user-12345"
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "from": 1,
+      "to": 20,
+      "count": 1247,
+      "_links": {
+        "next": {
+          "href": "https://api.edamam.com/api/recipes/v2?type=public&q=chicken+curry&app_id=YOUR_APP_ID&app_key=YOUR_APP_KEY&_cont=CHcVQBtNNQphDmgVQntAEX4BYldtBQADRGFGAGcQYAJyVgEHe1NzAVZSRDdABFB6CARMVWcSXgZxLg",
+          "title": "Next page"
+        }
+      },
+      "hits": [
+        {
+          "recipe": {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#recipe_b79327d05b8e5b838ad6cfd9576b30b6",
+            "label": "Chicken Tikka Masala",
+            "image": "https://www.edamam.com/web-img/abc/chicken-tikka-masala.jpg",
+            "source": "BBC Good Food",
+            "url": "https://www.bbcgoodfood.com/recipes/chicken-tikka-masala",
+            "shareAs": "https://www.edamam.com/recipe/chicken-tikka-masala-b79327d05b8e5b838ad6cfd9576b30b6",
+            "yield": 4,
+            "dietLabels": ["High-Protein", "Low-Carb"],
+            "healthLabels": ["Sugar-Conscious", "Gluten-Free", "Peanut-Free", "Tree-Nut-Free"],
+            "cautions": ["Sulfites"],
+            "ingredientLines": [
+              "4 boneless chicken breasts, cubed",
+              "1 cup plain yogurt",
+              "2 tbsp tikka masala paste",
+              "400ml coconut milk",
+              "1 onion, finely chopped"
+            ],
+            "calories": 1842.7,
+            "totalWeight": 1532.4,
+            "totalTime": 45,
+            "cuisineType": ["indian"],
+            "mealType": ["dinner"],
+            "dishType": ["main course"],
+            "co2EmissionsClass": "C"
+          },
+          "_links": {
+            "self": {
+              "href": "https://api.edamam.com/api/recipes/v2/b79327d05b8e5b838ad6cfd9576b30b6?type=public&app_id=YOUR_APP_ID&app_key=YOUR_APP_KEY",
+              "title": "Self"
+            }
+          }
+        }
+      ]
+    }
+  }
+}

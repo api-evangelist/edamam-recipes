@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.com/edamam-recipes/json-schema/edamam-nutrient-info-schema.json",
+  "title": "Edamam Nutrient Info",
+  "description": "Single nutrient entry used in totalNutrients and totalDaily maps.",
+  "type": "object",
+  "required": ["label", "quantity", "unit"],
+  "properties": {
+    "label": {"type": "string"},
+    "quantity": {"type": "number"},
+    "unit": {"type": "string"}
+  }
+}

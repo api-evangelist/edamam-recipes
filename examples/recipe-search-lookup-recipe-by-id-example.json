@@ -1,0 +1,48 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "https://api.edamam.com/api/recipes/v2/b79327d05b8e5b838ad6cfd9576b30b6",
+    "query": {
+      "type": "public",
+      "app_id": "YOUR_APP_ID",
+      "app_key": "YOUR_APP_KEY"
+    },
+    "headers": {
+      "Accept": "application/json",
+      "Edamam-Account-User": "user-12345"
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "recipe": {
+        "uri": "http://www.edamam.com/ontologies/edamam.owl#recipe_b79327d05b8e5b838ad6cfd9576b30b6",
+        "label": "Chicken Tikka Masala",
+        "image": "https://www.edamam.com/web-img/abc/chicken-tikka-masala.jpg",
+        "source": "BBC Good Food",
+        "url": "https://www.bbcgoodfood.com/recipes/chicken-tikka-masala",
+        "yield": 4,
+        "dietLabels": ["High-Protein", "Low-Carb"],
+        "healthLabels": ["Sugar-Conscious", "Gluten-Free"],
+        "ingredients": [
+          {
+            "text": "4 boneless chicken breasts, cubed",
+            "quantity": 4,
+            "measure": "<unit>",
+            "food": "chicken breasts",
+            "weight": 680,
+            "foodId": "food_avzj4ttauwde5kbra5gj4ay2qq79"
+          }
+        ],
+        "calories": 1842.7,
+        "totalNutrients": {
+          "ENERC_KCAL": {"label": "Energy", "quantity": 1842.7, "unit": "kcal"},
+          "PROCNT": {"label": "Protein", "quantity": 162.4, "unit": "g"},
+          "FAT": {"label": "Fat", "quantity": 95.3, "unit": "g"},
+          "CHOCDF": {"label": "Carbs", "quantity": 62.1, "unit": "g"}
+        },
+        "co2EmissionsClass": "C"
+      }
+    }
+  }
+}

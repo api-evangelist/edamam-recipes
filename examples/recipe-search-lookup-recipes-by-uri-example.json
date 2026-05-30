@@ -1,0 +1,31 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "https://api.edamam.com/api/recipes/v2/by-uri",
+    "query": {
+      "type": "public",
+      "uri": [
+        "http://www.edamam.com/ontologies/edamam.owl#recipe_b79327d05b8e5b838ad6cfd9576b30b6",
+        "http://www.edamam.com/ontologies/edamam.owl#recipe_a3f9f8c0e3b2c4d5e6f7a8b9c0d1e2f3"
+      ],
+      "app_id": "YOUR_APP_ID",
+      "app_key": "YOUR_APP_KEY"
+    },
+    "headers": {
+      "Accept": "application/json",
+      "Edamam-Account-User": "user-12345"
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "from": 1,
+      "to": 2,
+      "count": 2,
+      "hits": [
+        {"recipe": {"label": "Chicken Tikka Masala", "yield": 4}},
+        {"recipe": {"label": "Vegan Pad Thai", "yield": 2}}
+      ]
+    }
+  }
+}

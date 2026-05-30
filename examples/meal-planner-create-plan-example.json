@@ -1,0 +1,44 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "https://api.edamam.com/api/meal-planner/v1/{app_id}/select",
+    "headers": {
+      "Authorization": "Basic <base64(app_id:app_key)>",
+      "Content-Type": "application/json",
+      "Edamam-Account-User": "user-12345"
+    },
+    "body": {
+      "size": 7,
+      "plan": {
+        "accept": {
+          "all": [
+            {"health": ["VEGAN"]}
+          ]
+        },
+        "fit": {
+          "ENERC_KCAL": {"min": 1600, "max": 2200}
+        },
+        "sections": {
+          "Breakfast": {"accept": {"all": [{"meal": ["breakfast"]}]}, "fit": {"ENERC_KCAL": {"min": 300, "max": 600}}},
+          "Lunch": {"accept": {"all": [{"meal": ["lunch/dinner"]}]}, "fit": {"ENERC_KCAL": {"min": 500, "max": 800}}},
+          "Dinner": {"accept": {"all": [{"meal": ["lunch/dinner"]}]}, "fit": {"ENERC_KCAL": {"min": 600, "max": 1000}}}
+        }
+      }
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "status": "OK",
+      "selection": [
+        {
+          "sections": {
+            "Breakfast": {"_links": {"self": {"href": "https://api.edamam.com/api/recipes/v2/.../recipe", "title": "Self"}}},
+            "Lunch": {"_links": {"self": {"href": "https://api.edamam.com/api/recipes/v2/.../recipe", "title": "Self"}}},
+            "Dinner": {"_links": {"self": {"href": "https://api.edamam.com/api/recipes/v2/.../recipe", "title": "Self"}}}
+          }
+        }
+      ]
+    }
+  }
+}

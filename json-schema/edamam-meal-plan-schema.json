@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.com/edamam-recipes/json-schema/edamam-meal-plan-schema.json",
+  "title": "Edamam Meal Plan",
+  "description": "A meal plan request/response shape used by the Meal Planner API.",
+  "type": "object",
+  "properties": {
+    "size": {"type": "integer", "minimum": 1, "maximum": 14, "description": "Number of days in the plan."},
+    "plan": {
+      "type": "object",
+      "properties": {
+        "accept": {"$ref": "#/$defs/FilterGroup"},
+        "exclude": {"type": "array", "items": {"type": "string"}},
+        "fit": {"$ref": "#/$defs/NutrientRanges"},
+        "sections": {
+          "type": "object",
+          "additionalProperties": {"$ref": "#/$defs/Section"}
+        }
+      }
+    }
+  },
+  "$defs": {
+    "FilterGroup": {
+      "type": "object",
+      "properties": {
+        "all": {"type": "array", "items": {"type": "object"}},
+        "any": {"type": "array", "items": {"type": "object"}}
+      }
+    },
+    "NutrientRanges": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "min": {"type": "number"},
+          "max": {"type": "number"}
+        }
+      }
+    },
+    "Section": {
+      "type": "object",
+      "properties": {
+        "accept": {"$ref": "#/$defs/FilterGroup"},
+        "fit": {"$ref": "#/$defs/NutrientRanges"},
+        "sections": {"type": "object"}
+      }
+    }
+  }
+}

@@ -1,0 +1,260 @@
+name: Edamam Recipes Vocabulary
+description: Controlled vocabulary covering Edamam's Recipe Search, Nutrition Analysis, Food Database, and Meal Planner APIs — capturing food, nutrition, diet, health, cuisine, meal, and sustainability dimensions.
+url: https://api-evangelist.com/edamam-recipes/vocabulary/edamam-recipes-vocabulary.yml
+created: '2026-05-30'
+modified: '2026-05-30'
+
+domains:
+  - name: Food And Drink
+    description: Recipes, ingredients, prepared meals, and packaged foods.
+
+operationalDimensions:
+  - name: Provider
+    values:
+      - Edamam
+  - name: ApiSurface
+    values:
+      - Recipe Search
+      - Nutrition Analysis
+      - Food Database
+      - Meal Planner
+      - Shopping List
+  - name: Authentication
+    values:
+      - app_id + app_key (query)
+      - HTTP Basic (app_id:app_key)
+      - Edamam-Account-User header (Active User Tracking)
+  - name: Pricing Tier
+    values:
+      - Enterprise Basic
+      - Enterprise Core
+      - Enterprise Plus
+      - Enterprise Unlimited
+      - Meal Planner Developer (free)
+
+capabilityDimensions:
+  - name: Action
+    values:
+      - Search
+      - Lookup
+      - Analyze
+      - Plan
+      - Aggregate
+      - Autocomplete
+      - Recognize
+  - name: Subject
+    values:
+      - Recipe
+      - Ingredient
+      - Food
+      - Nutrient
+      - Diet
+      - Meal Plan
+      - Shopping List
+      - Image
+      - UPC / Barcode
+
+dietLabels:
+  - balanced
+  - high-fiber
+  - high-protein
+  - low-carb
+  - low-fat
+  - low-sodium
+
+healthLabels:
+  - vegan
+  - vegetarian
+  - paleo
+  - dairy-free
+  - gluten-free
+  - wheat-free
+  - egg-free
+  - peanut-free
+  - tree-nut-free
+  - soy-free
+  - fish-free
+  - shellfish-free
+  - pork-free
+  - red-meat-free
+  - crustacean-free
+  - celery-free
+  - mustard-free
+  - sesame-free
+  - lupine-free
+  - mollusk-free
+  - alcohol-free
+  - kosher
+  - keto-friendly
+  - low-sugar
+  - sugar-conscious
+  - immuno-supportive
+  - mediterranean
+
+cuisineTypes:
+  - american
+  - asian
+  - british
+  - caribbean
+  - central europe
+  - chinese
+  - eastern europe
+  - french
+  - greek
+  - indian
+  - italian
+  - japanese
+  - korean
+  - kosher
+  - mediterranean
+  - mexican
+  - middle eastern
+  - nordic
+  - south american
+  - south east asian
+  - world
+
+mealTypes:
+  - breakfast
+  - brunch
+  - lunch/dinner
+  - snack
+  - teatime
+
+dishTypes:
+  - alcohol-cocktail
+  - biscuits and cookies
+  - bread
+  - cereals
+  - condiments and sauces
+  - desserts
+  - drinks
+  - egg
+  - ice cream and custard
+  - main course
+  - pancake
+  - pasta
+  - pastry
+  - pies and tarts
+  - pizza
+  - preps
+  - preserve
+  - salad
+  - sandwiches
+  - seafood
+  - side dish
+  - soup
+  - special occasions
+  - starter
+  - sweets
+
+nutrientCodes:
+  - code: ENERC_KCAL
+    label: Energy
+    unit: kcal
+  - code: PROCNT
+    label: Protein
+    unit: g
+  - code: FAT
+    label: Total fat
+    unit: g
+  - code: FASAT
+    label: Saturated fat
+    unit: g
+  - code: FATRN
+    label: Trans fat
+    unit: g
+  - code: FAMS
+    label: Monounsaturated fat
+    unit: g
+  - code: FAPU
+    label: Polyunsaturated fat
+    unit: g
+  - code: CHOCDF
+    label: Carbohydrates (total)
+    unit: g
+  - code: CHOCDF.net
+    label: Carbohydrates (net)
+    unit: g
+  - code: FIBTG
+    label: Fiber
+    unit: g
+  - code: SUGAR
+    label: Sugars
+    unit: g
+  - code: CHOLE
+    label: Cholesterol
+    unit: mg
+  - code: NA
+    label: Sodium
+    unit: mg
+  - code: CA
+    label: Calcium
+    unit: mg
+  - code: FE
+    label: Iron
+    unit: mg
+  - code: K
+    label: Potassium
+    unit: mg
+  - code: MG
+    label: Magnesium
+    unit: mg
+  - code: P
+    label: Phosphorus
+    unit: mg
+  - code: ZN
+    label: Zinc
+    unit: mg
+  - code: VITA_RAE
+    label: Vitamin A
+    unit: µg
+  - code: VITC
+    label: Vitamin C
+    unit: mg
+  - code: VITD
+    label: Vitamin D
+    unit: µg
+  - code: TOCPHA
+    label: Vitamin E
+    unit: mg
+  - code: VITK1
+    label: Vitamin K
+    unit: µg
+  - code: VITB12
+    label: Vitamin B-12
+    unit: µg
+  - code: FOLAC
+    label: Folic acid
+    unit: µg
+  - code: FOLDFE
+    label: Folate (DFE)
+    unit: µg
+
+co2EmissionsClasses:
+  - A+
+  - A
+  - B
+  - C
+  - D
+  - E
+  - F
+  - G
+
+foodCategories:
+  - generic-foods
+  - generic-meals
+  - packaged-foods
+  - fast-foods
+
+tags:
+  - Food And Drink
+  - Recipes
+  - Nutrition
+  - Diet
+  - Allergens
+  - Sustainability
+  - Carbon Footprint
+  - Meal Planning
+  - Grocery
+  - Public APIs

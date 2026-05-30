@@ -1,0 +1,145 @@
+apiCommonsRateLimits: "0.1"
+
+info:
+  name: Edamam Rate Limits
+  description: >-
+    Request-rate, concurrency, and monthly quota policies across Edamam's
+    Recipe Search, Nutrition Analysis, Food Database, and Meal Planner APIs.
+    Limits are tier-scoped — each app_id/app_key pair is bound to a plan.
+  url: https://developer.edamam.com/edamam-recipe-api
+  documentation: https://developer.edamam.com/api/faq
+  created: '2026-05-30'
+  modified: '2026-05-30'
+
+scopes:
+  - id: per-app-id
+    name: Per app_id + app_key pair
+    description: Edamam enforces limits per active application credential pair.
+  - id: per-user
+    name: Per Edamam-Account-User (Active User Tracking)
+    description: When Active User Tracking is enabled, per-user rate budgets apply to Meal Planner and Enterprise plans.
+
+policies:
+
+  - id: recipe-search-enterprise-basic
+    productId: recipe-search
+    planId: recipe-enterprise-basic
+    scope: per-app-id
+    limits:
+      - dimension: requestsPerMinute
+        value: 10
+      - dimension: requestsPerMonth
+        value: 10000
+    onExceeded:
+      action: reject
+      statusCode: 429
+      message: "Too Many Requests — plan quota or per-minute rate exceeded."
+
+  - id: recipe-search-enterprise-core
+    productId: recipe-search
+    planId: recipe-enterprise-core
+    scope: per-app-id
+    limits:
+      - dimension: requestsPerMinute
+        value: 100
+      - dimension: requestsPerMonth
+        value: 500000
+    onExceeded:
+      action: reject
+      statusCode: 429
+
+  - id: recipe-search-enterprise-plus
+    productId: recipe-search
+    planId: recipe-enterprise-plus
+    scope: per-app-id
+    limits:
+      - dimension: requestsPerMinute
+        value: 300
+      - dimension: requestsPerMonth
+        value: 1000000
+    onExceeded:
+      action: reject
+      statusCode: 429
+
+  - id: recipe-search-enterprise-unlimited
+    productId: recipe-search
+    planId: recipe-enterprise-unlimited
+    scope: per-app-id
+    limits:
+      - dimension: requestsPerMinute
+        value: null
+        note: Custom
+      - dimension: requestsPerMonth
+        value: null
+        note: Unlimited
+
+  - id: nutrition-developer
+    productId: nutrition-analysis
+    planId: nutrition-developer
+    scope: per-app-id
+    limits:
+      - dimension: requestsPerMinute
+        value: 10
+      - dimension: requestsPerMonth
+        value: 10000
+
+  - id: food-basic-vision
+    productId: food-database
+    planId: food-basic-vision
+    scope: per-app-id
+    limits:
+      - dimension: requestsPerMonth
+        value: 100000
+      - dimension: visionRequestsPerMonth
+        value: 500
+
+  - id: food-core
+    productId: food-database
+    planId: food-core
+    scope: per-app-id
+    limits:
+      - dimension: requestsPerMonth
+        value: 750000
+      - dimension: visionRequestsPerMonth
+        value: null
+        note: Pay-as-you-go
+
+  - id: food-plus
+    productId: food-database
+    planId: food-plus
+    scope: per-app-id
+    limits:
+      - dimension: requestsPerMonth
+        value: 5000000
+      - dimension: visionRequestsPerMonth
+        value: 10000
+
+  - id: meal-planner-developer
+    productId: meal-planner
+    planId: meal-developer
+    scope: per-user
+    limits:
+      - dimension: monthlyActiveUsers
+        value: 10
+      - dimension: mealPlanCallsPerDay
+        value: 20
+      - dimension: recipeCallsPerMinute
+        value: 300
+
+  - id: meal-planner-enterprise-core
+    productId: meal-planner
+    planId: meal-enterprise-core
+    scope: per-user
+    limits:
+      - dimension: monthlyActiveUsers
+        value: 1000
+      - dimension: mealPlanCallsPerDay
+        value: 30
+      - dimension: recipeCallsPerMinute
+        value: 5000
+
+headers:
+  notes: >-
+    Edamam does not document standard RateLimit-* headers. Monitor usage via the
+    Dashboard ("Usage" page) on developer.edamam.com. The Active User Tracking
+    header `Edamam-Account-User` is mandatory for Enterprise and Meal Planner usage.

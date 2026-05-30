@@ -1,0 +1,164 @@
+extends:
+  - [spectral:oas, all]
+
+documentationUrl: https://developer.edamam.com/edamam-docs-recipe-api
+
+aliases:
+  EdamamPaths:
+    - "$.paths[*]"
+  EdamamOperations:
+    - "$.paths[*][get,post,put,patch,delete]"
+  EdamamSchemas:
+    - "$.components.schemas[*]"
+
+rules:
+  # ----- Naming conventions -----
+  edamam-summary-required:
+    description: Every operation MUST have a summary.
+    message: Operation is missing summary.
+    severity: error
+    given: "#EdamamOperations"
+    then:
+      field: summary
+      function: truthy
+
+  edamam-summary-title-case:
+    description: Operation summaries SHOULD use Title Case (Edamam convention).
+    message: "Operation summary '{{value}}' should use Title Case."
+    severity: warn
+    given: "#EdamamOperations"
+    then:
+      field: summary
+      function: pattern
+      functionOptions:
+        match: "^[A-Z0-9]"
+
+  edamam-description-required:
+    description: Operations SHOULD provide a description with usage context.
+    severity: warn
+    given: "#EdamamOperations"
+    then:
+      field: description
+      function: truthy
+
+  edamam-tags-required:
+    description: Operations MUST be tagged (Recipe Search, Food Database, Nutrition, Meal Planner, Shopping List).
+    severity: error
+    given: "#EdamamOperations"
+    then:
+      field: tags
+      function: schema
+      functionOptions:
+        schema:
+          type: array
+          minItems: 1
+
+  # ----- Auth -----
+  edamam-app-id-key-auth:
+    description: All operations MUST require Edamam app_id + app_key (or HTTP basic) auth.
+    message: Operation must declare security with app_id+app_key or basic auth.
+    severity: error
+    given: "#EdamamOperations"
+    then:
+      field: security
+      function: truthy
+
+  edamam-account-user-header:
+    description: Operations SHOULD support the Edamam-Account-User header for Active User Tracking.
+    severity: info
+    given: "#EdamamOperations"
+    then:
+      function: defined
+
+  # ----- Paths -----
+  edamam-paths-version-prefix:
+    description: Paths MUST be versioned under /api/{api-name}/v{n}/...
+    message: "Path '{{property}}' must follow /api/{api-name}/v{n}/... pattern."
+    severity: error
+    given: "$.paths"
+    then:
+      field: "@key"
+      function: pattern
+      functionOptions:
+        match: "^/api/[a-z-]+/v[0-9]+(/.*)?$|^/api/nutrition-details$"
+
+  edamam-paths-no-trailing-slash:
+    description: Paths MUST NOT end with a trailing slash.
+    severity: error
+    given: "$.paths"
+    then:
+      field: "@key"
+      function: pattern
+      functionOptions:
+        notMatch: "/$"
+
+  # ----- Responses -----
+  edamam-200-response-required:
+    description: GET/POST operations MUST define a 200 response.
+    severity: error
+    given:
+      - "$.paths[*][get,post]"
+    then:
+      field: "responses.200"
+      function: truthy
+
+  edamam-400-response-required:
+    description: Operations SHOULD document a 400 error response.
+    severity: warn
+    given: "#EdamamOperations"
+    then:
+      field: "responses.400"
+      function: truthy
+
+  edamam-403-response-required:
+    description: Operations SHOULD document a 403 auth/quota error response.
+    severity: warn
+    given: "#EdamamOperations"
+    then:
+      field: "responses.403"
+      function: truthy
+
+  # ----- Schemas -----
+  edamam-recipe-schema-fields:
+    description: Recipe schema SHOULD include uri, label, ingredients, totalNutrients, dietLabels, healthLabels.
+    severity: warn
+    given: "$.components.schemas.Recipe.properties"
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: object
+          required: [uri, label, ingredients, totalNutrients, dietLabels, healthLabels]
+
+  edamam-nutrient-info-shape:
+    description: NutrientInfo MUST expose label, quantity, unit.
+    severity: error
+    given: "$.components.schemas.NutrientInfo.properties"
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          type: object
+          required: [label, quantity, unit]
+
+  edamam-links-hateoas:
+    description: Paged list responses MUST include _links.next using HATEOAS.
+    severity: warn
+    given: "$.components.schemas.Response.properties"
+    then:
+      field: _links
+      function: truthy
+
+  # ----- Co2 / sustainability convention -----
+  edamam-co2-class-enum:
+    description: co2EmissionsClass MUST be one of A+, A, B, C, D, E, F, G.
+    severity: error
+    given: "$.components.schemas.Recipe.properties.co2EmissionsClass"
+    then:
+      field: enum
+      function: schema
+      functionOptions:
+        schema:
+          type: array
+          enum:
+            - ["A+", "A", "B", "C", "D", "E", "F", "G"]

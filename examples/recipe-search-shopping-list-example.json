@@ -1,0 +1,34 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "https://api.edamam.com/api/meal-planner/v1/shopping-list",
+    "headers": {
+      "Content-Type": "application/json",
+      "Authorization": "Basic <base64(app_id:app_key)>",
+      "Edamam-Account-User": "user-12345"
+    },
+    "body": {
+      "entries": [
+        {
+          "quantity": 4,
+          "measure": "http://www.edamam.com/ontologies/edamam.owl#Measure_serving",
+          "item": "http://www.edamam.com/ontologies/edamam.owl#recipe_b79327d05b8e5b838ad6cfd9576b30b6"
+        }
+      ]
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "entries": [
+        {
+          "foodId": "food_avzj4ttauwde5kbra5gj4ay2qq79",
+          "food": "chicken breast",
+          "quantities": [
+            {"quantity": 680, "measure": "http://www.edamam.com/ontologies/edamam.owl#Measure_gram"}
+          ]
+        }
+      ]
+    }
+  }
+}

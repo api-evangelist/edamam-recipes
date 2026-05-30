@@ -1,0 +1,150 @@
+finops: "0.1"
+focusVersion: "1.2"
+
+info:
+  name: Edamam FinOps Surface
+  description: >-
+    FinOps mapping for Edamam APIs aligned to the FOCUS data spec.
+    Edamam bills monthly subscription per API + per plan tier; overage requires
+    upgrading to a higher tier (no documented overage rate). Vision usage is
+    metered separately for Food Database Core (pay-as-you-go) and capped for
+    Basic Vision / Plus.
+  url: https://www.edamam.com/
+  billingPortal: https://developer.edamam.com/
+  contact: api@edamam.com
+  created: '2026-05-30'
+  modified: '2026-05-30'
+
+provider:
+  ProviderName: Edamam
+  PublisherName: Edamam
+  BillingAccountType: Subscription
+  BillingCurrency: USD
+
+products:
+
+  - ServiceCategory: AI / Data API
+    ServiceName: Edamam Recipe Search API
+    skus:
+      - SkuId: recipe-enterprise-basic
+        SkuPriceId: 9-usd-month
+        PricingCategory: Committed
+        PricingUnit: subscription/month
+        ListUnitPrice: 9.00
+        BillingPeriodStart: monthly
+        ChargeCategory: Usage
+        ChargeFrequency: Recurring
+      - SkuId: recipe-enterprise-core
+        SkuPriceId: 99-usd-month
+        PricingCategory: Committed
+        PricingUnit: subscription/month
+        ListUnitPrice: 99.00
+        ChargeFrequency: Recurring
+      - SkuId: recipe-enterprise-plus
+        SkuPriceId: 399-usd-month
+        PricingCategory: Committed
+        PricingUnit: subscription/month
+        ListUnitPrice: 399.00
+        ChargeFrequency: Recurring
+      - SkuId: recipe-enterprise-unlimited
+        PricingCategory: Negotiated
+        PricingUnit: contract
+        ListUnitPrice: null
+
+  - ServiceCategory: AI / Data API
+    ServiceName: Edamam Nutrition Analysis API
+    skus:
+      - SkuId: nutrition-developer
+        PricingCategory: OnDemand
+        PricingUnit: subscription/month
+        ListUnitPrice: 0
+        ChargeCategory: Usage
+        ChargeFrequency: Recurring
+      - SkuId: nutrition-enterprise
+        PricingCategory: Negotiated
+        PricingUnit: contract
+        ListUnitPrice: null
+
+  - ServiceCategory: AI / Data API
+    ServiceName: Edamam Food Database API
+    skus:
+      - SkuId: food-basic-vision
+        SkuPriceId: 14-usd-month
+        PricingCategory: Committed
+        PricingUnit: subscription/month
+        ListUnitPrice: 14.00
+        ChargeFrequency: Recurring
+        bundledMetering:
+          - meter: visionRequests
+            includedQuantity: 500
+            unit: request/month
+      - SkuId: food-core
+        SkuPriceId: 69-usd-month
+        PricingCategory: Committed
+        PricingUnit: subscription/month
+        ListUnitPrice: 69.00
+        ChargeFrequency: Recurring
+        meteredAddons:
+          - meter: visionRequests
+            unit: request
+            ListUnitPrice: null
+            note: Pay-as-you-go (rate set per contract)
+      - SkuId: food-plus
+        SkuPriceId: 299-usd-month
+        PricingCategory: Committed
+        PricingUnit: subscription/month
+        ListUnitPrice: 299.00
+        ChargeFrequency: Recurring
+        bundledMetering:
+          - meter: visionRequests
+            includedQuantity: 10000
+            unit: request/month
+
+  - ServiceCategory: AI / Data API
+    ServiceName: Edamam Meal Planner API
+    skus:
+      - SkuId: meal-developer
+        PricingCategory: OnDemand
+        PricingUnit: subscription/month
+        ListUnitPrice: 0
+        ChargeFrequency: Recurring
+      - SkuId: meal-enterprise-core
+        SkuPriceId: 300-usd-month
+        PricingCategory: Committed
+        PricingUnit: subscription/month
+        ListUnitPrice: 300.00
+        ChargeFrequency: Recurring
+      - SkuId: meal-enterprise-custom
+        PricingCategory: Negotiated
+        PricingUnit: contract
+        ListUnitPrice: null
+
+usageMetrics:
+  - meter: apiCalls
+    unit: request
+    description: Each successful HTTP request against an Edamam API counts as one billed call.
+  - meter: visionRequests
+    unit: request
+    description: Each Food Database AI Vision (image recognition) call is metered separately.
+  - meter: monthlyActiveUsers
+    unit: user
+    description: Meal Planner plans cap by MAU; an active user is identified via the Edamam-Account-User header.
+  - meter: mealPlanCalls
+    unit: request/day
+    description: Daily cap on /api/meal-planner/v1/{app_id}/select POST calls.
+
+allocation:
+  notes: >-
+    Allocation in FOCUS terms is by ServiceName + SkuId. Subscriptions are per app_id —
+    teams managing multiple applications (web app, mobile app, internal admin) typically
+    map each app to its own SkuId/SkuPriceId. Tagging is done client-side via the
+    Edamam-Account-User header for per-user attribution.
+
+billingPeriods:
+  - granularity: month
+    startsOn: subscription anniversary
+
+cancellation:
+  policy: >-
+    On cancellation, customer must delete all cached Edamam nutrient data.
+    No refunds for partial-month cancellation.

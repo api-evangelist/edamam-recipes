@@ -1,0 +1,42 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "https://api.edamam.com/api/food-database/v2/parser",
+    "query": {
+      "app_id": "YOUR_FOOD_APP_ID",
+      "app_key": "YOUR_FOOD_APP_KEY",
+      "ingr": "1 large apple",
+      "nutrition-type": "logging"
+    }
+  },
+  "response": {
+    "status": 200,
+    "body": {
+      "text": "1 large apple",
+      "parsed": [
+        {
+          "food": {
+            "foodId": "food_at5xz0msl87rxsbgaplnfa1lz0sl",
+            "label": "Apple",
+            "knownAs": "apple",
+            "nutrients": {
+              "ENERC_KCAL": 52,
+              "PROCNT": 0.26,
+              "FAT": 0.17,
+              "CHOCDF": 13.81,
+              "FIBTG": 2.4
+            },
+            "category": "Generic foods",
+            "categoryLabel": "food"
+          },
+          "quantity": 1,
+          "measure": {
+            "uri": "http://www.edamam.com/ontologies/edamam.owl#Measure_large",
+            "label": "Large"
+          }
+        }
+      ],
+      "hints": []
+    }
+  }
+}

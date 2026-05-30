@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://api-evangelist.com/edamam-recipes/json-structure/edamam-meal-plan-structure.json",
+  "name": "EdamamMealPlan",
+  "description": "Meal plan specification used by the Meal Planner API.",
+  "type": "object",
+  "properties": {
+    "size": {"type": "int32"},
+    "plan": {
+      "type": "object",
+      "properties": {
+        "accept": {"$ref": "#/definitions/FilterGroup"},
+        "exclude": {"type": "array", "items": {"type": "string"}},
+        "fit": {"$ref": "#/definitions/NutrientRanges"},
+        "sections": {
+          "type": "object",
+          "additionalProperties": {"$ref": "#/definitions/Section"}
+        }
+      }
+    }
+  },
+  "definitions": {
+    "FilterGroup": {
+      "type": "object",
+      "properties": {
+        "all": {"type": "array", "items": {"type": "object"}},
+        "any": {"type": "array", "items": {"type": "object"}}
+      }
+    },
+    "NutrientRanges": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "min": {"type": "double"},
+          "max": {"type": "double"}
+        }
+      }
+    },
+    "Section": {
+      "type": "object",
+      "properties": {
+        "accept": {"$ref": "#/definitions/FilterGroup"},
+        "fit": {"$ref": "#/definitions/NutrientRanges"},
+        "sections": {"type": "object"}
+      }
+    }
+  }
+}
