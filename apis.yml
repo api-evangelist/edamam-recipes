@@ -1,11 +1,10 @@
 aid: edamam-recipes
 name: Edamam
 description: >-
-  Edamam is a food and nutrition data platform powering recipe search, NLP-based
-  nutrition analysis, food database lookup (keyword / brand / UPC / AI Vision),
-  and personalized meal planning. The flagship Recipe Search API v2 covers a
-  2M+ recipe index with 30+ filters across diet, health, cuisine, meal, dish,
-  nutrients, time, glycemic index, and CO2 emissions class.
+  Edamam is a food and nutrition data platform powering recipe search, NLP-based nutrition analysis, food database
+  lookup (keyword / brand / UPC / AI Vision), and personalized meal planning. The flagship Recipe Search API v2 covers a
+  2M+ recipe index with 30+ filters across diet, health, cuisine, meal, dish, nutrients, time, glycemic index, and CO2
+  emissions class.
 url: https://www.edamam.com/
 humanURL: https://developer.edamam.com/
 baseURL: https://api.edamam.com
@@ -13,7 +12,7 @@ specificationVersion: '0.20'
 created: '2026-05-28'
 modified: '2026-05-30'
 x-source: public-apis/public-apis
-x-category: "Food & Drink"
+x-category: Food & Drink
 x-tier: 3
 x-tier-reason: bulk-registered-from-public-apis
 tags:
@@ -27,13 +26,11 @@ tags:
   - Carbon Footprint
   - Public APIs
 apis:
-
   - name: Edamam Recipe Search API
     description: >-
-      Search and look up recipes from a 2M+ recipe index with 30+ filters
-      (q, diet, health, cuisineType, mealType, dishType, calories, time,
-      excluded, nutrients, glycemicIndex, random) plus per-recipe nutrient
-      breakdowns and CO2 emissions class (A+ through G).
+      Search and look up recipes from a 2M+ recipe index with 30+ filters (q, diet, health, cuisineType, mealType,
+      dishType, calories, time, excluded, nutrients, glycemicIndex, random) plus per-recipe nutrient breakdowns and CO2
+      emissions class (A+ through G).
     humanURL: https://developer.edamam.com/edamam-docs-recipe-api
     baseURL: https://api.edamam.com/api/recipes/v2
     tags:
@@ -63,22 +60,16 @@ apis:
         url: examples/recipe-search-lookup-recipes-by-uri-example.json
       - type: Example
         url: examples/recipe-search-shopping-list-example.json
-      - type: NaftikoCapability
-        url: capabilities/recipe-search-recipe-search.yaml
-      - type: NaftikoCapability
-        url: capabilities/recipe-search-shopping-list.yaml
       - type: Authentication
         url: https://developer.edamam.com/api/faq
       - type: RateLimits
         url: rate-limits/edamam-recipes-rate-limits.yml
       - type: Pricing
         url: https://developer.edamam.com/edamam-recipe-api
-
   - name: Edamam Nutrition Analysis API
     description: >-
-      Natural-language nutrition analysis. Submit free-text ingredient lines
-      or full recipes and receive computed energy, macronutrients, diet/health
-      labels, and recipe classification (cuisine / meal / dish type).
+      Natural-language nutrition analysis. Submit free-text ingredient lines or full recipes and receive computed
+      energy, macronutrients, diet/health labels, and recipe classification (cuisine / meal / dish type).
     humanURL: https://developer.edamam.com/edamam-docs-nutrition-api
     baseURL: https://api.edamam.com/api/nutrition-details
     tags:
@@ -92,19 +83,15 @@ apis:
         url: openapi/edamam-nutrition-analysis-v1-openapi.yml
       - type: Example
         url: examples/nutrition-analysis-full-recipe-analysis-example.json
-      - type: NaftikoCapability
-        url: capabilities/nutrition-analysis-nutrition.yaml
       - type: Authentication
         url: https://developer.edamam.com/api/faq
       - type: Pricing
         url: https://developer.edamam.com/edamam-nutrition-api
-
   - name: Edamam Food Database API
     description: >-
-      Look up nutrition data for foods by keyword, brand, UPC/EAN barcode,
-      AI Vision photo analysis, or autocomplete. Returns per-100g nutrient
-      values, allergen / health labels, and category classification (generic
-      foods, packaged foods, generic meals, fast foods).
+      Look up nutrition data for foods by keyword, brand, UPC/EAN barcode, AI Vision photo analysis, or autocomplete.
+      Returns per-100g nutrient values, allergen / health labels, and category classification (generic foods, packaged
+      foods, generic meals, fast foods).
     humanURL: https://developer.edamam.com/food-database-api-docs
     baseURL: https://api.edamam.com/api/food-database/v2
     tags:
@@ -123,18 +110,14 @@ apis:
         url: json-structure/edamam-food-structure.json
       - type: Example
         url: examples/food-database-food-search-example.json
-      - type: NaftikoCapability
-        url: capabilities/food-database-food-database.yaml
       - type: Authentication
         url: https://developer.edamam.com/api/faq
       - type: Pricing
         url: https://developer.edamam.com/food-database-api
-
   - name: Edamam Meal Planner API
     description: >-
-      Generate personalized meal plans (up to 14 days) with daily structure of
-      sections and slots, fit to nutritional ranges and diet/health constraints.
-      Includes DRI calculation, recipe lookup, shopping list aggregation, and
+      Generate personalized meal plans (up to 14 days) with daily structure of sections and slots, fit to nutritional
+      ranges and diet/health constraints. Includes DRI calculation, recipe lookup, shopping list aggregation, and
       (Enterprise) Instacart integration.
     humanURL: https://developer.edamam.com/meal-planner-api
     baseURL: https://api.edamam.com/api/meal-planner/v1
@@ -153,13 +136,10 @@ apis:
         url: json-structure/edamam-meal-plan-structure.json
       - type: Example
         url: examples/meal-planner-create-plan-example.json
-      - type: NaftikoCapability
-        url: capabilities/meal-planner-meal-planner.yaml
       - type: Authentication
         url: https://developer.edamam.com/api/faq
       - type: Pricing
         url: https://developer.edamam.com/meal-planner-api
-
 common:
   - type: Website
     url: https://www.edamam.com/
@@ -193,30 +173,42 @@ common:
     url: https://github.com/edamam-llc
   - type: PublicAPIsListing
     url: https://github.com/public-apis/public-apis
-
   - type: Features
     data:
       - name: 2M+ Recipe Index
-        description: Search across 2 million recipes from third-party sources plus 20,000+ Edamam-owned recipes with cooking instructions.
+        description: >-
+          Search across 2 million recipes from third-party sources plus 20,000+ Edamam-owned recipes with cooking
+          instructions.
       - name: 30+ Filters
-        description: Filter by diet, health/allergen labels, cuisine, meal type, dish type, calorie range, total time, nutrients, glycemic index, and excluded ingredients.
+        description: >-
+          Filter by diet, health/allergen labels, cuisine, meal type, dish type, calorie range, total time, nutrients,
+          glycemic index, and excluded ingredients.
       - name: 28+ Nutrients
-        description: Per-recipe and per-food breakdowns including macros, vitamins (A, B-12, C, D, E, K), minerals (Ca, Fe, K, Mg, P, Zn), fiber, sodium, sugars.
+        description: >-
+          Per-recipe and per-food breakdowns including macros, vitamins (A, B-12, C, D, E, K), minerals (Ca, Fe, K, Mg,
+          P, Zn), fiber, sodium, sugars.
       - name: Carbon Footprint (CO2e)
         description: Recipes carry a CO2 emissions class (A+ through G) when beta=true is set.
       - name: AI Vision Food Recognition
-        description: Submit a public image URL or base64 data URI to the Food Database API and receive detected food + nutrition estimates.
+        description: >-
+          Submit a public image URL or base64 data URI to the Food Database API and receive detected food + nutrition
+          estimates.
       - name: NLP Recipe Analysis
-        description: Submit raw recipe text (title + ingredient lines) to the Nutrition Analysis API and receive structured nutrient and label output.
+        description: >-
+          Submit raw recipe text (title + ingredient lines) to the Nutrition Analysis API and receive structured
+          nutrient and label output.
       - name: Active User Tracking
-        description: Use the Edamam-Account-User header to bind per-user budgets and caching rights (required on Enterprise and Meal Planner plans).
+        description: >-
+          Use the Edamam-Account-User header to bind per-user budgets and caching rights (required on Enterprise and
+          Meal Planner plans).
       - name: Shopping List Aggregation
-        description: Aggregate ingredient quantities across one or more recipes into a consolidated shopping list, with optional Instacart integration on Enterprise tiers.
+        description: >-
+          Aggregate ingredient quantities across one or more recipes into a consolidated shopping list, with optional
+          Instacart integration on Enterprise tiers.
       - name: HTTP Compression
         description: gzip supported via Accept-Encoding header.
       - name: HATEOAS Pagination
         description: _links.next on paged responses; _links.self on individual hits.
-
   - type: UseCases
     data:
       - name: Recipe Discovery Apps
@@ -231,7 +223,6 @@ common:
         description: Edamam Platform Assistant chatbot and MCP server expose food/recipe tools to conversational agents.
       - name: Sustainability Apps
         description: Surface CO2e emissions class to promote lower-impact food choices.
-
   - type: Integrations
     data:
       - name: Instacart
@@ -241,8 +232,9 @@ common:
       - name: Edamam Content Management
         description: Recipe Management API integrates with the Recipe Search surface.
       - name: Model Context Protocol (MCP)
-        description: Official Edamam Food MCP server at https://mcp.edamam.com/mcp/food exposes get_food_nutrition and analyze_food_image tools to LLM agents (Claude Code, etc.).
-
+        description: >-
+          Official Edamam Food MCP server at https://mcp.edamam.com/mcp/food exposes get_food_nutrition and
+          analyze_food_image tools to LLM agents (Claude Code, etc.).
   - type: Solutions
     data:
       - name: Recipe Search Enterprise Basic
@@ -263,22 +255,18 @@ common:
         description: Free, 10 MAU, 20 meal-plan calls/day, 300 recipe calls/min, non-commercial.
       - name: Meal Planner Enterprise Core
         description: $300/mo, 1,000 MAU, 30 meal-plan calls/day, 5,000 recipe calls/min, Instacart integration.
-
   - type: Tools
     data:
       - name: Edamam Food MCP
         description: >-
-          Official Edamam MCP server (Model Context Protocol) at
-          https://mcp.edamam.com/mcp/food exposing get_food_nutrition (keyword,
-          quantity, UPC/EAN) and analyze_food_image (Vision) tools. Install in
-          Claude Code with:
-          `claude mcp add --transport http edamam-food https://mcp.edamam.com/mcp/food --header "Authorization: Bearer <app_id>:<app_key>"`.
-          Source: https://github.com/edamam-llc/mcp-edamam-food
+          Official Edamam MCP server (Model Context Protocol) at https://mcp.edamam.com/mcp/food exposing
+          get_food_nutrition (keyword, quantity, UPC/EAN) and analyze_food_image (Vision) tools. Install in Claude Code
+          with: `claude mcp add --transport http edamam-food https://mcp.edamam.com/mcp/food --header "Authorization:
+          Bearer <app_id>:<app_key>"`. Source: https://github.com/edamam-llc/mcp-edamam-food
       - name: edamam-api-demo
         description: Java demo for the Nutrition Analysis API (https://github.com/edamam-llc/edamam-api-demo).
       - name: Recipe Search Demo
         description: Interactive Recipe Search demo at https://developer.edamam.com/recipe-demo.
-
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
