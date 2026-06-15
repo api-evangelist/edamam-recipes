@@ -1,0 +1,113 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Meal Planning API",
+    "version": "1.2 beta"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "planner",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create Dietary Plan According to Supplied Specification",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.edamam.com/api/meal-planner/v1/:app_id/select",
+            "headers": [
+              {
+                "name": "Edamam-Account-User",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "app_id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "beta",
+                "value": "",
+                "type": "query",
+                "description": "Turn on support for beta features"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Types of recipes to choose from."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Create Dietary Plan According to Supplied Specification"
+        },
+        {
+          "info": {
+            "name": "Lookup Recipes by URI",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.edamam.com/api/recipes/v2/by-uri"
+          },
+          "docs": "The meal planner returns recipe URIs as part of its response. Use this endpoint to retrieve the recipes. For more information see the relevant documentation in the [Recipe Search API](https://developer.edamam.com/edamam-docs-recipe-api#operations-tag-Lookup_recipes_by_URI)."
+        },
+        {
+          "info": {
+            "name": "Create Shopping List From Total Meal Quantities",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.edamam.com/api/shopping-list/v2"
+          },
+          "docs": "Once a meal plan has been generated, a shopping list can be created for the requisite quantities of all necessary ingredients across the plan, through the \"Shopping List API\". For more information see the relevant documentation in the [Recipe Search API](https://developer.edamam.com/edamam-docs-recipe-api)."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "values",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Calculate Recommended Daily Intake and Tolerable Upper Limits for the Specified Metabolic Profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.edamam.com/api/daily-values/v1/values",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "Calculate Recommended Daily Intake and Tolerable Upper Limits for the Specified Metabolic Profile"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
