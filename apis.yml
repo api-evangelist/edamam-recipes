@@ -52,13 +52,13 @@ apis:
         url: json-schema/edamam-nutrient-info-schema.json
       - type: JSONStructure
         url: json-structure/edamam-recipe-structure.json
-      - type: Example
+      - type: Examples
         url: examples/recipe-search-search-recipe-example.json
-      - type: Example
+      - type: Examples
         url: examples/recipe-search-lookup-recipe-by-id-example.json
-      - type: Example
+      - type: Examples
         url: examples/recipe-search-lookup-recipes-by-uri-example.json
-      - type: Example
+      - type: Examples
         url: examples/recipe-search-shopping-list-example.json
       - type: Authentication
         url: https://developer.edamam.com/api/faq
@@ -81,7 +81,7 @@ apis:
         url: https://developer.edamam.com/edamam-docs-nutrition-api
       - type: OpenAPI
         url: openapi/edamam-nutrition-analysis-v1-openapi.yml
-      - type: Example
+      - type: Examples
         url: examples/nutrition-analysis-full-recipe-analysis-example.json
       - type: Authentication
         url: https://developer.edamam.com/api/faq
@@ -108,7 +108,7 @@ apis:
         url: json-schema/edamam-food-schema.json
       - type: JSONStructure
         url: json-structure/edamam-food-structure.json
-      - type: Example
+      - type: Examples
         url: examples/food-database-food-search-example.json
       - type: Authentication
         url: https://developer.edamam.com/api/faq
@@ -134,7 +134,7 @@ apis:
         url: json-schema/edamam-meal-plan-schema.json
       - type: JSONStructure
         url: json-structure/edamam-meal-plan-structure.json
-      - type: Example
+      - type: Examples
         url: examples/meal-planner-create-plan-example.json
       - type: Authentication
         url: https://developer.edamam.com/api/faq
@@ -147,7 +147,7 @@ common:
     url: https://developer.edamam.com/
   - type: Documentation
     url: https://developer.edamam.com/
-  - type: SignUp
+  - type: Signup
     url: https://developer.edamam.com/admin/applications/new
   - type: Login
     url: https://developer.edamam.com/admin
