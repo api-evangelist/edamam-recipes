@@ -141,6 +141,10 @@ apis:
       - type: Pricing
         url: https://developer.edamam.com/meal-planner-api
 common:
+  - type: DomainSecurity
+    url: security/edamam-recipes-domain-security.yml
+  - type: Authentication
+    url: authentication/edamam-recipes-authentication.yml
   - type: Website
     url: https://www.edamam.com/
   - type: DeveloperPortal

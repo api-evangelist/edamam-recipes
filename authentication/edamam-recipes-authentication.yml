@@ -1,0 +1,39 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/edamam-meal-planner-v1-openapi.yml, openapi/edamam-recipe-search-v2-openapi.yml
+summary:
+  types:
+  - apiKey
+  - http
+  api_key_in:
+  - header
+  - query
+schemes:
+- name: basic
+  type: http
+  scheme: basic
+  sources:
+  - openapi/edamam-meal-planner-v1-openapi.yml
+  - openapi/edamam-recipe-search-v2-openapi.yml
+- name: app_id
+  type: apiKey
+  in: query
+  parameter: app_id
+  description: The application ID, obtained from the account dashboard, https://developer.edamam.com/admin/applications.
+  sources:
+  - openapi/edamam-recipe-search-v2-openapi.yml
+- name: app_key
+  type: apiKey
+  in: query
+  parameter: app_key
+  description: The application key, obtained from the account dashboard, https://developer.edamam.com/admin/applications.
+  sources:
+  - openapi/edamam-recipe-search-v2-openapi.yml
+- name: Edamam-Account-User
+  type: apiKey
+  in: header
+  parameter: Edamam-Account-User
+  description: ID of the account user. Should be used *only* if the account is configured for
+    active user tracking.
+  sources:
+  - openapi/edamam-recipe-search-v2-openapi.yml
