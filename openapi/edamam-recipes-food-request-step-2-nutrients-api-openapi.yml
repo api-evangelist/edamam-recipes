@@ -1,0 +1,307 @@
+openapi: 3.0.3
+info:
+  version: '2.0'
+  title: Food Database Food Nutrition Request - AI Vision (Beta) Food Nutrition Request - AI Vision (Beta) Food Request Step 2 - Nutrients API
+  description: ''
+servers:
+- url: https://api.edamam.com
+tags:
+- name: Food Request Step 2 - Nutrients
+paths:
+  /api/food-database/v2/nutrients:
+    post:
+      tags:
+      - Food Request Step 2 - Nutrients
+      summary: Full Nutrition Lookup
+      description: 'In the response to your parser request you receive the a food ID for each database match. Using the food ID and
+
+        the measure URI, which parser provides, you can make a request to the nutrients access point. The nutrients
+
+        access points returns nutrition with diet and health labels for a given quantity of the food.
+
+
+        **Access Point:** <https://api.edamam.com/api/food-database/v2/nutrients>'
+      parameters:
+      - name: app_id
+        in: query
+        x-data-threescale-name: app_ids
+        description: The application ID, obtained from the account dashboard, <https://developer.edamam.com/admin/applications>.
+        required: true
+        schema:
+          type: string
+      - name: app_key
+        in: query
+        x-data-threescale-name: app_keys
+        description: The application key, obtained from the account dashboard, <https://developer.edamam.com/admin/applications>.
+        required: true
+        schema:
+          type: string
+      - name: Edamam-Account-User
+        description: ID of the account user. Should be used *only* if the account is configured for active user tracking.
+        in: header
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/List'
+      responses:
+        '200':
+          description: 'Object containing number of servings (yield), total calories for the food (calories), nutrient content by
+
+            nutrient type (totalNutrients, totalDaily), diet and health classification (dietLabels, healthLabels)'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RecipeInfo'
+        '404':
+          description: The specified URL was not found or couldn't be retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+        '422':
+          description: Couldn't parse the request or extract the nutritional info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+        '555':
+          description: Text with insufficient quality to process correctly
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+components:
+  schemas:
+    NutrientsMap:
+      type: object
+      additionalProperties:
+        type: object
+        properties:
+          label:
+            type: string
+          tag:
+            type: string
+          units:
+            type: string
+    List:
+      type: object
+      properties:
+        ingredients:
+          type: array
+          items:
+            $ref: '#/components/schemas/Ingredients'
+    Errors:
+      type: array
+      items:
+        $ref: '#/components/schemas/Error'
+    Error:
+      properties:
+        errorCode:
+          type: string
+        message:
+          type: string
+        params:
+          type: array
+          items:
+            type: string
+    IngredientLine:
+      type: object
+      properties:
+        quantity:
+          type: number
+        measure:
+          type: string
+        measureURI:
+          type: string
+        foodMatch:
+          type: string
+        food:
+          type: string
+        foodId:
+          type: string
+        foodURI:
+          type: string
+        specificFoodURI:
+          type: string
+        foodCategory:
+          type: string
+        brand:
+          type: string
+        weight:
+          type: number
+        retainedWeight:
+          type: number
+        nutrients:
+          $ref: '#/components/schemas/NutrientsMap'
+        status:
+          type: string
+          enum:
+          - OK
+          - MISSING_QUANTITY
+          - UNRECOGNIZED_FOOD
+        template:
+          type: string
+        servingSizes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Quantity'
+        servingsPerContainer:
+          type: number
+    Quantity:
+      type: object
+      properties:
+        uri:
+          type: string
+        label:
+          type: string
+        quantity:
+          type: number
+    RecipeInfo:
+      type: object
+      properties:
+        uri:
+          type: string
+        url:
+          type: string
+        yield:
+          type: number
+        calories:
+          type: integer
+        glycemicIndex:
+          type: number
+        inflammatoryIndex:
+          type: number
+        co2EmissionsClass:
+          type: string
+        totalWeight:
+          type: number
+        dietLabels:
+          type: array
+          items:
+            type: string
+            enum:
+            - BALANCED
+            - HIGH_PROTEIN
+            - HIGH_FIBER
+            - LOW_FAT
+            - LOW_CARB
+            - LOW_SODIUM
+        healthLabels:
+          type: array
+          items:
+            type: string
+            enum:
+            - FAT_FREE
+            - LOW_FAT_ABS
+            - SUGAR_CONSCIOUS
+            - LOW_SUGAR
+            - LOW_POTASSIUM
+            - KIDNEY_FRIENDLY
+            - KETO_FRIENDLY
+            - PLANT_BASED
+            - VEGAN
+            - VEGETARIAN
+            - PESCATARIAN
+            - PALEO
+            - SPECIFIC_CARBS
+            - MEDITERRANEAN
+            - DASH
+            - DAIRY_FREE
+            - GLUTEN_FREE
+            - WHEAT_FREE
+            - EGG_FREE
+            - MILK_FREE
+            - PEANUT_FREE
+            - TREE_NUT_FREE
+            - SOY_FREE
+            - FISH_FREE
+            - SHELLFISH_FREE
+            - PORK_FREE
+            - RED_MEAT_FREE
+            - CRUSTACEAN_FREE
+            - CELERY_FREE
+            - MUSTARD_FREE
+            - SESAME_FREE
+            - LUPINE_FREE
+            - MOLLUSK_FREE
+            - ALCOHOL_FREE
+            - NO_OIL_ADDED
+            - NO_SUGAR_ADDED
+            - SULPHITE_FREE
+            - FODMAP_FREE
+            - KOSHER
+            - ALCOHOL_COCKTAIL
+            - IMMUNO_SUPPORTIVE
+        cautions:
+          type: array
+          items:
+            type: string
+            enum:
+            - GLUTEN
+            - WHEAT
+            - EGGS
+            - MILK
+            - PEANUTS
+            - TREE_NUTS
+            - SOY
+            - FISH
+            - SHELLFISH
+            - SULFITES
+            - FODMAP
+        totalNutrients:
+          $ref: '#/components/schemas/NutrientsMap'
+        totalNutrientsKCal:
+          type: object
+          additionalProperties:
+            type: object
+            properties:
+              label:
+                type: string
+              quantity:
+                type: number
+              unit:
+                type: string
+        totalDaily:
+          $ref: '#/components/schemas/NutrientsMap'
+        ingredientLines:
+          type: array
+          items:
+            type: string
+        label:
+          type: string
+        preparation:
+          type: array
+          items:
+            type: string
+        ingredients:
+          type: array
+          items:
+            $ref: '#/components/schemas/IngredientLine'
+        cuisineType:
+          type: array
+          items:
+            type: string
+        mealType:
+          type: array
+          items:
+            type: string
+        dishType:
+          type: array
+          items:
+            type: string
+    Ingredients:
+      type: object
+      properties:
+        quantity:
+          type: number
+        measureURI:
+          type: string
+        qualifiers:
+          type: array
+          items:
+            type: string
+        foodId:
+          type: string

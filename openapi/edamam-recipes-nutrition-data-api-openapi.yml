@@ -1,0 +1,313 @@
+openapi: 3.0.3
+info:
+  version: '2.0'
+  title: Food Database Food Nutrition Request - AI Vision (Beta) Food Nutrition Request - AI Vision (Beta) Nutrition Data API
+  description: ''
+servers:
+- url: https://api.edamam.com
+tags:
+- name: Nutrition Data
+paths:
+  /api/nutrition-data:
+    get:
+      summary: Individual Text Line Analysis
+      description: 'This returns the nutritional analysis for the specified food text by extracting information from a short
+
+        unstructured food text (usually an ingredient line and returns the following structured data for the text:
+
+        quantity, measure and food,) and if available: diet, health and allergen labels for the text.  With the built
+
+        in food logging feature, this allows for change of context. For example, “rice” will normally be matched to raw
+
+        rice while, with the food logging feature on, it will match to ready to eat ‘cooked rice.’'
+      parameters:
+      - name: app_id
+        in: query
+        x-data-threescale-name: app_ids
+        description: The application ID, obtained from the account dashboard, https://developer.edamam.com/admin/applications.
+        required: true
+        schema:
+          type: string
+      - name: app_key
+        in: query
+        x-data-threescale-name: app_keys
+        description: The application key, obtained from the account dashboard, https://developer.edamam.com/admin/applications.
+        required: true
+        schema:
+          type: string
+      - name: Edamam-Account-User
+        description: ID of the account user. Should be used *only* if the account is configured for active user tracking.
+        in: header
+        schema:
+          type: string
+      - name: nutrition-type
+        in: query
+        description: Select between the cooking and food logging processor.
+        schema:
+          type: string
+          default: cooking
+          enum:
+          - cooking
+          - logging
+      - name: ingr
+        in: query
+        description: The ingredient.
+        required: true
+        schema:
+          type: string
+      - name: If-None-Match
+        in: header
+        description: 'First, each successfully processed recipe will also return a tag in the ETag response header. This value
+
+          must be preserved together with the recipe. Then, when resubmitting the recipe, you should include the value
+
+          in the ''If-None-Match'' request header.'
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK - The result of the recipe analysis
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AnalyzedRecipe'
+        '304':
+          description: Not Modified
+        '404':
+          description: Not Found - The specified URL was not found or couldn't be retrieved
+        '409':
+          description: The provided ETag token does not match the input data
+        '422':
+          description: Unprocessable Entity - Couldn't parse the recipe or extract the nutritional info
+        '555':
+          description: Recipe with insufficient quality to process correctly
+      tags:
+      - Nutrition Data
+components:
+  schemas:
+    AnalyzedRecipe:
+      type: object
+      description: The extracted information. Not all information is available for each recipe or for every plan.
+      properties:
+        uri:
+          type: string
+        url:
+          type: string
+        yield:
+          type: number
+        calories:
+          type: integer
+        glycemicIndex:
+          type: number
+        inflammatoryIndex:
+          type: number
+        co2EmissionsClass:
+          type: string
+          enum:
+          - A+
+          - A
+          - B
+          - C
+          - D
+          - E
+          - F
+          - G
+        totalWeight:
+          type: number
+        dietLabels:
+          type: array
+          items:
+            type: string
+        healthLabels:
+          type: array
+          items:
+            type: string
+        cautions:
+          type: array
+          items:
+            type: string
+        totalNutrients:
+          $ref: '#/components/schemas/Nutrients'
+        totalNutrientsKCal:
+          $ref: '#/components/schemas/Nutrients'
+        totalDaily:
+          $ref: '#/components/schemas/Nutrients'
+        ingredientLines:
+          type: array
+          items:
+            type: string
+        label:
+          type: string
+        preparation:
+          type: array
+          items:
+            type: string
+        ingredients:
+          type: array
+          items:
+            $ref: '#/components/schemas/Ingredient'
+        cuisineType:
+          type: array
+          items:
+            type: string
+            enum:
+            - american
+            - asian
+            - british
+            - caribbean
+            - central europe
+            - chinese
+            - eastern europe
+            - french
+            - greek
+            - indian
+            - italian
+            - japanese
+            - korean
+            - kosher
+            - mediterranean
+            - mexican
+            - middle eastern
+            - nordic
+            - south american
+            - south east asian
+            - world
+        mealType:
+          type: array
+          items:
+            type: string
+            enum:
+            - breakfast
+            - brunch
+            - lunch/dinner
+            - snack
+            - teatime
+        dishType:
+          type: array
+          items:
+            type: string
+            enum:
+            - alcohol cocktail
+            - biscuits and cookies
+            - bread
+            - casserole
+            - cereals
+            - condiments and sauces
+            - desserts
+            - drinks
+            - egg
+            - ice cream and custard
+            - main course
+            - pancake
+            - pasta
+            - pastry
+            - pies and tarts
+            - pizza
+            - preps
+            - preserve
+            - salad
+            - sandwiches
+            - seafood
+            - side dish
+            - soup
+            - special occasions
+            - starter
+            - sweets
+        translations:
+          type: array
+          items:
+            $ref: '#/components/schemas/TranslatedLabel'
+    Ingredient:
+      type: object
+      properties:
+        text:
+          type: string
+        parsed:
+          $ref: '#/components/schemas/Parsed'
+    Quantity:
+      type: object
+      properties:
+        uri:
+          type: string
+        label:
+          type: string
+        quantity:
+          type: number
+    TranslatedLabel:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - health
+          - diet
+          - caution
+          - cuisineType
+          - mealType
+          - dishType
+        id:
+          type: string
+        label:
+          type: string
+      required:
+      - type
+      - id
+      - label
+    Parsed:
+      type: object
+      properties:
+        quantity:
+          type: number
+        measure:
+          type: string
+        measureURI:
+          type: string
+        foodMatch:
+          type: string
+        food:
+          type: string
+        foodId:
+          type: string
+        foodURI:
+          type: string
+        specificFoodURI:
+          type: string
+        foodCategory:
+          type: string
+        brand:
+          type: string
+        foodContentsLabel:
+          type: string
+        weight:
+          type: number
+        retainedWeight:
+          type: number
+        nutrients:
+          $ref: '#/components/schemas/Nutrients'
+        status:
+          type: string
+          enum:
+          - OK
+          - MISSING_QUANTITY
+          - UNRECOGNIZED_FOOD
+        servingSizes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Quantity'
+        servingsPerContainer:
+          type: number
+    Nutrients:
+      type: object
+      additionalProperties:
+        type: array
+        items:
+          $ref: '#/components/schemas/NutrientInfo'
+    NutrientInfo:
+      type: object
+      properties:
+        label:
+          type: string
+        quantity:
+          type: number
+        unit:
+          type: string

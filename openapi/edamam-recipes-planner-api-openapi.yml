@@ -1,0 +1,695 @@
+openapi: 3.0.3
+info:
+  version: '2.0'
+  title: Food Database Food Nutrition Request - AI Vision (Beta) Food Nutrition Request - AI Vision (Beta) planner API
+  description: Meal planning
+servers:
+- url: https://api.edamam.com
+tags:
+- name: planner
+  description: Meal planning
+paths:
+  /api/meal-planner/v1/{app_id}/select:
+    post:
+      tags:
+      - planner
+      summary: Create Dietary Plan According to Supplied Specification
+      parameters:
+      - name: app_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: Edamam-Account-User
+        in: header
+        schema:
+          type: string
+        description: ID of the account user. Should be used *only* if the account is configured for active user tracking.
+      - name: beta
+        in: query
+        schema:
+          type: boolean
+        description: Turn on support for beta features
+      - name: type
+        in: query
+        required: true
+        explode: true
+        schema:
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+            enum:
+            - public
+            - edamam-generic
+        description: Types of recipes to choose from.
+      requestBody:
+        description: Meal plan descriptor
+        content:
+          application/json:
+            schema:
+              properties:
+                size:
+                  description: Plan length (days)
+                  type: integer
+                  default: 1
+                  minimum: 1
+                  maximum: 14
+                plan:
+                  $ref: '#/components/schemas/Section'
+                selection:
+                  description: '(BETA only) Plan assignment template, with explicit entries potentially assigned at specific slots.
+
+                    The length of the generated plan, if successful, will equal the size of the template.  Free slots
+
+                    will be assigned to complete each day''s value according to the constraints in effect.  Pre-assigned
+
+                    entries'' nutritional value will be accounted for in nutritional constraint checking across the
+
+                    daily assignment, but the individual pre-assigned entries will *not* be checked against applicable
+
+                    acceptance criteria.
+
+
+                    Items must be pre-assigned in accordance with the plan structure, as expected to be returned in a
+
+                    successful plan assignment.  Only leaf sections can be pre-assigned, assignments on non-leaf
+
+                    sections will be reported back as invocation errors.
+
+
+                    Assigned entries must exist.  Non-existent entries will be reported with HTTP status 404.
+
+
+                    This property is mutually exclusive with `size`; a call supplying both plan size and an assignment
+
+                    template will be deemed invalid.
+
+                    '
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Selection'
+            examples:
+              7-Day Plan with Allergens:
+                $ref: '#/components/examples/7-Day-Plan-with-Allergens'
+              Vegan plan:
+                $ref: '#/components/examples/Vegan-plan'
+      responses:
+        200:
+          description: Plan generated completely or partially
+          content:
+            application/json:
+              schema:
+                properties:
+                  status:
+                    description: '| Status        | Description |
+
+                      |---------------|-------------|
+
+                      | `OK`          | Plan generated completely |
+
+                      | `INCOMPLETE`  | Plan generated partially.  Unique assignments for one or more days of the requested period could not be completed from available recipe data |
+
+                      | `TIME_OUT`    | Plan generated partially.  Unique assignments for one or more days of the requested period could not be completed within the allowed execution time |
+
+                      '
+                    type: string
+                    enum:
+                    - OK
+                    - INCOMPLETE
+                    - TIME_OUT
+                  _links:
+                    description: Links to resources related to the generated meal plan
+                    type: object
+                    properties:
+                      next:
+                        allOf:
+                        - description: '(BETA only) Link for extending the current meal plan with one more complete period, with new recipe entries.  The link is only provided for convenience; it will *not* be available for incomplete assignments (i.e. where `status` = `"INCOMPLETE"`,) or if the included extension token has grown too large.  It is highly recommended that the caller maintain their own chain of extension requests, by keeping track of recipe entries assigned so far in the chain, and adding them for exclusion on subsequent calls (see `exclude` in [`Section`](#/components/schemas/Section).)
+
+                            '
+                        - $ref: '#/components/schemas/LinkEntry'
+                  selection:
+                    description: 'Daily assignments according to the specified plan.  Each element of the array represents complete assignments for a single day, each daily assignment corresponding with the structure of the meals specified in the plan descriptor.
+
+                      '
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Selection'
+              examples:
+                Vegan plan assignment:
+                  $ref: '#/components/examples/Vegan-plan-assignment'
+        400:
+          description: Malformed or invalid plan specification
+        404:
+          description: One or more pre-assigned entries were not found
+      security:
+      - basic:
+        - app_id
+  /api/recipes/v2/by-uri:
+    get:
+      tags:
+      - planner
+      summary: Lookup Recipes by URI
+      description: The meal planner returns recipe URIs as part of its response. Use this endpoint to retrieve the recipes. For more information see the relevant documentation in the [Recipe Search API](https://developer.edamam.com/edamam-docs-recipe-api#operations-tag-Lookup_recipes_by_URI).
+      responses:
+        default:
+          description: See the relevant documentation in the [Recipe Search API](https://developer.edamam.com/edamam-docs-recipe-api#operations-tag-Lookup_recipes_by_URI).
+  /api/shopping-list/v2:
+    post:
+      tags:
+      - planner
+      summary: Create Shopping List From Total Meal Quantities
+      description: Once a meal plan has been generated, a shopping list can be created for the requisite quantities of all necessary ingredients across the plan, through the "Shopping List API". For more information see the relevant documentation in the [Recipe Search API](https://developer.edamam.com/edamam-docs-recipe-api).
+      responses:
+        default:
+          description: See the relevant documentation in the [Recipe Search API](https://developer.edamam.com/edamam-docs-recipe-api).
+components:
+  examples:
+    Vegan-plan-assignment:
+      description: Vegan meal plan, 2-day selection
+      value:
+        status: OK
+        selection:
+        - sections:
+            Breakfast:
+              assigned: http://www.edamam.com/ontologies/edamam.owl#recipe_1
+              _links:
+                self:
+                  title: Recipe №1
+                  href: https://test-cluster.edamam.com/api/recipes/v2/1?type=public
+            Lunch:
+              sections:
+                Starter:
+                  assigned: http://www.edamam.com/ontologies/edamam.owl#recipe_2
+                  _links:
+                    self:
+                      title: Recipe №2
+                      href: https://test-cluster.edamam.com/api/recipes/v2/2?type=public
+                Main:
+                  assigned: http://www.edamam.com/ontologies/edamam.owl#recipe_3
+                  _links:
+                    self:
+                      title: Recipe №3
+                      href: https://test-cluster.edamam.com/api/recipes/v2/3?type=public
+                Dessert:
+                  assigned: http://www.edamam.com/ontologies/edamam.owl#recipe_4
+                  _links:
+                    self:
+                      title: Recipe №4
+                      href: https://test-cluster.edamam.com/api/recipes/v2/4?type=public
+            Dinner:
+              sections:
+                Main:
+                  assigned: http://www.edamam.com/ontologies/edamam.owl#recipe_5
+                  _links:
+                    self:
+                      title: Recipe №5
+                      href: https://test-cluster.edamam.com/api/recipes/v2/5?type=public
+                Dessert:
+                  assigned: http://www.edamam.com/ontologies/edamam.owl#recipe_6
+                  _links:
+                    self:
+                      title: Recipe №6
+                      href: https://test-cluster.edamam.com/api/recipes/v2/6?type=public
+        - sections:
+            Breakfast:
+              assigned: http://www.edamam.com/ontologies/edamam.owl#recipe_7
+              _links:
+                self:
+                  title: Recipe №7
+                  href: https://test-cluster.edamam.com/api/recipes/v2/7?type=public
+            Lunch:
+              sections:
+                Starter:
+                  assigned: http://www.edamam.com/ontologies/edamam.owl#recipe_8
+                  _links:
+                    self:
+                      title: Recipe №8
+                      href: https://test-cluster.edamam.com/api/recipes/v2/8?type=public
+                Main:
+                  assigned: http://www.edamam.com/ontologies/edamam.owl#recipe_9
+                  _links:
+                    self:
+                      title: Recipe №9
+                      href: https://test-cluster.edamam.com/api/recipes/v2/9?type=public
+                Dessert:
+                  assigned: http://www.edamam.com/ontologies/edamam.owl#recipe_10
+                  _links:
+                    self:
+                      title: Recipe №10
+                      href: https://test-cluster.edamam.com/api/recipes/v2/10?type=public
+            Dinner:
+              sections:
+                Main:
+                  assigned: http://www.edamam.com/ontologies/edamam.owl#recipe_11
+                  _links:
+                    self:
+                      title: Recipe №11
+                      href: https://test-cluster.edamam.com/api/recipes/v2/11?type=public
+                Dessert:
+                  assigned: http://www.edamam.com/ontologies/edamam.owl#recipe_12
+                  _links:
+                    self:
+                      title: Recipe №12
+                      href: https://test-cluster.edamam.com/api/recipes/v2/12?type=public
+    7-Day-Plan-with-Allergens:
+      description: 7 Day Allergens descriptor
+      value:
+        size: 7
+        plan:
+          accept:
+            all:
+            - health:
+              - SOY_FREE
+              - FISH_FREE
+              - MEDITERRANEAN
+          fit:
+            ENERC_KCAL:
+              min: 1000
+              max: 2000
+            SUGAR.added:
+              max: 20
+          exclude:
+          - http://www.edamam.com/ontologies/edamam.owl#recipe_x
+          - http://www.edamam.com/ontologies/edamam.owl#recipe_y
+          - http://www.edamam.com/ontologies/edamam.owl#recipe_z
+          sections:
+            Breakfast:
+              accept:
+                all:
+                - dish:
+                  - drinks
+                  - egg
+                  - biscuits and cookies
+                  - bread
+                  - pancake
+                  - cereals
+                - meal:
+                  - breakfast
+              fit:
+                ENERC_KCAL:
+                  min: 100
+                  max: 600
+            Lunch:
+              accept:
+                all:
+                - dish:
+                  - main course
+                  - pasta
+                  - egg
+                  - salad
+                  - soup
+                  - sandwiches
+                  - pizza
+                  - seafood
+                - meal:
+                  - lunch/dinner
+              fit:
+                ENERC_KCAL:
+                  min: 300
+                  max: 900
+            Dinner:
+              accept:
+                all:
+                - dish:
+                  - seafood
+                  - egg
+                  - salad
+                  - pizza
+                  - pasta
+                  - main course
+                - meal:
+                  - lunch/dinner
+              fit:
+                ENERC_KCAL:
+                  min: 200
+                  max: 900
+    Vegan-plan:
+      description: Vegan meal plan descriptor
+      value:
+        size: 2
+        plan:
+          accept:
+            all:
+            - health:
+              - VEGAN
+            - cuisine:
+              - Mediterranean
+          fit:
+            ENERC_KCAL:
+              min: 1800
+              max: 2200
+            PROCNT:
+              min: 50
+              max: 300
+          sections:
+            Breakfast: {}
+            Lunch:
+              exclude:
+              - http://www.edamam.com/ontologies/edamam.owl#recipe_x
+              - http://www.edamam.com/ontologies/edamam.owl#recipe_y
+              - http://www.edamam.com/ontologies/edamam.owl#recipe_z
+              sections:
+                Starter: {}
+                Main: {}
+                Dessert: {}
+            Dinner:
+              exclude:
+              - http://www.edamam.com/ontologies/edamam.owl#recipe_a
+              - http://www.edamam.com/ontologies/edamam.owl#recipe_b
+              - http://www.edamam.com/ontologies/edamam.owl#recipe_c
+              sections:
+                Main: {}
+                Dessert: {}
+  schemas:
+    CuisineType:
+      type: string
+      enum:
+      - american
+      - asian
+      - british
+      - caribbean
+      - central europe
+      - chinese
+      - eastern europe
+      - french
+      - greek
+      - indian
+      - italian
+      - japanese
+      - korean
+      - kosher
+      - mediterranean
+      - mexican
+      - middle eastern
+      - nordic
+      - south american
+      - south east asian
+      - world
+    Selection:
+      type: object
+      properties:
+        assigned:
+          description: URI of the recipe assigned for this section (leaf sections only.)
+          type: string
+        _links:
+          description: Links to resources related to the assigned recipe
+          type: object
+          properties:
+            self:
+              allOf:
+              - description: Link to the assigned recipe's details in the Recipe Search API
+              - $ref: '#/components/schemas/LinkEntry'
+        sections:
+          description: Selection tree for sub-sections, according to the structure specified by the plan descriptor.
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/Selection'
+    MealType:
+      type: string
+      enum:
+      - breakfast
+      - brunch
+      - lunch/dinner
+      - lunch
+      - dinner
+      - snack
+      - teatime
+    Range:
+      type: object
+      properties:
+        min:
+          type: number
+        max:
+          type: number
+    CautionLabel:
+      type: string
+      enum:
+      - gluten
+      - wheat
+      - eggs
+      - milk
+      - peanuts
+      - tree-nuts
+      - soy
+      - fish
+      - shellfish
+      - sulfites
+      - fodmap
+    LinkEntry:
+      type: object
+      required:
+      - href
+      properties:
+        title:
+          description: Human-readable link title
+          type: string
+        href:
+          description: Target URL
+          type: string
+    DishType:
+      type: string
+      enum:
+      - alcohol cocktail
+      - biscuits and cookies
+      - bread
+      - casserole
+      - cereals
+      - condiments and sauces
+      - desserts
+      - drinks
+      - egg
+      - ice cream and custard
+      - main course
+      - pancake
+      - pasta
+      - pastry
+      - pies and tarts
+      - pizza
+      - preps
+      - preserve
+      - salad
+      - sandwiches
+      - seafood
+      - side dish
+      - soup
+      - special occasions
+      - starter
+      - sweets
+    Predicate:
+      oneOf:
+      - description: Select entries matching all of a given list of predicates
+        type: object
+        required:
+        - all
+        properties:
+          all:
+            type: array
+            items:
+              $ref: '#/components/schemas/Predicate'
+      - description: Select entries matching at least one out of a given list of predicates
+        type: object
+        required:
+        - any
+        properties:
+          any:
+            type: array
+            items:
+              $ref: '#/components/schemas/Predicate'
+      - description: Select entries that do *not* match a given predicate
+        type: object
+        required:
+        - not
+        properties:
+          not:
+            $ref: '#/components/schemas/Predicate'
+      - description: 'Select entries that satisfy a given target requirement, subject to a pre-condition.  Entries that do *not* satisfy the precondition will match this rule vacuously.
+
+          '
+        type: object
+        required:
+        - when
+        properties:
+          when:
+            type: object
+            required:
+            - condition
+            - require
+            properties:
+              condition:
+                allOf:
+                - description: Pre-condition for checking the target requirement
+                - $ref: '#/components/schemas/Predicate'
+              require:
+                allOf:
+                - description: Target requirement to check if the pre-condition is satisfied
+                - $ref: '#/components/schemas/Predicate'
+      - description: Select entries falling under one or more of the supplied health labels
+        type: object
+        required:
+        - health
+        properties:
+          health:
+            type: array
+            items:
+              $ref: '#/components/schemas/HealthLabel'
+      - description: Select entries falling under one or more of the supplied caution labels
+        type: object
+        required:
+        - caution
+        properties:
+          caution:
+            type: array
+            items:
+              $ref: '#/components/schemas/CautionLabel'
+      - description: Select entries falling under one or more of the supplied cuisine types
+        type: object
+        required:
+        - cuisine
+        properties:
+          cuisine:
+            type: array
+            items:
+              $ref: '#/components/schemas/CuisineType'
+      - description: Select entries falling under one or more of the supplied meal types
+        type: object
+        required:
+        - meal
+        properties:
+          meal:
+            type: array
+            items:
+              $ref: '#/components/schemas/MealType'
+      - description: Select entries falling under one or more of the supplied dish types
+        type: object
+        required:
+        - dish
+        properties:
+          dish:
+            type: array
+            items:
+              $ref: '#/components/schemas/DishType'
+      - description: Select entries falling under one or more of the supplied dish types *only* (exclude entries under any other dish types)
+        type: object
+        required:
+        - only-dish
+        properties:
+          only-dish:
+            type: array
+            items:
+              $ref: '#/components/schemas/DishType'
+      - description: Select entries from one of the listed sources
+        type: object
+        required:
+        - source
+        properties:
+          source:
+            type: array
+            items:
+              type: string
+      - description: Select entries from one of the listed sources (by site name)
+        type: object
+        required:
+        - source-name
+        properties:
+          source-name:
+            type: array
+            items:
+              type: string
+      - description: Select entries with their number of ingredients in the specified range
+        type: object
+        required:
+        - ingredients
+        properties:
+          ingredients:
+            $ref: '#/components/schemas/Range'
+      - description: Select entries with their total preparation time in the specified range
+        type: object
+        required:
+        - total-time
+        properties:
+          total-time:
+            $ref: '#/components/schemas/Range'
+    HealthLabel:
+      type: string
+      enum:
+      - fat-free
+      - low-fat-abs
+      - sugar-conscious
+      - low-sugar
+      - low-potassium
+      - kidney-friendly
+      - keto-friendly
+      - plant-based
+      - vegan
+      - vegetarian
+      - pescatarian
+      - paleo
+      - specific-carbs
+      - Mediterranean
+      - DASH
+      - dairy-free
+      - gluten-free
+      - wheat-free
+      - egg-free
+      - milk-free
+      - peanut-free
+      - tree-nut-free
+      - soy-free
+      - fish-free
+      - shellfish-free
+      - pork-free
+      - red-meat-free
+      - crustacean-free
+      - celery-free
+      - mustard-free
+      - sesame-free
+      - lupine-free
+      - mollusk-free
+      - alcohol-free
+      - no-oil-added
+      - no-sugar-added
+      - sulfite-free
+      - fodmap-free
+      - kosher
+      - alcohol-cocktail
+      - immuno-supportive
+    Section:
+      description: 'Plan section; may contain sub-sections.
+
+
+        Leaf sections (i.e. those that do not contain sub-sections) represent individual dishes in the daily plan.
+
+        Upon generation of the plan, complete or partial, each leaf section will be assigned a single recipe that will
+
+        be unique throughout the complete period of the generated plan.'
+      type: object
+      properties:
+        accept:
+          allOf:
+          - description: Acceptance criteria for all entries in the sub-tree
+          - $ref: '#/components/schemas/Predicate'
+        fit:
+          description: 'Nutritional budget (constraints for total nutrient content values in the sub-tree.) Keys must be valid **NutrientTag**-s
+
+            '
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/Range'
+        exclude:
+          description: Recipes to exclude from this section's sub-tree, listed by URI
+          type: array
+          items:
+            type: string
+        sections:
+          description: 'Sub-sections.
+
+
+            This section''s acceptance criteria and nutritional budget will apply to its complete sub-tree of
+
+            sub-sections, potentially in conjunction will any other criteria that may apply, specifically from
+
+            containing parent sections.'
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/Section'

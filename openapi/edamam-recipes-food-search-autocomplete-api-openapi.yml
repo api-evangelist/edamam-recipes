@@ -1,0 +1,65 @@
+openapi: 3.0.3
+info:
+  version: '2.0'
+  title: Food Database Food Nutrition Request - AI Vision (Beta) Food Nutrition Request - AI Vision (Beta) Food Search Autocomplete API
+  description: ''
+servers:
+- url: https://api.edamam.com
+tags:
+- name: Food Search Autocomplete
+paths:
+  /auto-complete:
+    get:
+      tags:
+      - Food Search Autocomplete
+      summary: Autocomplete for Food Search
+      description: 'Edamam provides a convenient autocomplete functionality which can be implemented for use when searching for
+
+        ingredients. Just send in the current query as the "q" parameter and the number of suggestions you wish to
+
+        receive as the "limit" parameter.
+
+
+        **Access Point:** <https://api.edamam.com/auto-complete>'
+      parameters:
+      - name: app_id
+        in: query
+        x-data-threescale-name: app_ids
+        description: The application ID, obtained from the account dashboard, <https://developer.edamam.com/admin/applications>.
+        required: true
+        schema:
+          type: string
+      - name: app_key
+        in: query
+        x-data-threescale-name: app_keys
+        description: The application key, obtained from the account dashboard, <https://developer.edamam.com/admin/applications>.
+        required: true
+        schema:
+          type: string
+      - name: Edamam-Account-User
+        description: ID of the account user. Should be used *only* if the account is configured for active user tracking.
+        in: header
+        schema:
+          type: string
+      - name: q
+        in: query
+        description: Query text. For example q=chi. This or the r parameter are required.
+        required: true
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Limit the number of suggestions.
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 10
+      responses:
+        '200':
+          description: The autocomplete suggestions.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string

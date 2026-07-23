@@ -1,0 +1,341 @@
+openapi: 3.0.3
+info:
+  version: '2.0'
+  title: Food Database Food Nutrition Request - AI Vision (Beta) Food Nutrition Request - AI Vision (Beta) values API
+  description: Daily values
+servers:
+- url: https://api.edamam.com
+tags:
+- name: values
+  description: Daily values
+paths:
+  /api/daily-values/v1/values:
+    post:
+      tags:
+      - values
+      summary: Calculate Recommended Daily Intake and Tolerable Upper Limits for the Specified Metabolic Profile
+      requestBody:
+        description: Metabolic profile descriptor (possibly incomplete)
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MetabolicProfile'
+            examples:
+              Male, generic:
+                $ref: '#/components/examples/profile_Male_generic'
+              Male, complete:
+                $ref: '#/components/examples/profile_Male_complete'
+              Female, pregnant:
+                $ref: '#/components/examples/profile_Female_pregnant'
+              Female, complete:
+                $ref: '#/components/examples/profile_Female_complete'
+      responses:
+        200:
+          description: Daily values calculated
+          content:
+            application/json:
+              schema:
+                properties:
+                  values:
+                    description: Daily values, indexed by nutrient; nutrients are represented by **NutrientTag**-s
+                    type: object
+                    additionalProperties:
+                      $ref: '#/components/schemas/Values'
+              examples:
+                Male, generic:
+                  $ref: '#/components/examples/values_Male_generic'
+                Female, pregnant:
+                  $ref: '#/components/examples/values_Female_pregnant'
+        400:
+          description: Malformed or inconsistent metabolic profile specification
+      security:
+      - basic:
+        - app_id
+components:
+  examples:
+    values_Male_generic:
+      description: Daily values for a male of unspecified age and build
+      value:
+        values:
+          PROCNT:
+            recommended: 34
+          WATER:
+            recommended: 2400
+          CHOCDF:
+            recommended: 130
+          FIBTG:
+            recommended: 31
+          F18D2CN6:
+            recommended: 12
+          F18D3CN3:
+            recommended: 1.2
+          VITA_RAE:
+            recommended: 600
+            limit: 1700
+          VITC:
+            recommended: 45
+            limit: 1200
+          VITD:
+            recommended: 15
+            limit: 100
+          TOCPHA:
+            recommended: 11
+            limit: 600
+          VITK1:
+            recommended: 60
+          THIA:
+            recommended: 0.9
+          RIBF:
+            recommended: 0.9
+          NIA:
+            recommended: 12
+            limit: 20
+          VITB6A:
+            recommended: 1
+            limit: 60
+          FOLDFE:
+            recommended: 300
+            limit: 600
+          VITB12:
+            recommended: 1.8
+          PANTAC:
+            recommended: 4
+          BIO:
+            recommended: 20
+          CHOLN:
+            recommended: 375
+            limit: 2000
+          CA:
+            recommended: 1300
+            limit: 3000
+          CR:
+            recommended: 25
+          CU:
+            recommended: 0.7
+            limit: 5
+          FLD:
+            recommended: 2000
+            limit: 10000
+          I:
+            recommended: 120
+            limit: 600
+          FE:
+            recommended: 8
+            limit: 40
+          MG:
+            recommended: 240
+            limit: 350
+          MN:
+            recommended: 1.9
+            limit: 6
+          MO:
+            recommended: 34
+            limit: 1100
+          P:
+            recommended: 1250
+            limit: 4000
+          SE:
+            recommended: 40
+            limit: 280
+          ZN:
+            recommended: 8
+            limit: 23
+          K:
+            recommended: 2500
+          NA:
+            recommended: 1200
+          CL:
+            recommended: 2300
+            limit: 3400
+          B:
+            limit: 11000
+          NI:
+            limit: 600
+    profile_Female_pregnant:
+      description: Pregnant female, 25, of unspecified build
+      value:
+        gender: female
+        conditions:
+        - pregnant
+        age: 25
+    profile_Male_generic:
+      description: Male of unspecified age and build
+      value:
+        gender: male
+    profile_Male_complete:
+      description: Male profile, fully specified
+      value:
+        gender: male
+        height: 180
+        weight: 80
+        age: 26
+        activity-level: moderately-active
+    profile_Female_complete:
+      description: Female profile, fully specified
+      value:
+        gender: female
+        conditions:
+        - lactating
+        height: 175
+        weight: 65
+        age: 20
+        activity-level: moderately-active
+    values_Female_pregnant:
+      description: Daily values for a pregnant female, 25, of unspecified build
+      value:
+        values:
+          PROCNT:
+            recommended: 71
+          CHOCDF:
+            recommended: 175
+          FIBTG:
+            recommended: 28
+          F18D2CN6:
+            recommended: 13
+          F18D3CN3:
+            recommended: 1.4
+          WATER:
+            recommended: 3000
+          VITA_RAE:
+            recommended: 770
+            limit: 3000
+          VITC:
+            recommended: 85
+            limit: 2000
+          VITD:
+            recommended: 15
+            limit: 100
+          TOCPHA:
+            recommended: 15
+            limit: 1000
+          VITK1:
+            recommended: 90
+          THIA:
+            recommended: 1.4
+          RIBF:
+            recommended: 1.4
+          NIA:
+            recommended: 18
+            limit: 35
+          VITB6A:
+            recommended: 1.9
+            limit: 100
+          FOLDFE:
+            recommended: 600
+            limit: 1000
+          VITB12:
+            recommended: 2.6
+          PANTAC:
+            recommended: 6
+          BIO:
+            recommended: 30
+          CHOLN:
+            recommended: 450
+            limit: 3500
+          CA:
+            recommended: 1000
+            limit: 2500
+          CR:
+            recommended: 30
+          CU:
+            recommended: 1
+            limit: 10
+          FLD:
+            recommended: 3000
+            limit: 10000
+          I:
+            recommended: 220
+            limit: 1100
+          FE:
+            recommended: 27
+            limit: 45
+          MG:
+            recommended: 350
+            limit: 350
+          MN:
+            recommended: 2
+            limit: 11
+          MO:
+            recommended: 50
+            limit: 2000
+          P:
+            recommended: 700
+            limit: 3500
+          SE:
+            recommended: 60
+            limit: 400
+          ZN:
+            recommended: 11
+            limit: 40
+          K:
+            recommended: 2900
+          NA:
+            recommended: 1500
+          CL:
+            recommended: 2300
+            limit: 3600
+          B:
+            limit: 20000
+          NI:
+            limit: 1000
+  schemas:
+    Gender:
+      description: User gender
+      type: string
+      enum:
+      - male
+      - female
+    Condition:
+      description: Physical or medical condition
+      type: string
+      enum:
+      - pregnant
+      - lactating
+    Values:
+      description: Recommended daily allowance and/or intake upper limit, in nutrient-specific units
+      type: object
+      properties:
+        recommended:
+          description: Recommended daily allowance, if defined
+          type: number
+        limit:
+          description: Tolerable upper limit on nutrient intake, if defined
+          type: number
+    MetabolicProfile:
+      description: (BETA only) Collection of parameters describing a target user's metabolic profile
+      type: object
+      properties:
+        gender:
+          $ref: '#/components/schemas/Gender'
+        conditions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Condition'
+        height:
+          type: number
+        weight:
+          type: number
+        age:
+          type: number
+        activity-level:
+          $ref: '#/components/schemas/ActivityLevel'
+    ActivityLevel:
+      description: '| Activity level      | Description |
+
+        |---------------------|-------------|
+
+        | `sedentary`         | Most of the day spent sitting; example: office worker getting little or no exercise |
+
+        | `moderately-active` | Regular daily physical exercise; example: construction worker or person running one hour daily |
+
+        | `vigorously-active` | Intense daily physical exercise; example: agricultural worker (non mechanized) or person swimming two hours daily |
+
+        | `extremely-active`  | Extreme daily physical effort; example: competitive cyclist |
+
+        '
+      type: string
+      enum:
+      - sedentary
+      - moderately-active
+      - vigorously-active
+      - extremely-active

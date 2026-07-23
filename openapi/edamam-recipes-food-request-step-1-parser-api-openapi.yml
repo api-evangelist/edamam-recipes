@@ -1,0 +1,683 @@
+openapi: 3.0.3
+info:
+  version: '2.0'
+  title: Food Database Food Nutrition Request - AI Vision (Beta) Food Nutrition Request - AI Vision (Beta) Food Request Step 1 - Parser API
+  description: ''
+servers:
+- url: https://api.edamam.com
+tags:
+- name: Food Request Step 1 - Parser
+paths:
+  /api/food-database/v2/parser:
+    get:
+      tags:
+      - Food Request Step 1 - Parser
+      summary: Food Search
+      description: "The parser access point handles text search for foods as well as filters for the foods like presence specific\nnutrient content or exclusion of allergens.\n\n  - Search for a phrase or keyword using NLP to get food entities from it\n  - Get basic nutrition facts and ingredients for each food\n  - Search for food by given nutrient quantity for 28 nutrients\n  - Search for foods within a given brand\n  - With the build in food-logging context it allows for requests which do not contain quantity and suggest\n       expected quantities for them.\n\n**Access Point:** <https://api.edamam.com/api/food-database/v2/parser>"
+      parameters:
+      - name: app_id
+        in: query
+        x-data-threescale-name: app_ids
+        description: The application ID, obtained from the account dashboard, <https://developer.edamam.com/admin/applications>.
+        required: true
+        schema:
+          type: string
+      - name: app_key
+        in: query
+        x-data-threescale-name: app_keys
+        description: The application key, obtained from the account dashboard, <https://developer.edamam.com/admin/applications>.
+        required: true
+        schema:
+          type: string
+      - name: Edamam-Account-User
+        description: ID of the account user. Should be used *only* if the account is configured for active user tracking.
+        in: header
+        schema:
+          type: string
+      - name: ingr
+        in: query
+        description: 'A keyword search parameter to be found in the food name. **REQUIRED** if `upc` **and** `brand` are not
+
+          specified. **NOT REQUIRED** if `brand` is specified. **DO NOT POPULATE** if `upc` is specified.'
+        schema:
+          type: string
+      - name: brand
+        in: query
+        description: 'A keyword search parameter to be found in the food''s brand. **REQUIRED** if `ingr` **and** `upc` are not
+
+          specified. **NOT REQUIRED** if `ingr` is specified. **DO NOT POPULATE** if `upc` is specified.'
+        schema:
+          type: string
+      - name: upc
+        in: query
+        description: 'Valid UPC, EAN, or PLU code. **REQUIRED** if neither `ingr` **nor** `brand` are specified.
+
+          **DO NOT POPULATE** otherwise.'
+        schema:
+          type: string
+      - name: nutrition-type
+        in: query
+        description: Select between cooking and food logging processor.
+        schema:
+          type: string
+          default: cooking
+          enum:
+          - cooking
+          - logging
+      - name: health
+        in: query
+        description: Health label
+        style: form
+        explode: true
+        schema:
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+            enum:
+            - alcohol-free
+            - celery-free
+            - crustacean-free
+            - dairy-free
+            - egg-free
+            - fish-free
+            - fodmap-free
+            - gluten-free
+            - immuno-supportive
+            - keto-friendly
+            - kidney-friendly
+            - kosher
+            - low-fat-abs
+            - low-potassium
+            - low-sugar
+            - lupine-free
+            - mustard-free
+            - no-oil-added
+            - paleo
+            - peanut-free
+            - pescatarian
+            - pork-free
+            - red-meat-free
+            - sesame-free
+            - shellfish-free
+            - soy-free
+            - sugar-conscious
+            - tree-nut-free
+            - vegan
+            - vegetarian
+            - wheat-free
+      - name: calories
+        in: query
+        description: 'The format is calories=RANGE where RANGE is replaced by the value in kcal. RANGE is in one of MIN+, MIN-MAX
+
+          or MAX, where MIN and MAX are non-negative integer numbers. The + symbol needs to be properly encoded.
+
+          Examples: “calories=100-300” will return all recipes with which have between 100 and 300 kcal per serving.'
+        schema:
+          type: string
+      - name: category
+        in: query
+        description: Categories
+        style: form
+        explode: true
+        schema:
+          type: array
+          uniqueItems: true
+          items:
+            type: string
+            enum:
+            - generic-foods
+            - generic-meals
+            - packaged-foods
+            - fast-foods
+      - name: nutrients[CA]
+        in: query
+        description: 'Calcium, Ca. Unit: mg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are
+
+          non-negative floating point numbers.
+
+
+          For example: nutrients[CA]=50+ means minimum 50mg calcium, where ‘50+’ has to be properly encoded as ‘50%2B’
+
+          nutrients[FAT]=30 means maximum 30g fat and nutrients[FE]=5-10 means iron between 5mg and 10mg inclusive.'
+        schema:
+          type: string
+          pattern: (?:[+-]?\d+(?:\.\d*)?)|(?:(?:[+-]?\d+(?:\.\d*)?)-(?:[+-]?\d+(?:\.\d*)?))|(?:(?:[+-]?\d+(?:\.\d*)?)[+-])
+      - name: nutrients[CHOCDF]
+        in: query
+        description: 'Carbohydrate, by difference. Unit: g. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and
+
+          MAX are non-negative floating point numbers.
+
+
+          See calcium for an example for how to fill in the range.'
+        schema:
+          type: string
+          pattern: (?:[+-]?\d+(?:\.\d*)?)|(?:(?:[+-]?\d+(?:\.\d*)?)-(?:[+-]?\d+(?:\.\d*)?))|(?:(?:[+-]?\d+(?:\.\d*)?)[+-])
+      - name: nutrients[CHOCDF.net]
+        in: query
+        description: 'Carbohydrates (net). Unit: g. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are
+
+          non-negative floating point numbers.
+
+
+          See calcium for an example for how to fill in the range.'
+        schema:
+          type: string
+          pattern: (?:[+-]?\d+(?:\.\d*)?)|(?:(?:[+-]?\d+(?:\.\d*)?)-(?:[+-]?\d+(?:\.\d*)?))|(?:(?:[+-]?\d+(?:\.\d*)?)[+-])
+      - name: nutrients[CHOLE]
+        in: query
+        description: 'Cholesterol. Unit: mg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are
+
+          non-negative floating point numbers.
+
+
+          See calcium for an example for how to fill in the range.'
+        schema:
+          type: string
+          pattern: (?:[+-]?\d+(?:\.\d*)?)|(?:(?:[+-]?\d+(?:\.\d*)?)-(?:[+-]?\d+(?:\.\d*)?))|(?:(?:[+-]?\d+(?:\.\d*)?)[+-])
+      - name: nutrients[ENERC_KCAL]
+        in: query
+        description: 'Energy. Unit: kcal. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are non-negative
+
+          floating point numbers.
+
+
+          See calcium for an example for how to fill in the range.'
+        schema:
+          type: string
+          pattern: (?:[+-]?\d+(?:\.\d*)?)|(?:(?:[+-]?\d+(?:\.\d*)?)-(?:[+-]?\d+(?:\.\d*)?))|(?:(?:[+-]?\d+(?:\.\d*)?)[+-])
+      - name: nutrients[FAMS]
+        in: query
+        description: 'Fatty acids, total monounsaturated. Unit: g. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN
+
+          and MAX are non-negative floating point numbers.
+
+
+          See calcium for an example for how to fill in the range.'
+        schema:
+          type: string
+          pattern: (?:[+-]?\d+(?:\.\d*)?)|(?:(?:[+-]?\d+(?:\.\d*)?)-(?:[+-]?\d+(?:\.\d*)?))|(?:(?:[+-]?\d+(?:\.\d*)?)[+-])
+      - name: nutrients[FAPU]
+        in: query
+        description: 'Fatty acids, total polyunsaturated. Unit: g. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN
+
+          and MAX are non-negative floating point numbers.
+
+
+          See calcium for an example for how to fill in the range.'
+        schema:
+          type: string
+          pattern: (?:[+-]?\d+(?:\.\d*)?)|(?:(?:[+-]?\d+(?:\.\d*)?)-(?:[+-]?\d+(?:\.\d*)?))|(?:(?:[+-]?\d+(?:\.\d*)?)[+-])
+      - name: nutrients[FASAT]
+        in: query
+        description: 'Fatty acids, total saturated. Unit: g. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and
+
+          MAX are non-negative floating point numbers.
+
+
+          See calcium for an example for how to fill in the range.'
+        schema:
+          type: string
+          pattern: (?:[+-]?\d+(?:\.\d*)?)|(?:(?:[+-]?\d+(?:\.\d*)?)-(?:[+-]?\d+(?:\.\d*)?))|(?:(?:[+-]?\d+(?:\.\d*)?)[+-])
+      - name: nutrients[FAT]
+        in: query
+        description: 'Total lipid (fat). Unit: g. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are
+
+          non-negative floating point numbers.
+
+
+          See calcium for an example for how to fill in the range.'
+        schema:
+          type: string
+          pattern: (?:[+-]?\d+(?:\.\d*)?)|(?:(?:[+-]?\d+(?:\.\d*)?)-(?:[+-]?\d+(?:\.\d*)?))|(?:(?:[+-]?\d+(?:\.\d*)?)[+-])
+      - name: nutrients[FATRN]
+        in: query
+        description: 'Fatty acids, total trans. Unit: g. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX
+
+          are non-negative floating point numbers.
+
+
+          See calcium for an example for how to fill in the range.'
+        schema:
+          type: string
+          pattern: (?:[+-]?\d+(?:\.\d*)?)|(?:(?:[+-]?\d+(?:\.\d*)?)-(?:[+-]?\d+(?:\.\d*)?))|(?:(?:[+-]?\d+(?:\.\d*)?)[+-])
+      - name: nutrients[FE]
+        in: query
+        description: 'Iron, Fe. Unit: mg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are non-negative
+
+          floating point numbers.
+
+
+          See calcium for an example for how to fill in the range.'
+        schema:
+          type: string
+          pattern: (?:[+-]?\d+(?:\.\d*)?)|(?:(?:[+-]?\d+(?:\.\d*)?)-(?:[+-]?\d+(?:\.\d*)?))|(?:(?:[+-]?\d+(?:\.\d*)?)[+-])
+      - name: nutrients[FIBTG]
+        in: query
+        description: 'Fiber, total dietary. Unit: g. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are
+
+          non-negative floating point numbers.
+
+
+          See calcium for an example for how to fill in the range.'
+        schema:
+          type: string
+          pattern: (?:[+-]?\d+(?:\.\d*)?)|(?:(?:[+-]?\d+(?:\.\d*)?)-(?:[+-]?\d+(?:\.\d*)?))|(?:(?:[+-]?\d+(?:\.\d*)?)[+-])
+      - name: nutrients[FOLAC]
+        in: query
+        description: 'Folic acid. Unit: µg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are
+
+          non-negative floating point numbers.
+
+
+          See calcium for an example for how to fill in the range.'
+        schema:
+          type: string
+          pattern: (?:[+-]?\d+(?:\.\d*)?)|(?:(?:[+-]?\d+(?:\.\d*)?)-(?:[+-]?\d+(?:\.\d*)?))|(?:(?:[+-]?\d+(?:\.\d*)?)[+-])
+      - name: nutrients[FOLDFE]
+        in: query
+        description: 'Folate, DFE. Unit: µg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are
+
+          non-negative floating point numbers.
+
+
+          See calcium for an example for how to fill in the range.'
+        schema:
+          type: string
+          pattern: (?:[+-]?\d+(?:\.\d*)?)|(?:(?:[+-]?\d+(?:\.\d*)?)-(?:[+-]?\d+(?:\.\d*)?))|(?:(?:[+-]?\d+(?:\.\d*)?)[+-])
+      - name: nutrients[FOLFD]
+        in: query
+        description: 'Folate (food). Unit: µg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are
+
+          non-negative floating point numbers.
+
+
+          See calcium for an example for how to fill in the range.'
+        schema:
+          type: string
+          pattern: (?:[+-]?\d+(?:\.\d*)?)|(?:(?:[+-]?\d+(?:\.\d*)?)-(?:[+-]?\d+(?:\.\d*)?))|(?:(?:[+-]?\d+(?:\.\d*)?)[+-])
+      - name: nutrients[K]
+        in: query
+        description: 'Potassium, K. Unit: mg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are
+
+          non-negative floating point numbers.
+
+
+          See calcium for an example for how to fill in the range.'
+        schema:
+          type: string
+          pattern: (?:[+-]?\d+(?:\.\d*)?)|(?:(?:[+-]?\d+(?:\.\d*)?)-(?:[+-]?\d+(?:\.\d*)?))|(?:(?:[+-]?\d+(?:\.\d*)?)[+-])
+      - name: nutrients[MG]
+        in: query
+        description: 'Magnesium. Unit: mg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are
+
+          non-negative floating point numbers.
+
+
+          See calcium for an example for how to fill in the range.'
+        schema:
+          type: string
+          pattern: (?:[+-]?\d+(?:\.\d*)?)|(?:(?:[+-]?\d+(?:\.\d*)?)-(?:[+-]?\d+(?:\.\d*)?))|(?:(?:[+-]?\d+(?:\.\d*)?)[+-])
+      - name: nutrients[NA]
+        in: query
+        description: 'Sodium, Na. Unit: mg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are
+
+          non-negative floating point numbers.
+
+
+          See calcium for an example for how to fill in the range.'
+        schema:
+          type: string
+          pattern: (?:[+-]?\d+(?:\.\d*)?)|(?:(?:[+-]?\d+(?:\.\d*)?)-(?:[+-]?\d+(?:\.\d*)?))|(?:(?:[+-]?\d+(?:\.\d*)?)[+-])
+      - name: nutrients[NIA]
+        in: query
+        description: 'Niacin. Unit: mg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are non-negative
+
+          floating point numbers.
+
+
+          See calcium for an example for how to fill in the range.'
+        schema:
+          type: string
+          pattern: (?:[+-]?\d+(?:\.\d*)?)|(?:(?:[+-]?\d+(?:\.\d*)?)-(?:[+-]?\d+(?:\.\d*)?))|(?:(?:[+-]?\d+(?:\.\d*)?)[+-])
+      - name: nutrients[P]
+        in: query
+        description: 'Phosphorus, P. Unit: mg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are
+
+          non-negative floating point numbers.
+
+
+          See calcium for an example for how to fill in the range.'
+        schema:
+          type: string
+          pattern: (?:[+-]?\d+(?:\.\d*)?)|(?:(?:[+-]?\d+(?:\.\d*)?)-(?:[+-]?\d+(?:\.\d*)?))|(?:(?:[+-]?\d+(?:\.\d*)?)[+-])
+      - name: nutrients[PROCNT]
+        in: query
+        description: 'Protein. Unit: g. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are non-negative
+
+          floating point numbers.
+
+
+          See calcium for an example for how to fill in the range.'
+        schema:
+          type: string
+          pattern: (?:[+-]?\d+(?:\.\d*)?)|(?:(?:[+-]?\d+(?:\.\d*)?)-(?:[+-]?\d+(?:\.\d*)?))|(?:(?:[+-]?\d+(?:\.\d*)?)[+-])
+      - name: nutrients[RIBF]
+        in: query
+        description: 'Riboflavin. Unit: mg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are
+
+          non-negative floating point numbers.
+
+
+          See calcium for an example for how to fill in the range.'
+        schema:
+          type: string
+          pattern: (?:[+-]?\d+(?:\.\d*)?)|(?:(?:[+-]?\d+(?:\.\d*)?)-(?:[+-]?\d+(?:\.\d*)?))|(?:(?:[+-]?\d+(?:\.\d*)?)[+-])
+      - name: nutrients[SUGAR]
+        in: query
+        description: 'Sugars, total. Unit: g. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are
+
+          non-negative floating point numbers.
+
+
+          See calcium for an example for how to fill in the range.'
+        schema:
+          type: string
+          pattern: (?:[+-]?\d+(?:\.\d*)?)|(?:(?:[+-]?\d+(?:\.\d*)?)-(?:[+-]?\d+(?:\.\d*)?))|(?:(?:[+-]?\d+(?:\.\d*)?)[+-])
+      - name: nutrients[SUGAR.added]
+        in: query
+        description: 'Sugars, added. Unit: g. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are
+
+          non-negative floating point numbers.
+
+
+          See calcium for an example for how to fill in the range.'
+        schema:
+          type: string
+          pattern: (?:[+-]?\d+(?:\.\d*)?)|(?:(?:[+-]?\d+(?:\.\d*)?)-(?:[+-]?\d+(?:\.\d*)?))|(?:(?:[+-]?\d+(?:\.\d*)?)[+-])
+      - name: nutrients[Sugar.alcohol]
+        in: query
+        description: 'Sugar alcohols. Unit: g. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are
+
+          non-negative floating point numbers.
+
+
+          See calcium for an example for how to fill in the range.'
+        schema:
+          type: string
+          pattern: (?:[+-]?\d+(?:\.\d*)?)|(?:(?:[+-]?\d+(?:\.\d*)?)-(?:[+-]?\d+(?:\.\d*)?))|(?:(?:[+-]?\d+(?:\.\d*)?)[+-])
+      - name: nutrients[THIA]
+        in: query
+        description: 'Thiamin. Unit: mg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are non-negative
+
+          floating point numbers.
+
+
+          See calcium for an example for how to fill in the range.'
+        schema:
+          type: string
+          pattern: (?:[+-]?\d+(?:\.\d*)?)|(?:(?:[+-]?\d+(?:\.\d*)?)-(?:[+-]?\d+(?:\.\d*)?))|(?:(?:[+-]?\d+(?:\.\d*)?)[+-])
+      - name: nutrients[TOCPHA]
+        in: query
+        description: 'Vitamin E (alpha-tocopherol). Unit: mg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and
+
+          MAX are non-negative floating point numbers.
+
+
+          See calcium for an example for how to fill in the range.'
+        schema:
+          type: string
+          pattern: (?:[+-]?\d+(?:\.\d*)?)|(?:(?:[+-]?\d+(?:\.\d*)?)-(?:[+-]?\d+(?:\.\d*)?))|(?:(?:[+-]?\d+(?:\.\d*)?)[+-])
+      - name: nutrients[VITA_RAE]
+        in: query
+        description: 'Vitamin A, RAE. Unit: µg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are
+
+          non-negative floating point numbers.
+
+
+          See calcium for an example for how to fill in the range.'
+        schema:
+          type: string
+          pattern: (?:[+-]?\d+(?:\.\d*)?)|(?:(?:[+-]?\d+(?:\.\d*)?)-(?:[+-]?\d+(?:\.\d*)?))|(?:(?:[+-]?\d+(?:\.\d*)?)[+-])
+      - name: nutrients[VITB12]
+        in: query
+        description: 'Vitamin B12. Unit: µg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are
+
+          non-negative floating point numbers.
+
+
+          See calcium for an example for how to fill in the range.'
+        schema:
+          type: string
+          pattern: (?:[+-]?\d+(?:\.\d*)?)|(?:(?:[+-]?\d+(?:\.\d*)?)-(?:[+-]?\d+(?:\.\d*)?))|(?:(?:[+-]?\d+(?:\.\d*)?)[+-])
+      - name: nutrients[VITB6A]
+        in: query
+        description: 'Vitamin B6. Unit: mg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are
+
+          non-negative floating point numbers.
+
+
+          See calcium for an example for how to fill in the range.'
+        schema:
+          pattern: (?:[+-]?\d+(?:\.\d*)?)|(?:(?:[+-]?\d+(?:\.\d*)?)-(?:[+-]?\d+(?:\.\d*)?))|(?:(?:[+-]?\d+(?:\.\d*)?)[+-])
+          type: string
+      - name: nutrients[VITC]
+        in: query
+        description: 'Vitamin C, total ascorbic acid. Unit: mg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN
+
+          and MAX are non-negative floating point numbers.
+
+
+          See calcium for an example for how to fill in the range.'
+        schema:
+          type: string
+          pattern: (?:[+-]?\d+(?:\.\d*)?)|(?:(?:[+-]?\d+(?:\.\d*)?)-(?:[+-]?\d+(?:\.\d*)?))|(?:(?:[+-]?\d+(?:\.\d*)?)[+-])
+      - name: nutrients[VITD]
+        in: query
+        description: 'Vitamin D (D2 + D3). Unit: µg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are
+
+          non-negative floating point numbers.
+
+
+          See calcium for an example for how to fill in the range.'
+        schema:
+          type: string
+          pattern: (?:[+-]?\d+(?:\.\d*)?)|(?:(?:[+-]?\d+(?:\.\d*)?)-(?:[+-]?\d+(?:\.\d*)?))|(?:(?:[+-]?\d+(?:\.\d*)?)[+-])
+      - name: nutrients[VITK1]
+        in: query
+        description: 'Vitamin K (phylloquinone). Unit: µg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX
+
+          are non-negative floating point numbers.
+
+
+          See calcium for an example for how to fill in the range.'
+        schema:
+          type: string
+          pattern: (?:[+-]?\d+(?:\.\d*)?)|(?:(?:[+-]?\d+(?:\.\d*)?)-(?:[+-]?\d+(?:\.\d*)?))|(?:(?:[+-]?\d+(?:\.\d*)?)[+-])
+      - name: nutrients[WATER]
+        in: query
+        description: 'Water. Unit: g. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are non-negative
+
+          floating point numbers.
+
+
+          See calcium for an example for how to fill in the range.'
+        schema:
+          type: string
+          pattern: (?:[+-]?\d+(?:\.\d*)?)|(?:(?:[+-]?\d+(?:\.\d*)?)-(?:[+-]?\d+(?:\.\d*)?))|(?:(?:[+-]?\d+(?:\.\d*)?)[+-])
+      - name: nutrients[ZN]
+        in: query
+        description: 'Zinc, Zn. Unit: mg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are non-negative
+
+          floating point numbers.
+
+
+          See calcium for an example for how to fill in the range.'
+        schema:
+          type: string
+          pattern: (?:[+-]?\d+(?:\.\d*)?)|(?:(?:[+-]?\d+(?:\.\d*)?)-(?:[+-]?\d+(?:\.\d*)?))|(?:(?:[+-]?\d+(?:\.\d*)?)[+-])
+      responses:
+        '200':
+          description: 'List of food objects, with each food object containing: kcal per 100gr, protein per 100 grams, carbohydrates
+
+            per 100 grams, brand of the food, if the food is generic or branded, a list of existing measures for the
+
+            food, contents label of the food'''
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ParseResponse'
+        '404':
+          description: The specified URL was not found or couldn't be retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+components:
+  schemas:
+    WeightedMeasure:
+      type: object
+      properties:
+        qualifiers:
+          type: array
+          items:
+            $ref: '#/components/schemas/Term'
+        weight:
+          type: number
+    Errors:
+      type: array
+      items:
+        $ref: '#/components/schemas/Error'
+    ParseResponse:
+      type: object
+      properties:
+        text:
+          type: string
+        count:
+          type: integer
+        parsed:
+          type: array
+          items:
+            $ref: '#/components/schemas/Parsed'
+        hints:
+          type: array
+          items:
+            $ref: '#/components/schemas/Hint'
+        _links:
+          $ref: '#/components/schemas/HATEOAS'
+    Food:
+      type: object
+      properties:
+        foodId:
+          type: string
+        uri:
+          type: string
+        label:
+          type: string
+        knownAs:
+          type: string
+        nutrients:
+          type: object
+          additionalProperties:
+            type: number
+        brand:
+          type: string
+        category:
+          type: string
+        categoryLabel:
+          type: string
+        foodContentsLabel:
+          type: string
+        image:
+          type: string
+        servingSizes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Quantity'
+        servingsPerContainer:
+          type: number
+    Error:
+      properties:
+        errorCode:
+          type: string
+        message:
+          type: string
+        params:
+          type: array
+          items:
+            type: string
+    Hint:
+      type: object
+      properties:
+        pluCode:
+          $ref: '#/components/schemas/PLUCode'
+        food:
+          $ref: '#/components/schemas/Food'
+        measures:
+          type: array
+          items:
+            $ref: '#/components/schemas/Measure'
+    Quantity:
+      type: object
+      properties:
+        uri:
+          type: string
+        label:
+          type: string
+        quantity:
+          type: number
+    HATEOAS:
+      type: object
+      properties:
+        next:
+          $ref: '#/components/schemas/Link'
+    PLUCode:
+      type: object
+      properties:
+        code:
+          type: string
+        category:
+          type: string
+        commodity:
+          type: string
+        variety:
+          type: string
+        isRetailerAssigned:
+          type: boolean
+    Parsed:
+      type: object
+      properties:
+        food:
+          $ref: '#/components/schemas/Food'
+        quantity:
+          type: number
+        measure:
+          $ref: '#/components/schemas/Measure'
+    Measure:
+      type: object
+      properties:
+        uri:
+          type: string
+        label:
+          type: string
+        weight:
+          type: number
+        qualified:
+          type: array
+          items:
+            $ref: '#/components/schemas/WeightedMeasure'
+    Term:
+      type: object
+      properties:
+        uri:
+          type: string
+        label:
+          type: string
+    Link:
+      type: object
+      properties:
+        href:
+          type: string
+        title:
+          type: string

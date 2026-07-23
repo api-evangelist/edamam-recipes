@@ -1,0 +1,374 @@
+openapi: 3.0.3
+info:
+  version: '2.0'
+  title: Food Database Food Nutrition Request - AI Vision (Beta) Food Nutrition Request - AI Vision (Beta) Food Nutrition Request - AI Vision (Beta) API
+  description: ''
+servers:
+- url: https://api.edamam.com
+tags:
+- name: Food Nutrition Request - AI Vision (Beta)
+paths:
+  /api/food-database/nutrients-from-image:
+    post:
+      tags:
+      - Food Nutrition Request - AI Vision (Beta)
+      summary: Full Nutrition Lookup From Image (Beta)
+      description: 'This endpoint analyzes an image of food (provided as a URL or a Base64 encoded data URI)
+
+        and returns its full nutrition analysis.
+
+
+        **Access Point:** <https://api.edamam.com/api/food-database/nutrients-from-image>'
+      parameters:
+      - name: app_id
+        in: query
+        x-data-threescale-name: app_ids
+        description: The application ID, obtained from the account dashboard, <https://developer.edamam.com/admin/applications>.
+        required: true
+        schema:
+          type: string
+      - name: app_key
+        in: query
+        x-data-threescale-name: app_keys
+        description: The application key, obtained from the account dashboard, <https://developer.edamam.com/admin/applications>.
+        required: true
+        schema:
+          type: string
+      - name: beta
+        in: query
+        description: Allow beta features in the request and response
+        schema:
+          type: boolean
+      requestBody:
+        description: A JSON object containing the image to be analyzed. Either "image" or "image_url" property should be supplied.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ImageRequest'
+      responses:
+        '200':
+          description: Nutrition, health/diet labels, etc., for the recognized food.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VisionResponse'
+        '404':
+          description: The specified URL was not found or couldn't be retrieved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+        '400':
+          description: Couldn't parse the request or extract the nutritional info
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+        '555':
+          description: Text with insufficient quality to process correctly
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Errors'
+components:
+  schemas:
+    VisionResponse:
+      type: object
+      properties:
+        parsed:
+          $ref: '#/components/schemas/Parsed'
+        recipe:
+          $ref: '#/components/schemas/RecipeInfo'
+    Errors:
+      type: array
+      items:
+        $ref: '#/components/schemas/Error'
+    NutrientsMap:
+      type: object
+      additionalProperties:
+        type: object
+        properties:
+          label:
+            type: string
+          tag:
+            type: string
+          units:
+            type: string
+    WeightedMeasure:
+      type: object
+      properties:
+        qualifiers:
+          type: array
+          items:
+            $ref: '#/components/schemas/Term'
+        weight:
+          type: number
+    Food:
+      type: object
+      properties:
+        foodId:
+          type: string
+        uri:
+          type: string
+        label:
+          type: string
+        knownAs:
+          type: string
+        nutrients:
+          type: object
+          additionalProperties:
+            type: number
+        brand:
+          type: string
+        category:
+          type: string
+        categoryLabel:
+          type: string
+        foodContentsLabel:
+          type: string
+        image:
+          type: string
+        servingSizes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Quantity'
+        servingsPerContainer:
+          type: number
+    Error:
+      properties:
+        errorCode:
+          type: string
+        message:
+          type: string
+        params:
+          type: array
+          items:
+            type: string
+    IngredientLine:
+      type: object
+      properties:
+        quantity:
+          type: number
+        measure:
+          type: string
+        measureURI:
+          type: string
+        foodMatch:
+          type: string
+        food:
+          type: string
+        foodId:
+          type: string
+        foodURI:
+          type: string
+        specificFoodURI:
+          type: string
+        foodCategory:
+          type: string
+        brand:
+          type: string
+        weight:
+          type: number
+        retainedWeight:
+          type: number
+        nutrients:
+          $ref: '#/components/schemas/NutrientsMap'
+        status:
+          type: string
+          enum:
+          - OK
+          - MISSING_QUANTITY
+          - UNRECOGNIZED_FOOD
+        template:
+          type: string
+        servingSizes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Quantity'
+        servingsPerContainer:
+          type: number
+    Quantity:
+      type: object
+      properties:
+        uri:
+          type: string
+        label:
+          type: string
+        quantity:
+          type: number
+    RecipeInfo:
+      type: object
+      properties:
+        uri:
+          type: string
+        url:
+          type: string
+        yield:
+          type: number
+        calories:
+          type: integer
+        glycemicIndex:
+          type: number
+        inflammatoryIndex:
+          type: number
+        co2EmissionsClass:
+          type: string
+        totalWeight:
+          type: number
+        dietLabels:
+          type: array
+          items:
+            type: string
+            enum:
+            - BALANCED
+            - HIGH_PROTEIN
+            - HIGH_FIBER
+            - LOW_FAT
+            - LOW_CARB
+            - LOW_SODIUM
+        healthLabels:
+          type: array
+          items:
+            type: string
+            enum:
+            - FAT_FREE
+            - LOW_FAT_ABS
+            - SUGAR_CONSCIOUS
+            - LOW_SUGAR
+            - LOW_POTASSIUM
+            - KIDNEY_FRIENDLY
+            - KETO_FRIENDLY
+            - PLANT_BASED
+            - VEGAN
+            - VEGETARIAN
+            - PESCATARIAN
+            - PALEO
+            - SPECIFIC_CARBS
+            - MEDITERRANEAN
+            - DASH
+            - DAIRY_FREE
+            - GLUTEN_FREE
+            - WHEAT_FREE
+            - EGG_FREE
+            - MILK_FREE
+            - PEANUT_FREE
+            - TREE_NUT_FREE
+            - SOY_FREE
+            - FISH_FREE
+            - SHELLFISH_FREE
+            - PORK_FREE
+            - RED_MEAT_FREE
+            - CRUSTACEAN_FREE
+            - CELERY_FREE
+            - MUSTARD_FREE
+            - SESAME_FREE
+            - LUPINE_FREE
+            - MOLLUSK_FREE
+            - ALCOHOL_FREE
+            - NO_OIL_ADDED
+            - NO_SUGAR_ADDED
+            - SULPHITE_FREE
+            - FODMAP_FREE
+            - KOSHER
+            - ALCOHOL_COCKTAIL
+            - IMMUNO_SUPPORTIVE
+        cautions:
+          type: array
+          items:
+            type: string
+            enum:
+            - GLUTEN
+            - WHEAT
+            - EGGS
+            - MILK
+            - PEANUTS
+            - TREE_NUTS
+            - SOY
+            - FISH
+            - SHELLFISH
+            - SULFITES
+            - FODMAP
+        totalNutrients:
+          $ref: '#/components/schemas/NutrientsMap'
+        totalNutrientsKCal:
+          type: object
+          additionalProperties:
+            type: object
+            properties:
+              label:
+                type: string
+              quantity:
+                type: number
+              unit:
+                type: string
+        totalDaily:
+          $ref: '#/components/schemas/NutrientsMap'
+        ingredientLines:
+          type: array
+          items:
+            type: string
+        label:
+          type: string
+        preparation:
+          type: array
+          items:
+            type: string
+        ingredients:
+          type: array
+          items:
+            $ref: '#/components/schemas/IngredientLine'
+        cuisineType:
+          type: array
+          items:
+            type: string
+        mealType:
+          type: array
+          items:
+            type: string
+        dishType:
+          type: array
+          items:
+            type: string
+    Parsed:
+      type: object
+      properties:
+        food:
+          $ref: '#/components/schemas/Food'
+        quantity:
+          type: number
+        measure:
+          $ref: '#/components/schemas/Measure'
+    Measure:
+      type: object
+      properties:
+        uri:
+          type: string
+        label:
+          type: string
+        weight:
+          type: number
+        qualified:
+          type: array
+          items:
+            $ref: '#/components/schemas/WeightedMeasure'
+    ImageRequest:
+      type: object
+      required:
+      - image_url or image
+      properties:
+        image:
+          type: string
+          description: An image of food, provided either as a Base64-encoded data (e.g., "data:image/jpeg;base64,...").
+          example: data:image/jpeg;base64,/9j/4AAQSkZJRgABAgEASABIAAD...
+        image_url:
+          type: string
+          description: An image of food, provided either a publicly accessible URL).
+          example: https://example.com/image_xyz.jpg
+    Term:
+      type: object
+      properties:
+        uri:
+          type: string
+        label:
+          type: string
