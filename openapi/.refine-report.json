@@ -1,0 +1,32 @@
+{
+  "provider": "edamam-recipes",
+  "sources": [
+    "edamam-recipes-food-nutrition-request-ai-vision-beta-api-openapi.yml",
+    "edamam-recipes-food-request-step-1-parser-api-openapi.yml",
+    "edamam-recipes-food-request-step-2-nutrients-api-openapi.yml",
+    "edamam-recipes-food-search-autocomplete-api-openapi.yml",
+    "edamam-recipes-nutrition-data-api-openapi.yml",
+    "edamam-recipes-nutrition-details-api-openapi.yml",
+    "edamam-recipes-planner-api-openapi.yml",
+    "edamam-recipes-recipe-search-api-openapi.yml",
+    "edamam-recipes-shopping-list-api-openapi.yml",
+    "edamam-recipes-values-api-openapi.yml"
+  ],
+  "outputs": [
+    "edamam-recipes-food-nutrition-request-ai-vision-beta-api-openapi.yml",
+    "edamam-recipes-food-request-step-1-parser-api-openapi.yml",
+    "edamam-recipes-food-request-step-2-nutrients-api-openapi.yml",
+    "edamam-recipes-food-search-autocomplete-api-openapi.yml",
+    "edamam-recipes-nutrition-data-api-openapi.yml",
+    "edamam-recipes-nutrition-details-api-openapi.yml",
+    "edamam-recipes-planner-api-openapi.yml",
+    "edamam-recipes-recipe-search-api-openapi.yml",
+    "edamam-recipes-shopping-list-api-openapi.yml",
+    "edamam-recipes-values-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
