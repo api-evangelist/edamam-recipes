@@ -21,7 +21,7 @@ description: >-
 url: https://www.edamam.com/
 humanURL: https://developer.edamam.com/
 baseURL: https://api.edamam.com
-specificationVersion: '0.20'
+specificationVersion: '0.23'
 created: '2026-05-28'
 modified: '2026-05-30'
 x-source: public-apis/public-apis
