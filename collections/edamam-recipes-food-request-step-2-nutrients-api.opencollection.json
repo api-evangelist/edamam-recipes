@@ -1,0 +1,53 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Food Database Food Nutrition Request - AI Vision (Beta) Food Nutrition Request - AI Vision (Beta) Food Request Step 2 - Nutrients API",
+    "version": "2.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Food Request Step 2 - Nutrients",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Full Nutrition Lookup",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.edamam.com/api/food-database/v2/nutrients",
+            "headers": [
+              {
+                "name": "Edamam-Account-User",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "app_id",
+                "value": "",
+                "type": "query",
+                "description": "The application ID, obtained from the account dashboard, <https://developer.edamam.com/admin/applications>."
+              },
+              {
+                "name": "app_key",
+                "value": "",
+                "type": "query",
+                "description": "The application key, obtained from the account dashboard, <https://developer.edamam.com/admin/applications>."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "In the response to your parser request you receive the a food ID for each database match. Using the food ID and\nthe measure URI, which parser provides, you can make a request to the nutrients access point. The nutrients\naccess points returns nutrition with diet and health labels for a given quantity of the food.\n\n**Access Point:** <https://api.edamam.com/api/food-database/v2/nutrients>"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,1898 @@
+{
+  "item": [
+    {
+      "id": "6f4108c8-235e-44b9-aa9f-4ebf141e25b3",
+      "name": "Recipe Search",
+      "description": {
+        "content": "Search or access individual recipes.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0cb8d6f6-90f5-41dc-90f9-252ec330538b",
+          "name": "Search for a Recipe",
+          "request": {
+            "name": "Search for a Recipe",
+            "description": {
+              "content": "This endpoint returns a list of recipes matching the provided criteria. Get started by placing your search query\nin the `q` parameter, fill in your 3scale credentials, and press the \"Try it out!\" button at the bottom.\nAdditionally, refine your search by using the optional parameters to specify what you are looking for.\n\n__Note:__\n- When mentioned, 'floating point values' refers to values such as `50.0`, `50.`, `0.5`, and `.5`.\n- When speaking of ranges, the API accepts values such as `1.0+`, `1.0-50.0`, or `50.0`, for floating point\n  ranges.\n\nThe parameters with __(required)__ in their value box are the required parameters and must be defined as part\nof a request, all others can be left blank if you do not wish to define them.\n\n__Access Point:__ https://api.edamam.com/api/recipes/v2",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "recipes",
+                "v2"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "(Required) Type of recipes to search for. For backward compatibility you can also specify `any` and it will be equivalent to specifying all enumerated values."
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "(Required) Type of recipes to search for. For backward compatibility you can also specify `any` and it will be equivalent to specifying all enumerated values."
+                },
+                {
+                  "disabled": false,
+                  "key": "beta",
+                  "value": "<boolean>",
+                  "description": "Allow beta features in the request and response"
+                },
+                {
+                  "disabled": false,
+                  "key": "q",
+                  "value": "<string>",
+                  "description": "Query text, for example \"chicken\".<br> __REQUIRED__ if no other parameter is specified. __NOT REQUIRED__ if any other parameter (other than application credentials) is specified."
+                },
+                {
+                  "disabled": false,
+                  "key": "ingr",
+                  "value": "<string>",
+                  "description": "Filter by number of ingredients (MIN+, MIN-MAX, MAX), where MIN and MAX are integer numbers.\nExample: `ingr=5-8`\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "diet",
+                  "value": "<string>",
+                  "description": "Diet label. You can select multiple labels by holding shift and left-clicking all the labels needed."
+                },
+                {
+                  "disabled": false,
+                  "key": "diet",
+                  "value": "<string>",
+                  "description": "Diet label. You can select multiple labels by holding shift and left-clicking all the labels needed."
+                },
+                {
+                  "disabled": false,
+                  "key": "health",
+                  "value": "<string>",
+                  "description": "Health label. You can select multiple labels by holding shift and left-clicking all the labels needed."
+                },
+                {
+                  "disabled": false,
+                  "key": "health",
+                  "value": "<string>",
+                  "description": "Health label. You can select multiple labels by holding shift and left-clicking all the labels needed."
+                },
+                {
+                  "disabled": false,
+                  "key": "cuisineType",
+                  "value": "<string>",
+                  "description": "The type of cuisine of the recipe"
+                },
+                {
+                  "disabled": false,
+                  "key": "cuisineType",
+                  "value": "<string>",
+                  "description": "The type of cuisine of the recipe"
+                },
+                {
+                  "disabled": false,
+                  "key": "mealType",
+                  "value": "<string>",
+                  "description": "The type of meal a recipe belongs to"
+                },
+                {
+                  "disabled": false,
+                  "key": "mealType",
+                  "value": "<string>",
+                  "description": "The type of meal a recipe belongs to"
+                },
+                {
+                  "disabled": false,
+                  "key": "dishType",
+                  "value": "<string>",
+                  "description": "The dish type a recipe belongs to"
+                },
+                {
+                  "disabled": false,
+                  "key": "dishType",
+                  "value": "<string>",
+                  "description": "The dish type a recipe belongs to"
+                },
+                {
+                  "disabled": false,
+                  "key": "calories",
+                  "value": "<string>",
+                  "description": "The format is calories=RANGE where RANGE is in one of MIN+, MIN-MAX or MAX, where MIN and MAX are\nnon-negative floating point numbers. The + symbol needs to be properly encoded. Example: `calories=100-300`\nwill return all recipes with which have between 100 and 300 kcal per serving.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "time",
+                  "value": "<string>",
+                  "description": "Time range for the total cooking and prep time for a recipe. The format is time=RANGE where RANGE is one of\nMIN+, MIN-MAX or MAX, where MIN and MAX are non-negative integer numbers. The + symbol needs to be properly\nencoded. Example: `time=1%2B` will return all recipes with available total time greater then 1 minute.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "imageSize",
+                  "value": "<string>",
+                  "description": "Show only recipes, which have images with selected sizes"
+                },
+                {
+                  "disabled": false,
+                  "key": "imageSize",
+                  "value": "<string>",
+                  "description": "Show only recipes, which have images with selected sizes"
+                },
+                {
+                  "disabled": false,
+                  "key": "glycemicIndex",
+                  "value": "<string>",
+                  "description": "Filter by glycemic index. The format is FLOAT-RANGE"
+                },
+                {
+                  "disabled": false,
+                  "key": "inflammatoryIndex",
+                  "value": "<string>",
+                  "description": "Filter by diet inflammatory index. The format is FLOAT-RANGE"
+                },
+                {
+                  "disabled": false,
+                  "key": "excluded",
+                  "value": "<string>",
+                  "description": "Excluding recipes with certain ingredients. The format is `excluded=FOOD` where FOOD is replaced by the name\nof the specific food you don't want to be present in the recipe results. More than one food can be excluded\nat the same time. Example: excluded=vinegar&excluded=pretzel will exclude any recipes which contain vinegar\nor pretzels in their ingredient list.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "excluded",
+                  "value": "<string>",
+                  "description": "Excluding recipes with certain ingredients. The format is `excluded=FOOD` where FOOD is replaced by the name\nof the specific food you don't want to be present in the recipe results. More than one food can be excluded\nat the same time. Example: excluded=vinegar&excluded=pretzel will exclude any recipes which contain vinegar\nor pretzels in their ingredient list.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "random",
+                  "value": "<boolean>",
+                  "description": "Select whether you want this query to respond with a random selection of 20 recipes based on the criteria\nfilled. If there were only 20 or less possible results, this will return those results in random order.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "nutrients[CA]",
+                  "value": "<string>",
+                  "description": "Calcium, Ca. Unit: mg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are \nnon-negative floating point numbers.<br>\nFor example: `nutrients[CA]=50+` means minimum 50mg calcium, where `50+` has to be properly encoded as\n`50%2B` `nutrients[FAT]=30` means maximum 30g fat and `nutrients[FE]=5-10` means iron between 5mg and 10mg\ninclusive.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "nutrients[CHOCDF]",
+                  "value": "<string>",
+                  "description": "Carbohydrate, by difference. Unit: g. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and\nMAX are non-negative floating point numbers.<br>\nSee calcium for an example for how to fill in the range.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "nutrients[CHOCDF.net]",
+                  "value": "<string>",
+                  "description": "Carbohydrates (net). Unit: g. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are\nnon-negative floating point numbers.<br>\nSee calcium for an example for how to fill in the range.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "nutrients[CHOLE]",
+                  "value": "<string>",
+                  "description": "Cholesterol. Unit: mg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are\nnon-negative floating point numbers.<br>\nSee calcium for an example for how to fill in the range.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "nutrients[ENERC_KCAL]",
+                  "value": "<string>",
+                  "description": "Energy. Unit: kcal. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are non-negative\nfloating point numbers.<br>\nSee calcium for an example for how to fill in the range.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "nutrients[FAMS]",
+                  "value": "<string>",
+                  "description": "Fatty acids, total monounsaturated. Unit: g. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN\nand MAX are non-negative floating point numbers.<br>\nSee calcium for an example for how to fill in the range.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "nutrients[FAPU]",
+                  "value": "<string>",
+                  "description": "Fatty acids, total polyunsaturated. Unit: g. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN\nand MAX are non-negative floating point numbers.<br>\nSee calcium for an example for how to fill in the range.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "nutrients[FASAT]",
+                  "value": "<string>",
+                  "description": "Fatty acids, total saturated. Unit: g. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and\nMAX are non-negative floating point numbers.<br>\nSee calcium for an example for how to fill in the range.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "nutrients[FAT]",
+                  "value": "<string>",
+                  "description": "Total lipid (fat). Unit: g. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are\nnon-negative floating point numbers.<br>\nSee calcium for an example for how to fill in the range.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "nutrients[FATRN]",
+                  "value": "<string>",
+                  "description": "Fatty acids, total trans. Unit: g. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX\nare non-negative floating point numbers.<br>\nSee calcium for an example for how to fill in the range.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "nutrients[FE]",
+                  "value": "<string>",
+                  "description": "Iron, Fe. Unit: mg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are non-negative\nfloating point numbers.<br>\nSee calcium for an example for how to fill in the range.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "nutrients[FIBTG]",
+                  "value": "<string>",
+                  "description": "Fiber, total dietary. Unit: g. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are\nnon-negative floating point numbers.<br>\nSee calcium for an example for how to fill in the range.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "nutrients[FOLAC]",
+                  "value": "<string>",
+                  "description": "Folic acid. Unit: µg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are\nnon-negative floating point numbers.<br>\nSee calcium for an example for how to fill in the range.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "nutrients[FOLDFE]",
+                  "value": "<string>",
+                  "description": "Folate, DFE. Unit: µg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are\nnon-negative floating point numbers.<br>\nSee calcium for an example for how to fill in the range.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "nutrients[FOLFD]",
+                  "value": "<string>",
+                  "description": "Folate (food). Unit: µg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are\nnon-negative floating point numbers.<br>\nSee calcium for an example for how to fill in the range.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "nutrients[K]",
+                  "value": "<string>",
+                  "description": "Potassium, K. Unit: mg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are\nnon-negative floating point numbers.<br>\nSee calcium for an example for how to fill in the range.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "nutrients[MG]",
+                  "value": "<string>",
+                  "description": "Magnesium. Unit: mg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are\nnon-negative floating point numbers.<br>\nSee calcium for an example for how to fill in the range.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "nutrients[NA]",
+                  "value": "<string>",
+                  "description": "Sodium, Na. Unit: mg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are\nnon-negative floating point numbers.<br>\nSee calcium for an example for how to fill in the range.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "nutrients[NIA]",
+                  "value": "<string>",
+                  "description": "Niacin. Unit: mg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are non-negative\nfloating point numbers.<br>\nSee calcium for an example for how to fill in the range.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "nutrients[P]",
+                  "value": "<string>",
+                  "description": "Phosphorus, P. Unit: mg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are\nnon-negative floating point numbers.<br>\nSee calcium for an example for how to fill in the range.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "nutrients[PROCNT]",
+                  "value": "<string>",
+                  "description": "Protein. Unit: g. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are non-negative\nfloating point numbers.<br>\nSee calcium for an example for how to fill in the range.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "nutrients[RIBF]",
+                  "value": "<string>",
+                  "description": "Riboflavin. Unit: mg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are\nnon-negative floating point numbers.<br>\nSee calcium for an example for how to fill in the range.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "nutrients[SUGAR]",
+                  "value": "<string>",
+                  "description": "Sugars, total. Unit: g. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are\nnon-negative floating point numbers.<br>\nSee calcium for an example for how to fill in the range.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "nutrients[SUGAR.added]",
+                  "value": "<string>",
+                  "description": "Sugars, added. Unit: g. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are\nnon-negative floating point numbers.<br>\nSee calcium for an example for how to fill in the range.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "nutrients[Sugar.alcohol]",
+                  "value": "<string>",
+                  "description": "Sugar alcohols. Unit: g. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are\nnon-negative floating point numbers.<br>\nSee calcium for an example for how to fill in the range.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "nutrients[THIA]",
+                  "value": "<string>",
+                  "description": "Thiamin. Unit: mg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are non-negative\nfloating point numbers.<br>\nSee calcium for an example for how to fill in the range.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "nutrients[TOCPHA]",
+                  "value": "<string>",
+                  "description": "Vitamin E (alpha-tocopherol). Unit: mg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and\nMAX are non-negative floating point numbers.<br>\nSee calcium for an example for how to fill in the range.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "nutrients[VITA_RAE]",
+                  "value": "<string>",
+                  "description": "Vitamin A, RAE. Unit: µg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are\nnon-negative floating point numbers.<br>\nSee calcium for an example for how to fill in the range.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "nutrients[VITB12]",
+                  "value": "<string>",
+                  "description": "Vitamin B12. Unit: µg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are\nnon-negative floating point numbers.<br>\nSee calcium for an example for how to fill in the range.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "nutrients[VITB6A]",
+                  "value": "<string>",
+                  "description": "Vitamin B6. Unit: mg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are\nnon-negative floating point numbers.<br>\nSee calcium for an example for how to fill in the range.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "nutrients[VITC]",
+                  "value": "<string>",
+                  "description": "Vitamin C, total ascorbic acid. Unit: mg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN \nand MAX are non-negative floating point numbers.<br>\nSee calcium for an example for how to fill in the range.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "nutrients[VITD]",
+                  "value": "<string>",
+                  "description": "Vitamin D (D2 + D3). Unit: µg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are\nnon-negative floating point numbers.<br>\nSee calcium for an example for how to fill in the range.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "nutrients[VITK1]",
+                  "value": "<string>",
+                  "description": "Vitamin K (phylloquinone). Unit: µg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX\nare non-negative floating point numbers.<br>\nSee calcium for an example for how to fill in the range.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "nutrients[WATER]",
+                  "value": "<string>",
+                  "description": "Water. Unit: g. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are non-negative\nfloating point numbers.<br>\nSee calcium for an example for how to fill in the range.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "nutrients[ZN]",
+                  "value": "<string>",
+                  "description": "Zinc, Zn. Unit: mg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are non-negative\nfloating point numbers.<br>\nSee calcium for an example for how to fill in the range.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "field",
+                  "value": "<string>",
+                  "description": "Recipe fields to be included in the response."
+                },
+                {
+                  "disabled": false,
+                  "key": "field",
+                  "value": "<string>",
+                  "description": "Recipe fields to be included in the response."
+                },
+                {
+                  "disabled": false,
+                  "key": "co2EmissionsClass",
+                  "value": "<string>",
+                  "description": "Filter recipes by their CO2 footprint."
+                },
+                {
+                  "disabled": false,
+                  "key": "tag",
+                  "value": "<string>",
+                  "description": "Show only recipes containing the specified tags."
+                },
+                {
+                  "disabled": false,
+                  "key": "tag",
+                  "value": "<string>",
+                  "description": "Show only recipes containing the specified tags."
+                },
+                {
+                  "disabled": false,
+                  "key": "sysTag",
+                  "value": "<string>",
+                  "description": "_(Beta)_ Show only recipes containing the specified system tags. This field is subject to account\nsubscription restrictions.\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "sysTag",
+                  "value": "<string>",
+                  "description": "_(Beta)_ Show only recipes containing the specified system tags. This field is subject to account\nsubscription restrictions.\n"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Search recipes in the specified language.",
+                "key": "Accept-Language",
+                "value": "en"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "adc48ee8-c793-4215-bfe7-0de2ea70c984",
+              "name": "A list of recipes",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "recipes",
+                    "v2"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "beta",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ingr",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "diet",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "health",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cuisineType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mealType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dishType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "calories",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "time",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "imageSize",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "imageSize",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "glycemicIndex",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "inflammatoryIndex",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "excluded",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "random",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "nutrients[CA]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[CHOCDF]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[CHOCDF.net]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[CHOLE]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[ENERC_KCAL]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[FAMS]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[FAPU]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[FASAT]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[FAT]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[FATRN]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[FE]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[FIBTG]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[FOLAC]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[FOLDFE]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[FOLFD]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[K]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[MG]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[NA]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[NIA]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[P]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[PROCNT]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[RIBF]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[SUGAR]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[SUGAR.added]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[Sugar.alcohol]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[THIA]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[TOCPHA]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[VITA_RAE]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[VITB12]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[VITB6A]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[VITC]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[VITD]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[VITK1]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[WATER]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[ZN]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "field",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "co2EmissionsClass",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tag",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tag",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sysTag",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Search recipes in the specified language.",
+                    "key": "Accept-Language",
+                    "value": "en"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "The localization language.",
+                  "key": "Content-Language",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"from\": 6402,\n  \"to\": 1095,\n  \"count\": 9646,\n  \"_links\": {\n    \"self\": {\n      \"href\": \"string\",\n      \"title\": \"string\"\n    },\n    \"next\": {\n      \"href\": \"string\",\n      \"title\": \"string\"\n    }\n  },\n  \"hits\": [\n    {\n      \"recipe\": {\n        \"uri\": \"string\",\n        \"label\": \"string\",\n        \"image\": \"string\",\n        \"images\": {\n          \"THUMBNAIL\": {\n            \"url\": \"string\",\n            \"width\": 5862,\n            \"height\": 6756\n          },\n          \"SMALL\": {\n            \"url\": \"string\",\n            \"width\": 4196,\n            \"height\": 6602\n          },\n          \"REGULAR\": {\n            \"url\": \"string\",\n            \"width\": 981,\n            \"height\": 9181\n          },\n          \"LARGE\": {\n            \"url\": \"string\",\n            \"width\": 9966,\n            \"height\": 527\n          }\n        },\n        \"source\": \"string\",\n        \"url\": \"string\",\n        \"shareAs\": \"string\",\n        \"yield\": 1921.7019240600087,\n        \"dietLabels\": [\n          \"string\",\n          \"string\"\n        ],\n        \"healthLabels\": [\n          \"string\",\n          \"string\"\n        ],\n        \"cautions\": [\n          \"string\",\n          \"string\"\n        ],\n        \"ingredientLines\": [\n          \"string\",\n          \"string\"\n        ],\n        \"ingredients\": [\n          {\n            \"text\": \"string\",\n            \"quantity\": 3706.5038611123737,\n            \"measure\": \"string\",\n            \"food\": \"string\",\n            \"weight\": 4680.251001517075,\n            \"foodId\": \"string\"\n          },\n          {\n            \"text\": \"string\",\n            \"quantity\": 4156.040532516188,\n            \"measure\": \"string\",\n            \"food\": \"string\",\n            \"weight\": 4116.390152756449,\n            \"foodId\": \"string\"\n          }\n        ],\n        \"calories\": 8981.112774488258,\n        \"glycemicIndex\": 9637.75159605876,\n        \"inflammatoryIndex\": 4748.331347010157,\n        \"totalCO2Emissions\": 9647.449427618054,\n        \"co2EmissionsClass\": \"C\",\n        \"totalWeight\": 9370.649511322112,\n        \"cuisineType\": [\n          \"string\",\n          \"string\"\n        ],\n        \"mealType\": [\n          \"string\",\n          \"string\"\n        ],\n        \"dishType\": [\n          \"string\",\n          \"string\"\n        ],\n        \"instructionLines\": [\n          \"string\",\n          \"string\"\n        ],\n        \"tags\": [\n          \"string\",\n          \"string\"\n        ],\n        \"externalId\": \"string\",\n        \"totalNutrients\": {\n          \"key_0\": {\n            \"label\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"quantity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"unit\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"key_1\": {\n            \"label\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"quantity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"unit\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"key_2\": {\n            \"label\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"quantity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"unit\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"key_3\": {\n            \"label\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"quantity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"unit\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"key_4\": {\n            \"label\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"quantity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"unit\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        \"totalDaily\": {\n          \"key_0\": {\n            \"label\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"quantity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"unit\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        \"digest\": [\n          {\n            \"label\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"tag\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"schemaOrgTag\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"total\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"hasRDI\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"daily\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"unit\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"sub\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"label\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"tag\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"schemaOrgTag\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"total\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"hasRDI\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"daily\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"unit\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"sub\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      },\n      \"_links\": {\n        \"self\": {\n          \"href\": \"string\",\n          \"title\": \"string\"\n        },\n        \"next\": {\n          \"href\": \"string\",\n          \"title\": \"string\"\n        }\n      }\n    },\n    {\n      \"recipe\": {\n        \"uri\": \"string\",\n        \"label\": \"string\",\n        \"image\": \"string\",\n        \"images\": {\n          \"THUMBNAIL\": {\n            \"url\": \"string\",\n            \"width\": 3370,\n            \"height\": 1781\n          },\n          \"SMALL\": {\n            \"url\": \"string\",\n            \"width\": 5394,\n            \"height\": 8644\n          },\n          \"REGULAR\": {\n            \"url\": \"string\",\n            \"width\": 793,\n            \"height\": 5280\n          },\n          \"LARGE\": {\n            \"url\": \"string\",\n            \"width\": 4892,\n            \"height\": 6257\n          }\n        },\n        \"source\": \"string\",\n        \"url\": \"string\",\n        \"shareAs\": \"string\",\n        \"yield\": 4442.011178123857,\n        \"dietLabels\": [\n          \"string\",\n          \"string\"\n        ],\n        \"healthLabels\": [\n          \"string\",\n          \"string\"\n        ],\n        \"cautions\": [\n          \"string\",\n          \"string\"\n        ],\n        \"ingredientLines\": [\n          \"string\",\n          \"string\"\n        ],\n        \"ingredients\": [\n          {\n            \"text\": \"string\",\n            \"quantity\": 218.52438119641548,\n            \"measure\": \"string\",\n            \"food\": \"string\",\n            \"weight\": 4289.573591157819,\n            \"foodId\": \"string\"\n          },\n          {\n            \"text\": \"string\",\n            \"quantity\": 9441.793535261679,\n            \"measure\": \"string\",\n            \"food\": \"string\",\n            \"weight\": 3391.4646959345387,\n            \"foodId\": \"string\"\n          }\n        ],\n        \"calories\": 6898.898128274116,\n        \"glycemicIndex\": 6414.8680709499595,\n        \"inflammatoryIndex\": 7939.709954428391,\n        \"totalCO2Emissions\": 6721.680508093856,\n        \"co2EmissionsClass\": \"E\",\n        \"totalWeight\": 7575.4806177967885,\n        \"cuisineType\": [\n          \"string\",\n          \"string\"\n        ],\n        \"mealType\": [\n          \"string\",\n          \"string\"\n        ],\n        \"dishType\": [\n          \"string\",\n          \"string\"\n        ],\n        \"instructionLines\": [\n          \"string\",\n          \"string\"\n        ],\n        \"tags\": [\n          \"string\",\n          \"string\"\n        ],\n        \"externalId\": \"string\",\n        \"totalNutrients\": {\n          \"key_0\": {\n            \"label\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"quantity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"unit\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"key_1\": {\n            \"label\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"quantity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"unit\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        \"totalDaily\": {\n          \"key_0\": {\n            \"label\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"quantity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"unit\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"key_1\": {\n            \"label\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"quantity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"unit\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        \"digest\": [\n          {\n            \"label\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"tag\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"schemaOrgTag\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"total\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"hasRDI\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"daily\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"unit\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"sub\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"label\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"tag\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"schemaOrgTag\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"total\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"hasRDI\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"daily\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"unit\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"sub\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      },\n      \"_links\": {\n        \"self\": {\n          \"href\": \"string\",\n          \"title\": \"string\"\n        },\n        \"next\": {\n          \"href\": \"string\",\n          \"title\": \"string\"\n        }\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cdf3e7a9-6929-4c85-9985-ceb80ffd9861",
+              "name": "A list of errors",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "recipes",
+                    "v2"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "beta",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ingr",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "diet",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "health",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cuisineType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mealType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dishType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "calories",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "time",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "imageSize",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "imageSize",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "glycemicIndex",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "inflammatoryIndex",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "excluded",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "random",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "nutrients[CA]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[CHOCDF]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[CHOCDF.net]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[CHOLE]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[ENERC_KCAL]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[FAMS]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[FAPU]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[FASAT]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[FAT]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[FATRN]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[FE]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[FIBTG]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[FOLAC]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[FOLDFE]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[FOLFD]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[K]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[MG]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[NA]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[NIA]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[P]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[PROCNT]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[RIBF]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[SUGAR]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[SUGAR.added]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[Sugar.alcohol]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[THIA]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[TOCPHA]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[VITA_RAE]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[VITB12]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[VITB6A]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[VITC]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[VITD]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[VITK1]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[WATER]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[ZN]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "field",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "co2EmissionsClass",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tag",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tag",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sysTag",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Search recipes in the specified language.",
+                    "key": "Accept-Language",
+                    "value": "en"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"string\",\n    \"message\": \"string\",\n    \"params\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  {\n    \"errorCode\": \"string\",\n    \"message\": \"string\",\n    \"params\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8625d7fb-c112-4937-8578-17fac7188ba4",
+              "name": "A list of errors",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "recipes",
+                    "v2"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "beta",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ingr",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "diet",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "health",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "cuisineType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "mealType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "dishType",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "calories",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "time",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "imageSize",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "imageSize",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "glycemicIndex",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "inflammatoryIndex",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "excluded",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "random",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "nutrients[CA]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[CHOCDF]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[CHOCDF.net]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[CHOLE]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[ENERC_KCAL]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[FAMS]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[FAPU]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[FASAT]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[FAT]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[FATRN]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[FE]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[FIBTG]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[FOLAC]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[FOLDFE]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[FOLFD]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[K]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[MG]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[NA]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[NIA]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[P]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[PROCNT]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[RIBF]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[SUGAR]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[SUGAR.added]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[Sugar.alcohol]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[THIA]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[TOCPHA]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[VITA_RAE]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[VITB12]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[VITB6A]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[VITC]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[VITD]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[VITK1]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[WATER]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[ZN]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "field",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "co2EmissionsClass",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tag",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "tag",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sysTag",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Search recipes in the specified language.",
+                    "key": "Accept-Language",
+                    "value": "en"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"string\",\n    \"message\": \"string\",\n    \"params\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  {\n    \"errorCode\": \"string\",\n    \"message\": \"string\",\n    \"params\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "17049ed5-915b-493f-a729-23d8954bf30d",
+          "name": "Lookup Recipe(s) using their URI(s)",
+          "request": {
+            "name": "Lookup Recipe(s) using their URI(s)",
+            "description": {
+              "content": "Search for recipes by their URI. Note, that the API response doesn't directly indicate if there are missing\nrecipes. Instead, you need to compare he URIs to see if any are missing.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "recipes",
+                "v2",
+                "by-uri"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "This parameter is no longer used. It's kept here for backwards compatibility."
+                },
+                {
+                  "disabled": false,
+                  "key": "beta",
+                  "value": "<boolean>",
+                  "description": "Allow beta features in the request and response"
+                },
+                {
+                  "disabled": false,
+                  "key": "uri",
+                  "value": "<string>",
+                  "description": "(Required) Recipe URIs - up to 20"
+                },
+                {
+                  "disabled": false,
+                  "key": "field",
+                  "value": "<string>",
+                  "description": "Recipe fields to be included in the response."
+                },
+                {
+                  "disabled": false,
+                  "key": "field",
+                  "value": "<string>",
+                  "description": "Recipe fields to be included in the response."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Search recipes in the specified language.",
+                "key": "Accept-Language",
+                "value": "en"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "d0b76176-30c7-4dba-8504-278454488382",
+              "name": "A list of recipes",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "recipes",
+                    "v2",
+                    "by-uri"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "beta",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "uri",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "field",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Search recipes in the specified language.",
+                    "key": "Accept-Language",
+                    "value": "en"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "The localization language.",
+                  "key": "Content-Language",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"from\": 1643,\n  \"to\": 9301,\n  \"count\": 4290,\n  \"_links\": {\n    \"self\": {\n      \"href\": \"string\",\n      \"title\": \"string\"\n    },\n    \"next\": {\n      \"href\": \"string\",\n      \"title\": \"string\"\n    }\n  },\n  \"hits\": [\n    {\n      \"recipe\": {\n        \"uri\": \"string\",\n        \"label\": \"string\",\n        \"image\": \"string\",\n        \"images\": {\n          \"THUMBNAIL\": {\n            \"url\": \"string\",\n            \"width\": 5367,\n            \"height\": 4527\n          },\n          \"SMALL\": {\n            \"url\": \"string\",\n            \"width\": 3751,\n            \"height\": 8473\n          },\n          \"REGULAR\": {\n            \"url\": \"string\",\n            \"width\": 3059,\n            \"height\": 178\n          },\n          \"LARGE\": {\n            \"url\": \"string\",\n            \"width\": 1264,\n            \"height\": 221\n          }\n        },\n        \"source\": \"string\",\n        \"url\": \"string\",\n        \"shareAs\": \"string\",\n        \"yield\": 9429.54863760166,\n        \"dietLabels\": [\n          \"string\",\n          \"string\"\n        ],\n        \"healthLabels\": [\n          \"string\",\n          \"string\"\n        ],\n        \"cautions\": [\n          \"string\",\n          \"string\"\n        ],\n        \"ingredientLines\": [\n          \"string\",\n          \"string\"\n        ],\n        \"ingredients\": [\n          {\n            \"text\": \"string\",\n            \"quantity\": 2300.480219845945,\n            \"measure\": \"string\",\n            \"food\": \"string\",\n            \"weight\": 3698.9665078219236,\n            \"foodId\": \"string\"\n          },\n          {\n            \"text\": \"string\",\n            \"quantity\": 418.66708272317754,\n            \"measure\": \"string\",\n            \"food\": \"string\",\n            \"weight\": 7218.709786256689,\n            \"foodId\": \"string\"\n          }\n        ],\n        \"calories\": 8747.229262492858,\n        \"glycemicIndex\": 5345.336771601172,\n        \"inflammatoryIndex\": 6156.954630738831,\n        \"totalCO2Emissions\": 9628.683763614294,\n        \"co2EmissionsClass\": \"D\",\n        \"totalWeight\": 383.94135181083146,\n        \"cuisineType\": [\n          \"string\",\n          \"string\"\n        ],\n        \"mealType\": [\n          \"string\",\n          \"string\"\n        ],\n        \"dishType\": [\n          \"string\",\n          \"string\"\n        ],\n        \"instructionLines\": [\n          \"string\",\n          \"string\"\n        ],\n        \"tags\": [\n          \"string\",\n          \"string\"\n        ],\n        \"externalId\": \"string\",\n        \"totalNutrients\": {\n          \"key_0\": {\n            \"label\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"quantity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"unit\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"key_1\": {\n            \"label\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"quantity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"unit\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"key_2\": {\n            \"label\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"quantity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"unit\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        \"totalDaily\": {\n          \"key_0\": {\n            \"label\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"quantity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"unit\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"key_1\": {\n            \"label\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"quantity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"unit\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        \"digest\": [\n          {\n            \"label\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"tag\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"schemaOrgTag\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"total\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"hasRDI\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"daily\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"unit\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"sub\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"label\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"tag\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"schemaOrgTag\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"total\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"hasRDI\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"daily\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"unit\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"sub\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      },\n      \"_links\": {\n        \"self\": {\n          \"href\": \"string\",\n          \"title\": \"string\"\n        },\n        \"next\": {\n          \"href\": \"string\",\n          \"title\": \"string\"\n        }\n      }\n    },\n    {\n      \"recipe\": {\n        \"uri\": \"string\",\n        \"label\": \"string\",\n        \"image\": \"string\",\n        \"images\": {\n          \"THUMBNAIL\": {\n            \"url\": \"string\",\n            \"width\": 9634,\n            \"height\": 3755\n          },\n          \"SMALL\": {\n            \"url\": \"string\",\n            \"width\": 8604,\n            \"height\": 3170\n          },\n          \"REGULAR\": {\n            \"url\": \"string\",\n            \"width\": 9891,\n            \"height\": 9184\n          },\n          \"LARGE\": {\n            \"url\": \"string\",\n            \"width\": 3498,\n            \"height\": 4379\n          }\n        },\n        \"source\": \"string\",\n        \"url\": \"string\",\n        \"shareAs\": \"string\",\n        \"yield\": 7049.559108538086,\n        \"dietLabels\": [\n          \"string\",\n          \"string\"\n        ],\n        \"healthLabels\": [\n          \"string\",\n          \"string\"\n        ],\n        \"cautions\": [\n          \"string\",\n          \"string\"\n        ],\n        \"ingredientLines\": [\n          \"string\",\n          \"string\"\n        ],\n        \"ingredients\": [\n          {\n            \"text\": \"string\",\n            \"quantity\": 942.6698887817342,\n            \"measure\": \"string\",\n            \"food\": \"string\",\n            \"weight\": 1292.5133662898136,\n            \"foodId\": \"string\"\n          },\n          {\n            \"text\": \"string\",\n            \"quantity\": 3371.465336511631,\n            \"measure\": \"string\",\n            \"food\": \"string\",\n            \"weight\": 1521.7810320067192,\n            \"foodId\": \"string\"\n          }\n        ],\n        \"calories\": 9248.903165413176,\n        \"glycemicIndex\": 3070.2269762206515,\n        \"inflammatoryIndex\": 2817.5437662929103,\n        \"totalCO2Emissions\": 1079.182582999909,\n        \"co2EmissionsClass\": \"B\",\n        \"totalWeight\": 7122.242400188735,\n        \"cuisineType\": [\n          \"string\",\n          \"string\"\n        ],\n        \"mealType\": [\n          \"string\",\n          \"string\"\n        ],\n        \"dishType\": [\n          \"string\",\n          \"string\"\n        ],\n        \"instructionLines\": [\n          \"string\",\n          \"string\"\n        ],\n        \"tags\": [\n          \"string\",\n          \"string\"\n        ],\n        \"externalId\": \"string\",\n        \"totalNutrients\": {\n          \"key_0\": {\n            \"label\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"quantity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"unit\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"key_1\": {\n            \"label\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"quantity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"unit\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        \"totalDaily\": {\n          \"key_0\": {\n            \"label\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"quantity\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"unit\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        },\n        \"digest\": [\n          {\n            \"label\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"tag\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"schemaOrgTag\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"total\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"hasRDI\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"daily\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"unit\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"sub\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          {\n            \"label\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"tag\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"schemaOrgTag\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"total\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"hasRDI\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"daily\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"unit\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"sub\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        ]\n      },\n      \"_links\": {\n        \"self\": {\n          \"href\": \"string\",\n          \"title\": \"string\"\n        },\n        \"next\": {\n          \"href\": \"string\",\n          \"title\": \"string\"\n        }\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "efee5064-7756-4a28-832b-c97f6f5f1598",
+              "name": "A list of errors",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "recipes",
+                    "v2",
+                    "by-uri"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "beta",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "uri",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "field",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Search recipes in the specified language.",
+                    "key": "Accept-Language",
+                    "value": "en"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"string\",\n    \"message\": \"string\",\n    \"params\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  {\n    \"errorCode\": \"string\",\n    \"message\": \"string\",\n    \"params\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4eb51eb8-661e-401a-a62b-1594d4542b5e",
+              "name": "A list of errors",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "recipes",
+                    "v2",
+                    "by-uri"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "beta",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "uri",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "field",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Search recipes in the specified language.",
+                    "key": "Accept-Language",
+                    "value": "en"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"string\",\n    \"message\": \"string\",\n    \"params\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  {\n    \"errorCode\": \"string\",\n    \"message\": \"string\",\n    \"params\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1156c53d-62c5-4509-8d12-a90f10ba3b21",
+          "name": "Lookup a Specific Recipe by ID",
+          "request": {
+            "name": "Lookup a Specific Recipe by ID",
+            "description": {
+              "content": "Returns the nutritional information for given recipe. These requests are constructed automatically and can\nbe found in `hits[]._links.self.href`.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "recipes",
+                "v2",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "(Required) This parameter is no longer used. It's kept here for backwards compatibility."
+                },
+                {
+                  "disabled": false,
+                  "key": "beta",
+                  "value": "<boolean>",
+                  "description": "Allow beta features in response."
+                },
+                {
+                  "disabled": false,
+                  "key": "field",
+                  "value": "<string>",
+                  "description": "Recipe fields to be included in the response."
+                },
+                {
+                  "disabled": false,
+                  "key": "field",
+                  "value": "<string>",
+                  "description": "Recipe fields to be included in the response."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) The recipe ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Search recipes in the specified language.",
+                "key": "Accept-Language",
+                "value": "en"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "70e41def-33b9-4e4a-b5fb-f7b8c25cb5f5",
+              "name": "Recipe info",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "recipes",
+                    "v2",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "beta",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "field",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The recipe ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Search recipes in the specified language.",
+                    "key": "Accept-Language",
+                    "value": "en"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "The localization language.",
+                  "key": "Content-Language",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"recipe\": {\n    \"uri\": \"string\",\n    \"label\": \"string\",\n    \"image\": \"string\",\n    \"images\": {\n      \"THUMBNAIL\": {\n        \"url\": \"string\",\n        \"width\": 8652,\n        \"height\": 8152\n      },\n      \"SMALL\": {\n        \"url\": \"string\",\n        \"width\": 3887,\n        \"height\": 338\n      },\n      \"REGULAR\": {\n        \"url\": \"string\",\n        \"width\": 6745,\n        \"height\": 9878\n      },\n      \"LARGE\": {\n        \"url\": \"string\",\n        \"width\": 2505,\n        \"height\": 755\n      }\n    },\n    \"source\": \"string\",\n    \"url\": \"string\",\n    \"shareAs\": \"string\",\n    \"yield\": 7827.5427384267305,\n    \"dietLabels\": [\n      \"string\",\n      \"string\"\n    ],\n    \"healthLabels\": [\n      \"string\",\n      \"string\"\n    ],\n    \"cautions\": [\n      \"string\",\n      \"string\"\n    ],\n    \"ingredientLines\": [\n      \"string\",\n      \"string\"\n    ],\n    \"ingredients\": [\n      {\n        \"text\": \"string\",\n        \"quantity\": 7714.938180160006,\n        \"measure\": \"string\",\n        \"food\": \"string\",\n        \"weight\": 9490.141629933072,\n        \"foodId\": \"string\"\n      },\n      {\n        \"text\": \"string\",\n        \"quantity\": 2131.939161868379,\n        \"measure\": \"string\",\n        \"food\": \"string\",\n        \"weight\": 422.36896530942425,\n        \"foodId\": \"string\"\n      }\n    ],\n    \"calories\": 7927.555443513963,\n    \"glycemicIndex\": 2944.6020592153545,\n    \"inflammatoryIndex\": 8569.512629098965,\n    \"totalCO2Emissions\": 6684.090321328472,\n    \"co2EmissionsClass\": \"A+\",\n    \"totalWeight\": 4308.558175948313,\n    \"cuisineType\": [\n      \"string\",\n      \"string\"\n    ],\n    \"mealType\": [\n      \"string\",\n      \"string\"\n    ],\n    \"dishType\": [\n      \"string\",\n      \"string\"\n    ],\n    \"instructionLines\": [\n      \"string\",\n      \"string\"\n    ],\n    \"tags\": [\n      \"string\",\n      \"string\"\n    ],\n    \"externalId\": \"string\",\n    \"totalNutrients\": {\n      \"key_0\": {\n        \"label\": \"string\",\n        \"quantity\": 6567.08589908324,\n        \"unit\": \"string\"\n      },\n      \"key_1\": {\n        \"label\": \"string\",\n        \"quantity\": 3734.4103863698388,\n        \"unit\": \"string\"\n      },\n      \"key_2\": {\n        \"label\": \"string\",\n        \"quantity\": 1614.841838944815,\n        \"unit\": \"string\"\n      },\n      \"key_3\": {\n        \"label\": \"string\",\n        \"quantity\": 1745.9891424719142,\n        \"unit\": \"string\"\n      }\n    },\n    \"totalDaily\": {\n      \"key_0\": {\n        \"label\": \"string\",\n        \"quantity\": 6586.652388446205,\n        \"unit\": \"string\"\n      },\n      \"key_1\": {\n        \"label\": \"string\",\n        \"quantity\": 5839.652855736061,\n        \"unit\": \"string\"\n      },\n      \"key_2\": {\n        \"label\": \"string\",\n        \"quantity\": 2667.9228402735735,\n        \"unit\": \"string\"\n      },\n      \"key_3\": {\n        \"label\": \"string\",\n        \"quantity\": 9873.303453402177,\n        \"unit\": \"string\"\n      },\n      \"key_4\": {\n        \"label\": \"string\",\n        \"quantity\": 7359.671020012397,\n        \"unit\": \"string\"\n      }\n    },\n    \"digest\": [\n      {\n        \"label\": \"string\",\n        \"tag\": \"string\",\n        \"schemaOrgTag\": \"string\",\n        \"total\": 4078.6171121535463,\n        \"hasRDI\": false,\n        \"daily\": 2443.809169196023,\n        \"unit\": \"string\",\n        \"sub\": {\n          \"value\": \"<Circular reference to #/components/schemas/Digest detected>\"\n        }\n      },\n      {\n        \"label\": \"string\",\n        \"tag\": \"string\",\n        \"schemaOrgTag\": \"string\",\n        \"total\": 4674.075529418173,\n        \"hasRDI\": false,\n        \"daily\": 9115.772461376886,\n        \"unit\": \"string\",\n        \"sub\": {\n          \"value\": \"<Circular reference to #/components/schemas/Digest detected>\"\n        }\n      }\n    ]\n  },\n  \"_links\": {\n    \"self\": {\n      \"href\": \"string\",\n      \"title\": \"string\"\n    },\n    \"next\": {\n      \"href\": \"string\",\n      \"title\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7539334a-dee5-4683-9779-0dcbcf37cfcf",
+              "name": "A list of errors",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "recipes",
+                    "v2",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "beta",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "field",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The recipe ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Search recipes in the specified language.",
+                    "key": "Accept-Language",
+                    "value": "en"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"string\",\n    \"message\": \"string\",\n    \"params\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  {\n    \"errorCode\": \"string\",\n    \"message\": \"string\",\n    \"params\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "eb903c9d-5ac3-4ac3-9c22-dd87a73256be",
+              "name": "A list of errors",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "recipes",
+                    "v2",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "beta",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "field",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The recipe ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Search recipes in the specified language.",
+                    "key": "Accept-Language",
+                    "value": "en"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"string\",\n    \"message\": \"string\",\n    \"params\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  {\n    \"errorCode\": \"string\",\n    \"message\": \"string\",\n    \"params\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8b4b9f51-8f08-4ccd-a161-8afb5ef13b9d",
+              "name": "A list of errors",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "recipes",
+                    "v2",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "beta",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "field",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) The recipe ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Search recipes in the specified language.",
+                    "key": "Accept-Language",
+                    "value": "en"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"string\",\n    \"message\": \"string\",\n    \"params\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  {\n    \"errorCode\": \"string\",\n    \"message\": \"string\",\n    \"params\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.edamam.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "5cccc6dd-7162-46d0-8100-a70d30be7fce",
+    "name": "Food Database Food Nutrition Request - AI Vision (Beta) Food Nutrition Request - AI Vision (Beta) Recipe Search API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Search or access individual recipes.",
+      "type": "text/plain"
+    }
+  }
+}

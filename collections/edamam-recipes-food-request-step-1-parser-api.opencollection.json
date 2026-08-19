@@ -1,0 +1,301 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Food Database Food Nutrition Request - AI Vision (Beta) Food Nutrition Request - AI Vision (Beta) Food Request Step 1 - Parser API",
+    "version": "2.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Food Request Step 1 - Parser",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Food Search",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.edamam.com/api/food-database/v2/parser",
+            "headers": [
+              {
+                "name": "Edamam-Account-User",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "app_id",
+                "value": "",
+                "type": "query",
+                "description": "The application ID, obtained from the account dashboard, <https://developer.edamam.com/admin/applications>."
+              },
+              {
+                "name": "app_key",
+                "value": "",
+                "type": "query",
+                "description": "The application key, obtained from the account dashboard, <https://developer.edamam.com/admin/applications>."
+              },
+              {
+                "name": "ingr",
+                "value": "",
+                "type": "query",
+                "description": "A keyword search parameter to be found in the food name. **REQUIRED** if `upc` **and** `brand` are not\nspecified. **NOT REQUIRED** if `brand` is specified. **DO NOT POPULATE** if `upc` is specified."
+              },
+              {
+                "name": "brand",
+                "value": "",
+                "type": "query",
+                "description": "A keyword search parameter to be found in the food's brand. **REQUIRED** if `ingr` **and** `upc` are not\nspecified. **NOT REQUIRED** if `ingr` is specified. **DO NOT POPULATE** if `upc` is specified."
+              },
+              {
+                "name": "upc",
+                "value": "",
+                "type": "query",
+                "description": "Valid UPC, EAN, or PLU code. **REQUIRED** if neither `ingr` **nor** `brand` are specified.\n**DO NOT POPULATE** otherwise."
+              },
+              {
+                "name": "nutrition-type",
+                "value": "",
+                "type": "query",
+                "description": "Select between cooking and food logging processor."
+              },
+              {
+                "name": "health",
+                "value": "",
+                "type": "query",
+                "description": "Health label"
+              },
+              {
+                "name": "calories",
+                "value": "",
+                "type": "query",
+                "description": "The format is calories=RANGE where RANGE is replaced by the value in kcal. RANGE is in one of MIN+, MIN-MAX\nor MAX, where MIN and MAX are non-negative integer numbers. The + symbol needs to be properly encoded.\nExamples: “calories=100-300” will return all recipes with which have between 100 and 300 kcal per serving."
+              },
+              {
+                "name": "category",
+                "value": "",
+                "type": "query",
+                "description": "Categories"
+              },
+              {
+                "name": "nutrients[CA]",
+                "value": "",
+                "type": "query",
+                "description": "Calcium, Ca. Unit: mg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are\nnon-negative floating point numbers.\n\nFor example: nutrients[CA]=50+ means minimum 50mg calcium, where ‘50+’ has to be properly encoded as ‘50%2B’\nnutrients[FAT]=30 means maximum 30g fat and nutrients[FE]=5-10 means iron between 5mg and 10mg inclusive."
+              },
+              {
+                "name": "nutrients[CHOCDF]",
+                "value": "",
+                "type": "query",
+                "description": "Carbohydrate, by difference. Unit: g. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and\nMAX are non-negative floating point numbers.\n\nSee calcium for an example for how to fill in the range."
+              },
+              {
+                "name": "nutrients[CHOCDF.net]",
+                "value": "",
+                "type": "query",
+                "description": "Carbohydrates (net). Unit: g. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are\nnon-negative floating point numbers.\n\nSee calcium for an example for how to fill in the range."
+              },
+              {
+                "name": "nutrients[CHOLE]",
+                "value": "",
+                "type": "query",
+                "description": "Cholesterol. Unit: mg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are\nnon-negative floating point numbers.\n\nSee calcium for an example for how to fill in the range."
+              },
+              {
+                "name": "nutrients[ENERC_KCAL]",
+                "value": "",
+                "type": "query",
+                "description": "Energy. Unit: kcal. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are non-negative\nfloating point numbers.\n\nSee calcium for an example for how to fill in the range."
+              },
+              {
+                "name": "nutrients[FAMS]",
+                "value": "",
+                "type": "query",
+                "description": "Fatty acids, total monounsaturated. Unit: g. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN\nand MAX are non-negative floating point numbers.\n\nSee calcium for an example for how to fill in the range."
+              },
+              {
+                "name": "nutrients[FAPU]",
+                "value": "",
+                "type": "query",
+                "description": "Fatty acids, total polyunsaturated. Unit: g. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN\nand MAX are non-negative floating point numbers.\n\nSee calcium for an example for how to fill in the range."
+              },
+              {
+                "name": "nutrients[FASAT]",
+                "value": "",
+                "type": "query",
+                "description": "Fatty acids, total saturated. Unit: g. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and\nMAX are non-negative floating point numbers.\n\nSee calcium for an example for how to fill in the range."
+              },
+              {
+                "name": "nutrients[FAT]",
+                "value": "",
+                "type": "query",
+                "description": "Total lipid (fat). Unit: g. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are\nnon-negative floating point numbers.\n\nSee calcium for an example for how to fill in the range."
+              },
+              {
+                "name": "nutrients[FATRN]",
+                "value": "",
+                "type": "query",
+                "description": "Fatty acids, total trans. Unit: g. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX\nare non-negative floating point numbers.\n\nSee calcium for an example for how to fill in the range."
+              },
+              {
+                "name": "nutrients[FE]",
+                "value": "",
+                "type": "query",
+                "description": "Iron, Fe. Unit: mg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are non-negative\nfloating point numbers.\n\nSee calcium for an example for how to fill in the range."
+              },
+              {
+                "name": "nutrients[FIBTG]",
+                "value": "",
+                "type": "query",
+                "description": "Fiber, total dietary. Unit: g. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are\nnon-negative floating point numbers.\n\nSee calcium for an example for how to fill in the range."
+              },
+              {
+                "name": "nutrients[FOLAC]",
+                "value": "",
+                "type": "query",
+                "description": "Folic acid. Unit: µg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are\nnon-negative floating point numbers.\n\nSee calcium for an example for how to fill in the range."
+              },
+              {
+                "name": "nutrients[FOLDFE]",
+                "value": "",
+                "type": "query",
+                "description": "Folate, DFE. Unit: µg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are\nnon-negative floating point numbers.\n\nSee calcium for an example for how to fill in the range."
+              },
+              {
+                "name": "nutrients[FOLFD]",
+                "value": "",
+                "type": "query",
+                "description": "Folate (food). Unit: µg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are\nnon-negative floating point numbers.\n\nSee calcium for an example for how to fill in the range."
+              },
+              {
+                "name": "nutrients[K]",
+                "value": "",
+                "type": "query",
+                "description": "Potassium, K. Unit: mg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are\nnon-negative floating point numbers.\n\nSee calcium for an example for how to fill in the range."
+              },
+              {
+                "name": "nutrients[MG]",
+                "value": "",
+                "type": "query",
+                "description": "Magnesium. Unit: mg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are\nnon-negative floating point numbers.\n\nSee calcium for an example for how to fill in the range."
+              },
+              {
+                "name": "nutrients[NA]",
+                "value": "",
+                "type": "query",
+                "description": "Sodium, Na. Unit: mg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are\nnon-negative floating point numbers.\n\nSee calcium for an example for how to fill in the range."
+              },
+              {
+                "name": "nutrients[NIA]",
+                "value": "",
+                "type": "query",
+                "description": "Niacin. Unit: mg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are non-negative\nfloating point numbers.\n\nSee calcium for an example for how to fill in the range."
+              },
+              {
+                "name": "nutrients[P]",
+                "value": "",
+                "type": "query",
+                "description": "Phosphorus, P. Unit: mg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are\nnon-negative floating point numbers.\n\nSee calcium for an example for how to fill in the range."
+              },
+              {
+                "name": "nutrients[PROCNT]",
+                "value": "",
+                "type": "query",
+                "description": "Protein. Unit: g. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are non-negative\nfloating point numbers.\n\nSee calcium for an example for how to fill in the range."
+              },
+              {
+                "name": "nutrients[RIBF]",
+                "value": "",
+                "type": "query",
+                "description": "Riboflavin. Unit: mg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are\nnon-negative floating point numbers.\n\nSee calcium for an example for how to fill in the range."
+              },
+              {
+                "name": "nutrients[SUGAR]",
+                "value": "",
+                "type": "query",
+                "description": "Sugars, total. Unit: g. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are\nnon-negative floating point numbers.\n\nSee calcium for an example for how to fill in the range."
+              },
+              {
+                "name": "nutrients[SUGAR.added]",
+                "value": "",
+                "type": "query",
+                "description": "Sugars, added. Unit: g. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are\nnon-negative floating point numbers.\n\nSee calcium for an example for how to fill in the range."
+              },
+              {
+                "name": "nutrients[Sugar.alcohol]",
+                "value": "",
+                "type": "query",
+                "description": "Sugar alcohols. Unit: g. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are\nnon-negative floating point numbers.\n\nSee calcium for an example for how to fill in the range."
+              },
+              {
+                "name": "nutrients[THIA]",
+                "value": "",
+                "type": "query",
+                "description": "Thiamin. Unit: mg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are non-negative\nfloating point numbers.\n\nSee calcium for an example for how to fill in the range."
+              },
+              {
+                "name": "nutrients[TOCPHA]",
+                "value": "",
+                "type": "query",
+                "description": "Vitamin E (alpha-tocopherol). Unit: mg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and\nMAX are non-negative floating point numbers.\n\nSee calcium for an example for how to fill in the range."
+              },
+              {
+                "name": "nutrients[VITA_RAE]",
+                "value": "",
+                "type": "query",
+                "description": "Vitamin A, RAE. Unit: µg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are\nnon-negative floating point numbers.\n\nSee calcium for an example for how to fill in the range."
+              },
+              {
+                "name": "nutrients[VITB12]",
+                "value": "",
+                "type": "query",
+                "description": "Vitamin B12. Unit: µg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are\nnon-negative floating point numbers.\n\nSee calcium for an example for how to fill in the range."
+              },
+              {
+                "name": "nutrients[VITB6A]",
+                "value": "",
+                "type": "query",
+                "description": "Vitamin B6. Unit: mg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are\nnon-negative floating point numbers.\n\nSee calcium for an example for how to fill in the range."
+              },
+              {
+                "name": "nutrients[VITC]",
+                "value": "",
+                "type": "query",
+                "description": "Vitamin C, total ascorbic acid. Unit: mg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN\nand MAX are non-negative floating point numbers.\n\nSee calcium for an example for how to fill in the range."
+              },
+              {
+                "name": "nutrients[VITD]",
+                "value": "",
+                "type": "query",
+                "description": "Vitamin D (D2 + D3). Unit: µg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are\nnon-negative floating point numbers.\n\nSee calcium for an example for how to fill in the range."
+              },
+              {
+                "name": "nutrients[VITK1]",
+                "value": "",
+                "type": "query",
+                "description": "Vitamin K (phylloquinone). Unit: µg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX\nare non-negative floating point numbers.\n\nSee calcium for an example for how to fill in the range."
+              },
+              {
+                "name": "nutrients[WATER]",
+                "value": "",
+                "type": "query",
+                "description": "Water. Unit: g. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are non-negative\nfloating point numbers.\n\nSee calcium for an example for how to fill in the range."
+              },
+              {
+                "name": "nutrients[ZN]",
+                "value": "",
+                "type": "query",
+                "description": "Zinc, Zn. Unit: mg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are non-negative\nfloating point numbers.\n\nSee calcium for an example for how to fill in the range."
+              }
+            ]
+          },
+          "docs": "The parser access point handles text search for foods as well as filters for the foods like presence specific\nnutrient content or exclusion of allergens.\n\n  - Search for a phrase or keyword using NLP to get food entities from it\n  - Get basic nutrition facts and ingredients for each food\n  - Search for food by given nutrient quantity for 28 nutrients\n  - Search for foods within a given brand\n  - With the build in food-logging context it allows for requests which do not contain quantity and sugge"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

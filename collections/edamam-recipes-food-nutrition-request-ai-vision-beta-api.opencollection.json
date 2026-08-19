@@ -1,0 +1,53 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Food Database Food Nutrition Request - AI Vision (Beta) Food Nutrition Request - AI Vision (Beta) Food Nutrition Request - AI Vision (Beta) API",
+    "version": "2.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Food Nutrition Request - AI Vision (Beta)",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Full Nutrition Lookup From Image (Beta)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.edamam.com/api/food-database/nutrients-from-image",
+            "params": [
+              {
+                "name": "app_id",
+                "value": "",
+                "type": "query",
+                "description": "The application ID, obtained from the account dashboard, <https://developer.edamam.com/admin/applications>."
+              },
+              {
+                "name": "app_key",
+                "value": "",
+                "type": "query",
+                "description": "The application key, obtained from the account dashboard, <https://developer.edamam.com/admin/applications>."
+              },
+              {
+                "name": "beta",
+                "value": "",
+                "type": "query",
+                "description": "Allow beta features in the request and response"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This endpoint analyzes an image of food (provided as a URL or a Base64 encoded data URI)\nand returns its full nutrition analysis.\n\n**Access Point:** <https://api.edamam.com/api/food-database/nutrients-from-image>"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

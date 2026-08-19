@@ -1,0 +1,441 @@
+{
+  "item": [
+    {
+      "id": "7c1d7f20-3bc7-4e76-b9ff-7cc4cd9082d2",
+      "name": "planner",
+      "description": {
+        "content": "Meal planning",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "32a424a5-d2ad-4708-9dee-429057e01e33",
+          "name": "Create Dietary Plan According to Supplied Specification",
+          "request": {
+            "name": "Create Dietary Plan According to Supplied Specification",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "meal-planner",
+                "v1",
+                ":app_id",
+                "select"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "beta",
+                  "value": "<boolean>",
+                  "description": "Turn on support for beta features"
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "(Required) Types of recipes to choose from."
+                },
+                {
+                  "disabled": false,
+                  "key": "type",
+                  "value": "<string>",
+                  "description": "(Required) Types of recipes to choose from."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "app_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "ID of the account user. Should be used *only* if the account is configured for active user tracking.",
+                "key": "Edamam-Account-User",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"size\": 1,\n  \"plan\": {\n    \"accept\": {\n      \"all\": [\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Predicate detected>\"\n        },\n        {\n          \"value\": \"<Circular reference to #/components/schemas/Predicate detected>\"\n        }\n      ]\n    },\n    \"fit\": {\n      \"key_0\": {\n        \"min\": \"<number>\",\n        \"max\": \"<number>\"\n      },\n      \"key_1\": {\n        \"min\": \"<number>\",\n        \"max\": \"<number>\"\n      }\n    },\n    \"exclude\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"sections\": {\n      \"key_0\": {\n        \"value\": \"<Circular reference to #/components/schemas/Section detected>\"\n      },\n      \"key_1\": {\n        \"value\": \"<Circular reference to #/components/schemas/Section detected>\"\n      }\n    }\n  },\n  \"selection\": [\n    {\n      \"assigned\": \"<string>\",\n      \"_links\": {\n        \"self\": {\n          \"href\": \"<string>\",\n          \"title\": \"<string>\"\n        }\n      },\n      \"sections\": {\n        \"key_0\": {\n          \"value\": \"<Circular reference to #/components/schemas/Selection detected>\"\n        },\n        \"key_1\": {\n          \"value\": \"<Circular reference to #/components/schemas/Selection detected>\"\n        }\n      }\n    },\n    {\n      \"assigned\": \"<string>\",\n      \"_links\": {\n        \"self\": {\n          \"href\": \"<string>\",\n          \"title\": \"<string>\"\n        }\n      },\n      \"sections\": {\n        \"key_0\": {\n          \"value\": \"<Circular reference to #/components/schemas/Selection detected>\"\n        },\n        \"key_1\": {\n          \"value\": \"<Circular reference to #/components/schemas/Selection detected>\"\n        }\n      }\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9ea80c05-771a-4333-bdca-46140140df82",
+              "name": "Plan generated completely or partially",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "meal-planner",
+                    "v1",
+                    ":app_id",
+                    "select"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "beta",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "app_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "ID of the account user. Should be used *only* if the account is configured for active user tracking.",
+                    "key": "Edamam-Account-User",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"size\": 7,\n  \"plan\": {\n    \"accept\": {\n      \"all\": [\n        {\n          \"health\": [\n            \"SOY_FREE\",\n            \"FISH_FREE\",\n            \"MEDITERRANEAN\"\n          ]\n        }\n      ]\n    },\n    \"fit\": {\n      \"ENERC_KCAL\": {\n        \"min\": 1000,\n        \"max\": 2000\n      },\n      \"SUGAR.added\": {\n        \"max\": 20\n      }\n    },\n    \"exclude\": [\n      \"http://www.edamam.com/ontologies/edamam.owl#recipe_x\",\n      \"http://www.edamam.com/ontologies/edamam.owl#recipe_y\",\n      \"http://www.edamam.com/ontologies/edamam.owl#recipe_z\"\n    ],\n    \"sections\": {\n      \"Breakfast\": {\n        \"accept\": {\n          \"all\": [\n            {\n              \"dish\": [\n                \"drinks\",\n                \"egg\",\n                \"biscuits and cookies\",\n                \"bread\",\n                \"pancake\",\n                \"cereals\"\n              ]\n            },\n            {\n              \"meal\": [\n                \"breakfast\"\n              ]\n            }\n          ]\n        },\n        \"fit\": {\n          \"ENERC_KCAL\": {\n            \"min\": 100,\n            \"max\": 600\n          }\n        }\n      },\n      \"Lunch\": {\n        \"accept\": {\n          \"all\": [\n            {\n              \"dish\": [\n                \"main course\",\n                \"pasta\",\n                \"egg\",\n                \"salad\",\n                \"soup\",\n                \"sandwiches\",\n                \"pizza\",\n                \"seafood\"\n              ]\n            },\n            {\n              \"meal\": [\n                \"lunch/dinner\"\n              ]\n            }\n          ]\n        },\n        \"fit\": {\n          \"ENERC_KCAL\": {\n            \"min\": 300,\n            \"max\": 900\n          }\n        }\n      },\n      \"Dinner\": {\n        \"accept\": {\n          \"all\": [\n            {\n              \"dish\": [\n                \"seafood\",\n                \"egg\",\n                \"salad\",\n                \"pizza\",\n                \"pasta\",\n                \"main course\"\n              ]\n            },\n            {\n              \"meal\": [\n                \"lunch/dinner\"\n              ]\n            }\n          ]\n        },\n        \"fit\": {\n          \"ENERC_KCAL\": {\n            \"min\": 200,\n            \"max\": 900\n          }\n        }\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": \"OK\",\n  \"selection\": [\n    {\n      \"sections\": {\n        \"Breakfast\": {\n          \"assigned\": \"http://www.edamam.com/ontologies/edamam.owl#recipe_1\",\n          \"_links\": {\n            \"self\": {\n              \"title\": \"Recipe №1\",\n              \"href\": \"https://test-cluster.edamam.com/api/recipes/v2/1?type=public\"\n            }\n          }\n        },\n        \"Lunch\": {\n          \"sections\": {\n            \"Starter\": {\n              \"assigned\": \"http://www.edamam.com/ontologies/edamam.owl#recipe_2\",\n              \"_links\": {\n                \"self\": {\n                  \"title\": \"Recipe №2\",\n                  \"href\": \"https://test-cluster.edamam.com/api/recipes/v2/2?type=public\"\n                }\n              }\n            },\n            \"Main\": {\n              \"assigned\": \"http://www.edamam.com/ontologies/edamam.owl#recipe_3\",\n              \"_links\": {\n                \"self\": {\n                  \"title\": \"Recipe №3\",\n                  \"href\": \"https://test-cluster.edamam.com/api/recipes/v2/3?type=public\"\n                }\n              }\n            },\n            \"Dessert\": {\n              \"assigned\": \"http://www.edamam.com/ontologies/edamam.owl#recipe_4\",\n              \"_links\": {\n                \"self\": {\n                  \"title\": \"Recipe №4\",\n                  \"href\": \"https://test-cluster.edamam.com/api/recipes/v2/4?type=public\"\n                }\n              }\n            }\n          }\n        },\n        \"Dinner\": {\n          \"sections\": {\n            \"Main\": {\n              \"assigned\": \"http://www.edamam.com/ontologies/edamam.owl#recipe_5\",\n              \"_links\": {\n                \"self\": {\n                  \"title\": \"Recipe №5\",\n                  \"href\": \"https://test-cluster.edamam.com/api/recipes/v2/5?type=public\"\n                }\n              }\n            },\n            \"Dessert\": {\n              \"assigned\": \"http://www.edamam.com/ontologies/edamam.owl#recipe_6\",\n              \"_links\": {\n                \"self\": {\n                  \"title\": \"Recipe №6\",\n                  \"href\": \"https://test-cluster.edamam.com/api/recipes/v2/6?type=public\"\n                }\n              }\n            }\n          }\n        }\n      }\n    },\n    {\n      \"sections\": {\n        \"Breakfast\": {\n          \"assigned\": \"http://www.edamam.com/ontologies/edamam.owl#recipe_7\",\n          \"_links\": {\n            \"self\": {\n              \"title\": \"Recipe №7\",\n              \"href\": \"https://test-cluster.edamam.com/api/recipes/v2/7?type=public\"\n            }\n          }\n        },\n        \"Lunch\": {\n          \"sections\": {\n            \"Starter\": {\n              \"assigned\": \"http://www.edamam.com/ontologies/edamam.owl#recipe_8\",\n              \"_links\": {\n                \"self\": {\n                  \"title\": \"Recipe №8\",\n                  \"href\": \"https://test-cluster.edamam.com/api/recipes/v2/8?type=public\"\n                }\n              }\n            },\n            \"Main\": {\n              \"assigned\": \"http://www.edamam.com/ontologies/edamam.owl#recipe_9\",\n              \"_links\": {\n                \"self\": {\n                  \"title\": \"Recipe №9\",\n                  \"href\": \"https://test-cluster.edamam.com/api/recipes/v2/9?type=public\"\n                }\n              }\n            },\n            \"Dessert\": {\n              \"assigned\": \"http://www.edamam.com/ontologies/edamam.owl#recipe_10\",\n              \"_links\": {\n                \"self\": {\n                  \"title\": \"Recipe №10\",\n                  \"href\": \"https://test-cluster.edamam.com/api/recipes/v2/10?type=public\"\n                }\n              }\n            }\n          }\n        },\n        \"Dinner\": {\n          \"sections\": {\n            \"Main\": {\n              \"assigned\": \"http://www.edamam.com/ontologies/edamam.owl#recipe_11\",\n              \"_links\": {\n                \"self\": {\n                  \"title\": \"Recipe №11\",\n                  \"href\": \"https://test-cluster.edamam.com/api/recipes/v2/11?type=public\"\n                }\n              }\n            },\n            \"Dessert\": {\n              \"assigned\": \"http://www.edamam.com/ontologies/edamam.owl#recipe_12\",\n              \"_links\": {\n                \"self\": {\n                  \"title\": \"Recipe №12\",\n                  \"href\": \"https://test-cluster.edamam.com/api/recipes/v2/12?type=public\"\n                }\n              }\n            }\n          }\n        }\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "42dd952c-4b0f-4f9c-a2ca-27512dedae82",
+              "name": "Malformed or invalid plan specification",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "meal-planner",
+                    "v1",
+                    ":app_id",
+                    "select"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "beta",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "app_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "ID of the account user. Should be used *only* if the account is configured for active user tracking.",
+                    "key": "Edamam-Account-User",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"size\": 7,\n  \"plan\": {\n    \"accept\": {\n      \"all\": [\n        {\n          \"health\": [\n            \"SOY_FREE\",\n            \"FISH_FREE\",\n            \"MEDITERRANEAN\"\n          ]\n        }\n      ]\n    },\n    \"fit\": {\n      \"ENERC_KCAL\": {\n        \"min\": 1000,\n        \"max\": 2000\n      },\n      \"SUGAR.added\": {\n        \"max\": 20\n      }\n    },\n    \"exclude\": [\n      \"http://www.edamam.com/ontologies/edamam.owl#recipe_x\",\n      \"http://www.edamam.com/ontologies/edamam.owl#recipe_y\",\n      \"http://www.edamam.com/ontologies/edamam.owl#recipe_z\"\n    ],\n    \"sections\": {\n      \"Breakfast\": {\n        \"accept\": {\n          \"all\": [\n            {\n              \"dish\": [\n                \"drinks\",\n                \"egg\",\n                \"biscuits and cookies\",\n                \"bread\",\n                \"pancake\",\n                \"cereals\"\n              ]\n            },\n            {\n              \"meal\": [\n                \"breakfast\"\n              ]\n            }\n          ]\n        },\n        \"fit\": {\n          \"ENERC_KCAL\": {\n            \"min\": 100,\n            \"max\": 600\n          }\n        }\n      },\n      \"Lunch\": {\n        \"accept\": {\n          \"all\": [\n            {\n              \"dish\": [\n                \"main course\",\n                \"pasta\",\n                \"egg\",\n                \"salad\",\n                \"soup\",\n                \"sandwiches\",\n                \"pizza\",\n                \"seafood\"\n              ]\n            },\n            {\n              \"meal\": [\n                \"lunch/dinner\"\n              ]\n            }\n          ]\n        },\n        \"fit\": {\n          \"ENERC_KCAL\": {\n            \"min\": 300,\n            \"max\": 900\n          }\n        }\n      },\n      \"Dinner\": {\n        \"accept\": {\n          \"all\": [\n            {\n              \"dish\": [\n                \"seafood\",\n                \"egg\",\n                \"salad\",\n                \"pizza\",\n                \"pasta\",\n                \"main course\"\n              ]\n            },\n            {\n              \"meal\": [\n                \"lunch/dinner\"\n              ]\n            }\n          ]\n        },\n        \"fit\": {\n          \"ENERC_KCAL\": {\n            \"min\": 200,\n            \"max\": 900\n          }\n        }\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8e27adc2-b7bc-4dca-9484-858f044c69d8",
+              "name": "One or more pre-assigned entries were not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "meal-planner",
+                    "v1",
+                    ":app_id",
+                    "select"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "beta",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "app_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "ID of the account user. Should be used *only* if the account is configured for active user tracking.",
+                    "key": "Edamam-Account-User",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"size\": 7,\n  \"plan\": {\n    \"accept\": {\n      \"all\": [\n        {\n          \"health\": [\n            \"SOY_FREE\",\n            \"FISH_FREE\",\n            \"MEDITERRANEAN\"\n          ]\n        }\n      ]\n    },\n    \"fit\": {\n      \"ENERC_KCAL\": {\n        \"min\": 1000,\n        \"max\": 2000\n      },\n      \"SUGAR.added\": {\n        \"max\": 20\n      }\n    },\n    \"exclude\": [\n      \"http://www.edamam.com/ontologies/edamam.owl#recipe_x\",\n      \"http://www.edamam.com/ontologies/edamam.owl#recipe_y\",\n      \"http://www.edamam.com/ontologies/edamam.owl#recipe_z\"\n    ],\n    \"sections\": {\n      \"Breakfast\": {\n        \"accept\": {\n          \"all\": [\n            {\n              \"dish\": [\n                \"drinks\",\n                \"egg\",\n                \"biscuits and cookies\",\n                \"bread\",\n                \"pancake\",\n                \"cereals\"\n              ]\n            },\n            {\n              \"meal\": [\n                \"breakfast\"\n              ]\n            }\n          ]\n        },\n        \"fit\": {\n          \"ENERC_KCAL\": {\n            \"min\": 100,\n            \"max\": 600\n          }\n        }\n      },\n      \"Lunch\": {\n        \"accept\": {\n          \"all\": [\n            {\n              \"dish\": [\n                \"main course\",\n                \"pasta\",\n                \"egg\",\n                \"salad\",\n                \"soup\",\n                \"sandwiches\",\n                \"pizza\",\n                \"seafood\"\n              ]\n            },\n            {\n              \"meal\": [\n                \"lunch/dinner\"\n              ]\n            }\n          ]\n        },\n        \"fit\": {\n          \"ENERC_KCAL\": {\n            \"min\": 300,\n            \"max\": 900\n          }\n        }\n      },\n      \"Dinner\": {\n        \"accept\": {\n          \"all\": [\n            {\n              \"dish\": [\n                \"seafood\",\n                \"egg\",\n                \"salad\",\n                \"pizza\",\n                \"pasta\",\n                \"main course\"\n              ]\n            },\n            {\n              \"meal\": [\n                \"lunch/dinner\"\n              ]\n            }\n          ]\n        },\n        \"fit\": {\n          \"ENERC_KCAL\": {\n            \"min\": 200,\n            \"max\": 900\n          }\n        }\n      }\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c967362c-65a6-4178-a1c2-b30778634c05",
+          "name": "Lookup Recipes by URI",
+          "request": {
+            "name": "Lookup Recipes by URI",
+            "description": {
+              "content": "The meal planner returns recipe URIs as part of its response. Use this endpoint to retrieve the recipes. For more information see the relevant documentation in the [Recipe Search API](https://developer.edamam.com/edamam-docs-recipe-api#operations-tag-Lookup_recipes_by_URI).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "recipes",
+                "v2",
+                "by-uri"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5854dea5-a7d1-4318-8a62-38123442b271",
+              "name": "See the relevant documentation in the [Recipe Search API](https://developer.edamam.com/edamam-docs-recipe-api#operations-tag-Lookup_recipes_by_URI).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "recipes",
+                    "v2",
+                    "by-uri"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f00efa80-c508-4d56-a4d3-dfefd4f9d526",
+          "name": "Create Shopping List From Total Meal Quantities",
+          "request": {
+            "name": "Create Shopping List From Total Meal Quantities",
+            "description": {
+              "content": "Once a meal plan has been generated, a shopping list can be created for the requisite quantities of all necessary ingredients across the plan, through the \"Shopping List API\". For more information see the relevant documentation in the [Recipe Search API](https://developer.edamam.com/edamam-docs-recipe-api).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "shopping-list",
+                "v2"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1ee06c40-2414-4116-98b8-2baf8f952844",
+              "name": "See the relevant documentation in the [Recipe Search API](https://developer.edamam.com/edamam-docs-recipe-api).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "shopping-list",
+                    "v2"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.edamam.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "02ec59d4-2dde-449e-8ecd-21738d6b9f6a",
+    "name": "Food Database Food Nutrition Request - AI Vision (Beta) Food Nutrition Request - AI Vision (Beta) planner API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Meal planning",
+      "type": "text/plain"
+    }
+  }
+}

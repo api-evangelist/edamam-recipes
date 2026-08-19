@@ -1,0 +1,156 @@
+{
+  "item": [
+    {
+      "id": "4c750d64-1917-426f-b509-2e33633b7f06",
+      "name": "Food Search Autocomplete",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "6a0a2307-1f62-4353-85ef-78b0e626f0c4",
+          "name": "Autocomplete for Food Search",
+          "request": {
+            "name": "Autocomplete for Food Search",
+            "description": {
+              "content": "Edamam provides a convenient autocomplete functionality which can be implemented for use when searching for\ningredients. Just send in the current query as the \"q\" parameter and the number of suggestions you wish to\nreceive as the \"limit\" parameter.\n\n**Access Point:** <https://api.edamam.com/auto-complete>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "auto-complete"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "app_id",
+                  "value": "<string>",
+                  "description": "(Required) The application ID, obtained from the account dashboard, <https://developer.edamam.com/admin/applications>."
+                },
+                {
+                  "disabled": false,
+                  "key": "app_key",
+                  "value": "<string>",
+                  "description": "(Required) The application key, obtained from the account dashboard, <https://developer.edamam.com/admin/applications>."
+                },
+                {
+                  "disabled": false,
+                  "key": "q",
+                  "value": "<string>",
+                  "description": "(Required) Query text. For example q=chi. This or the r parameter are required."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "<integer>",
+                  "description": "Limit the number of suggestions."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "ID of the account user. Should be used *only* if the account is configured for active user tracking.",
+                "key": "Edamam-Account-User",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "37fb66c1-fd97-42c5-b0c4-e4802ac3658e",
+              "name": "The autocomplete suggestions.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "auto-complete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "app_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "ID of the account user. Should be used *only* if the account is configured for active user tracking.",
+                    "key": "Edamam-Account-User",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  \"string\",\n  \"string\"\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.edamam.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "74c7dc11-746c-4d62-8775-521206df0a44",
+    "name": "Food Database Food Nutrition Request - AI Vision (Beta) Food Nutrition Request - AI Vision (Beta) Food Search Autocomplete API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

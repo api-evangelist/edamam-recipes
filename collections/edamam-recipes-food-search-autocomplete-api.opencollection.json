@@ -1,0 +1,61 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Food Database Food Nutrition Request - AI Vision (Beta) Food Nutrition Request - AI Vision (Beta) Food Search Autocomplete API",
+    "version": "2.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Food Search Autocomplete",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Autocomplete for Food Search",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.edamam.com/auto-complete",
+            "headers": [
+              {
+                "name": "Edamam-Account-User",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "app_id",
+                "value": "",
+                "type": "query",
+                "description": "The application ID, obtained from the account dashboard, <https://developer.edamam.com/admin/applications>."
+              },
+              {
+                "name": "app_key",
+                "value": "",
+                "type": "query",
+                "description": "The application key, obtained from the account dashboard, <https://developer.edamam.com/admin/applications>."
+              },
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "Query text. For example q=chi. This or the r parameter are required."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Limit the number of suggestions."
+              }
+            ]
+          },
+          "docs": "Edamam provides a convenient autocomplete functionality which can be implemented for use when searching for\ningredients. Just send in the current query as the \"q\" parameter and the number of suggestions you wish to\nreceive as the \"limit\" parameter.\n\n**Access Point:** <https://api.edamam.com/auto-complete>"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

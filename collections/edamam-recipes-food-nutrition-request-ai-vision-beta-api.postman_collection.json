@@ -1,0 +1,332 @@
+{
+  "item": [
+    {
+      "id": "80e84f90-dc1e-44cf-a458-efa4846814d0",
+      "name": "Food Nutrition Request - AI Vision (Beta)",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "98457b89-8a5b-4b5c-b7df-a6731f752e06",
+          "name": "Full Nutrition Lookup From Image (Beta)",
+          "request": {
+            "name": "Full Nutrition Lookup From Image (Beta)",
+            "description": {
+              "content": "This endpoint analyzes an image of food (provided as a URL or a Base64 encoded data URI)\nand returns its full nutrition analysis.\n\n**Access Point:** <https://api.edamam.com/api/food-database/nutrients-from-image>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "food-database",
+                "nutrients-from-image"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "app_id",
+                  "value": "<string>",
+                  "description": "(Required) The application ID, obtained from the account dashboard, <https://developer.edamam.com/admin/applications>."
+                },
+                {
+                  "disabled": false,
+                  "key": "app_key",
+                  "value": "<string>",
+                  "description": "(Required) The application key, obtained from the account dashboard, <https://developer.edamam.com/admin/applications>."
+                },
+                {
+                  "disabled": false,
+                  "key": "beta",
+                  "value": "<boolean>",
+                  "description": "Allow beta features in the request and response"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"image\": \"<string>\",\n  \"image_url\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9f402f72-e4fb-40c8-b7fd-e888a5a9d3cb",
+              "name": "Nutrition, health/diet labels, etc., for the recognized food.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "food-database",
+                    "nutrients-from-image"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "app_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "beta",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"image\": \"data:image/jpeg;base64,/9j/4AAQSkZJRgABAgEASABIAAD...\",\n  \"image_url\": \"https://example.com/image_xyz.jpg\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"parsed\": {\n    \"food\": {\n      \"foodId\": \"string\",\n      \"uri\": \"string\",\n      \"label\": \"string\",\n      \"knownAs\": \"string\",\n      \"nutrients\": {\n        \"key_0\": 9497.701427878865,\n        \"key_1\": 1941.0054682310329\n      },\n      \"brand\": \"string\",\n      \"category\": \"string\",\n      \"categoryLabel\": \"string\",\n      \"foodContentsLabel\": \"string\",\n      \"image\": \"string\",\n      \"servingSizes\": [\n        {\n          \"uri\": \"string\",\n          \"label\": \"string\",\n          \"quantity\": 1391.6392103250253\n        },\n        {\n          \"uri\": \"string\",\n          \"label\": \"string\",\n          \"quantity\": 6266.432937920186\n        }\n      ],\n      \"servingsPerContainer\": 9462.645274011262\n    },\n    \"quantity\": 9841.306339269046,\n    \"measure\": {\n      \"uri\": \"string\",\n      \"label\": \"string\",\n      \"weight\": 7556.445752116309,\n      \"qualified\": [\n        {\n          \"qualifiers\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"weight\": 8517.243073301492\n        },\n        {\n          \"qualifiers\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ],\n          \"weight\": 9615.894794028263\n        }\n      ]\n    }\n  },\n  \"recipe\": {\n    \"uri\": \"string\",\n    \"url\": \"string\",\n    \"yield\": 5697.85162491921,\n    \"calories\": 6592,\n    \"glycemicIndex\": 2920.7561714045028,\n    \"inflammatoryIndex\": 617.9989604490111,\n    \"co2EmissionsClass\": \"string\",\n    \"totalWeight\": 8714.765415561822,\n    \"dietLabels\": [\n      \"BALANCED\",\n      \"HIGH_FIBER\"\n    ],\n    \"healthLabels\": [\n      \"FAT_FREE\",\n      \"PORK_FREE\"\n    ],\n    \"cautions\": [\n      \"SULFITES\",\n      \"TREE_NUTS\"\n    ],\n    \"totalNutrients\": {\n      \"key_0\": {\n        \"label\": \"string\",\n        \"tag\": \"string\",\n        \"units\": \"string\"\n      },\n      \"key_1\": {\n        \"label\": \"string\",\n        \"tag\": \"string\",\n        \"units\": \"string\"\n      },\n      \"key_2\": {\n        \"label\": \"string\",\n        \"tag\": \"string\",\n        \"units\": \"string\"\n      }\n    },\n    \"totalNutrientsKCal\": {\n      \"key_0\": {\n        \"label\": \"string\",\n        \"quantity\": 6170.018799423374,\n        \"unit\": \"string\"\n      }\n    },\n    \"totalDaily\": {\n      \"key_0\": {\n        \"label\": \"string\",\n        \"tag\": \"string\",\n        \"units\": \"string\"\n      },\n      \"key_1\": {\n        \"label\": \"string\",\n        \"tag\": \"string\",\n        \"units\": \"string\"\n      }\n    },\n    \"ingredientLines\": [\n      \"string\",\n      \"string\"\n    ],\n    \"label\": \"string\",\n    \"preparation\": [\n      \"string\",\n      \"string\"\n    ],\n    \"ingredients\": [\n      {\n        \"quantity\": 1203.5017219836197,\n        \"measure\": \"string\",\n        \"measureURI\": \"string\",\n        \"foodMatch\": \"string\",\n        \"food\": \"string\",\n        \"foodId\": \"string\",\n        \"foodURI\": \"string\",\n        \"specificFoodURI\": \"string\",\n        \"foodCategory\": \"string\",\n        \"brand\": \"string\",\n        \"weight\": 7082.220275025469,\n        \"retainedWeight\": 5346.165077860592,\n        \"nutrients\": {\n          \"key_0\": {\n            \"label\": \"string\",\n            \"tag\": \"string\",\n            \"units\": \"string\"\n          },\n          \"key_1\": {\n            \"label\": \"string\",\n            \"tag\": \"string\",\n            \"units\": \"string\"\n          }\n        },\n        \"status\": \"MISSING_QUANTITY\",\n        \"template\": \"string\",\n        \"servingSizes\": [\n          {\n            \"uri\": \"string\",\n            \"label\": \"string\",\n            \"quantity\": 5353.197278529398\n          },\n          {\n            \"uri\": \"string\",\n            \"label\": \"string\",\n            \"quantity\": 7762.127871769408\n          }\n        ],\n        \"servingsPerContainer\": 9427.111228304952\n      },\n      {\n        \"quantity\": 9566.038564433882,\n        \"measure\": \"string\",\n        \"measureURI\": \"string\",\n        \"foodMatch\": \"string\",\n        \"food\": \"string\",\n        \"foodId\": \"string\",\n        \"foodURI\": \"string\",\n        \"specificFoodURI\": \"string\",\n        \"foodCategory\": \"string\",\n        \"brand\": \"string\",\n        \"weight\": 7500.498907358394,\n        \"retainedWeight\": 7862.989086874291,\n        \"nutrients\": {\n          \"key_0\": {\n            \"label\": \"string\",\n            \"tag\": \"string\",\n            \"units\": \"string\"\n          }\n        },\n        \"status\": \"MISSING_QUANTITY\",\n        \"template\": \"string\",\n        \"servingSizes\": [\n          {\n            \"uri\": \"string\",\n            \"label\": \"string\",\n            \"quantity\": 5129.190243963654\n          },\n          {\n            \"uri\": \"string\",\n            \"label\": \"string\",\n            \"quantity\": 3826.185735553522\n          }\n        ],\n        \"servingsPerContainer\": 806.2253300690026\n      }\n    ],\n    \"cuisineType\": [\n      \"string\",\n      \"string\"\n    ],\n    \"mealType\": [\n      \"string\",\n      \"string\"\n    ],\n    \"dishType\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "be6fa9eb-b0a8-4011-b21c-bfee654bea03",
+              "name": "Couldn't parse the request or extract the nutritional info",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "food-database",
+                    "nutrients-from-image"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "app_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "beta",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"image\": \"data:image/jpeg;base64,/9j/4AAQSkZJRgABAgEASABIAAD...\",\n  \"image_url\": \"https://example.com/image_xyz.jpg\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"string\",\n    \"message\": \"string\",\n    \"params\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  {\n    \"errorCode\": \"string\",\n    \"message\": \"string\",\n    \"params\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f3948e17-09a8-41bd-ab10-3759c1ca4649",
+              "name": "The specified URL was not found or couldn't be retrieved",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "food-database",
+                    "nutrients-from-image"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "app_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "beta",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"image\": \"data:image/jpeg;base64,/9j/4AAQSkZJRgABAgEASABIAAD...\",\n  \"image_url\": \"https://example.com/image_xyz.jpg\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"string\",\n    \"message\": \"string\",\n    \"params\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  {\n    \"errorCode\": \"string\",\n    \"message\": \"string\",\n    \"params\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "536a3a26-7202-4da6-af60-baddf563ec4c",
+              "name": "Text with insufficient quality to process correctly",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "food-database",
+                    "nutrients-from-image"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "app_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "beta",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"image\": \"data:image/jpeg;base64,/9j/4AAQSkZJRgABAgEASABIAAD...\",\n  \"image_url\": \"https://example.com/image_xyz.jpg\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "code": 555,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"string\",\n    \"message\": \"string\",\n    \"params\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  {\n    \"errorCode\": \"string\",\n    \"message\": \"string\",\n    \"params\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.edamam.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "9918b428-c46d-4fe6-8fa2-33e2883a4209",
+    "name": "Food Database Food Nutrition Request - AI Vision (Beta) Food Nutrition Request - AI Vision (Beta) Food Nutrition Request - AI Vision (Beta) API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

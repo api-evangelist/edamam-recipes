@@ -1,0 +1,65 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Food Database Food Nutrition Request - AI Vision (Beta) Food Nutrition Request - AI Vision (Beta) Nutrition Data API",
+    "version": "2.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Nutrition Data",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Individual Text Line Analysis",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.edamam.com/api/nutrition-data",
+            "headers": [
+              {
+                "name": "Edamam-Account-User",
+                "value": ""
+              },
+              {
+                "name": "If-None-Match",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "app_id",
+                "value": "",
+                "type": "query",
+                "description": "The application ID, obtained from the account dashboard, https://developer.edamam.com/admin/applications."
+              },
+              {
+                "name": "app_key",
+                "value": "",
+                "type": "query",
+                "description": "The application key, obtained from the account dashboard, https://developer.edamam.com/admin/applications."
+              },
+              {
+                "name": "nutrition-type",
+                "value": "",
+                "type": "query",
+                "description": "Select between the cooking and food logging processor."
+              },
+              {
+                "name": "ingr",
+                "value": "",
+                "type": "query",
+                "description": "The ingredient."
+              }
+            ]
+          },
+          "docs": "This returns the nutritional analysis for the specified food text by extracting information from a short\nunstructured food text (usually an ingredient line and returns the following structured data for the text:\nquantity, measure and food,) and if available: diet, health and allergen labels for the text.  With the built\nin food logging feature, this allows for change of context. For example, “rice” will normally be matched to raw\nrice while, with the food logging feature on, it will match to rea"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

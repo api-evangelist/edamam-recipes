@@ -1,0 +1,85 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Food Database Food Nutrition Request - AI Vision (Beta) Food Nutrition Request - AI Vision (Beta) Nutrition Details API",
+    "version": "2.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Nutrition Details",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Full Recipe Analysis",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.edamam.com/api/nutrition-details",
+            "headers": [
+              {
+                "name": "Edamam-Account-User",
+                "value": ""
+              },
+              {
+                "name": "If-None-Match",
+                "value": ""
+              },
+              {
+                "name": "Content-Language",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "app_id",
+                "value": "",
+                "type": "query",
+                "description": "The application ID, obtained from the dashboard, <https://developer.edamam.com/admin/applications>."
+              },
+              {
+                "name": "app_key",
+                "value": "",
+                "type": "query",
+                "description": "The application key, obtained from the dashboard, <https://developer.edamam.com/admin/applications>."
+              },
+              {
+                "name": "beta",
+                "value": "",
+                "type": "query",
+                "description": "Allow beta features in the request and response"
+              },
+              {
+                "name": "force",
+                "value": "",
+                "type": "query",
+                "description": "Force the re-evaluation of the recipe even when the `If-None-Match` parameter is provided and is valid."
+              },
+              {
+                "name": "kitchen",
+                "value": "",
+                "type": "query",
+                "description": "Select the type of kitchen this recipe is for. If this parameter is not present \"home\" is assumed as\ndefault."
+              },
+              {
+                "name": "field",
+                "value": "",
+                "type": "query",
+                "description": "Recipe fields to be included in the response. If the field is not specified, then we include the\nfollowing fields:\n\n    - uri\n    - url\n    - yield\n    - calories\n    - glycemicIndex\n    - inflammatoryIndex\n    - co2EmissionsClass\n    - totalWeight\n    - dietLabels\n    - healthLabels\n    - cautions\n    - totalNutrients\n    - totalNutrientsKCal\n    - totalDaily\n    - ingredientLines\n    - label\n    - preparation\n    - ingredients\n    - cuisineType\n    - mealType\n    - dishType\n\nThese are all the available fields from before the introduction of this feature.\n\nUse `*` to include all fields, or explicitly specify all the fields that are needed."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This returns the nutritional information based on a POST request of the recipe content. The POST request submits\nthe recipe content, specifically the recipe title and ingredient list. The response the API returns, will\ncontain the nutritional analysis for the recipe based on the information provided."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

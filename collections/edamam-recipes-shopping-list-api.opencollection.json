@@ -1,0 +1,47 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Food Database Food Nutrition Request - AI Vision (Beta) Food Nutrition Request - AI Vision (Beta) Shopping List API",
+    "version": "2.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Shopping List",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create Shopping List From Total Meal Quantities",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.edamam.com/api/shopping-list/v2",
+            "params": [
+              {
+                "name": "beta",
+                "value": "",
+                "type": "query",
+                "description": "Turn on support for beta features"
+              },
+              {
+                "name": "shopping-cart",
+                "value": "",
+                "type": "query",
+                "description": "(BETA only) Generate a shopping cart page for the the foods aggregated in the shopping list"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create Shopping List From Total Meal Quantities"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

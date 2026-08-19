@@ -1,0 +1,474 @@
+{
+  "item": [
+    {
+      "id": "a033941a-c3ea-4244-9609-1322ad62e08d",
+      "name": "Nutrition Data",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5501c6cd-0f50-4054-af72-8df91acddf8d",
+          "name": "Individual Text Line Analysis",
+          "request": {
+            "name": "Individual Text Line Analysis",
+            "description": {
+              "content": "This returns the nutritional analysis for the specified food text by extracting information from a short\nunstructured food text (usually an ingredient line and returns the following structured data for the text:\nquantity, measure and food,) and if available: diet, health and allergen labels for the text.  With the built\nin food logging feature, this allows for change of context. For example, “rice” will normally be matched to raw\nrice while, with the food logging feature on, it will match to ready to eat ‘cooked rice.’",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "nutrition-data"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "app_id",
+                  "value": "<string>",
+                  "description": "(Required) The application ID, obtained from the account dashboard, https://developer.edamam.com/admin/applications."
+                },
+                {
+                  "disabled": false,
+                  "key": "app_key",
+                  "value": "<string>",
+                  "description": "(Required) The application key, obtained from the account dashboard, https://developer.edamam.com/admin/applications."
+                },
+                {
+                  "disabled": false,
+                  "key": "nutrition-type",
+                  "value": "cooking",
+                  "description": "Select between the cooking and food logging processor."
+                },
+                {
+                  "disabled": false,
+                  "key": "ingr",
+                  "value": "<string>",
+                  "description": "(Required) The ingredient."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "ID of the account user. Should be used *only* if the account is configured for active user tracking.",
+                "key": "Edamam-Account-User",
+                "value": "<string>"
+              },
+              {
+                "disabled": false,
+                "description": "First, each successfully processed recipe will also return a tag in the ETag response header. This value\nmust be preserved together with the recipe. Then, when resubmitting the recipe, you should include the value\nin the 'If-None-Match' request header.",
+                "key": "If-None-Match",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8584ca81-e37a-48da-a017-8c6bb240844d",
+              "name": "OK - The result of the recipe analysis",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "nutrition-data"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "app_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrition-type",
+                      "value": "cooking"
+                    },
+                    {
+                      "key": "ingr",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "ID of the account user. Should be used *only* if the account is configured for active user tracking.",
+                    "key": "Edamam-Account-User",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "First, each successfully processed recipe will also return a tag in the ETag response header. This value\nmust be preserved together with the recipe. Then, when resubmitting the recipe, you should include the value\nin the 'If-None-Match' request header.",
+                    "key": "If-None-Match",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"uri\": \"string\",\n  \"url\": \"string\",\n  \"yield\": 1085.1846997387993,\n  \"calories\": 4773,\n  \"glycemicIndex\": 8919.787345043233,\n  \"inflammatoryIndex\": 5786.843391341548,\n  \"co2EmissionsClass\": \"A\",\n  \"totalWeight\": 7311.640113299554,\n  \"dietLabels\": [\n    \"string\",\n    \"string\"\n  ],\n  \"healthLabels\": [\n    \"string\",\n    \"string\"\n  ],\n  \"cautions\": [\n    \"string\",\n    \"string\"\n  ],\n  \"totalNutrients\": {\n    \"key_0\": [\n      {\n        \"label\": \"string\",\n        \"quantity\": 93.31953828949024,\n        \"unit\": \"string\"\n      },\n      {\n        \"label\": \"string\",\n        \"quantity\": 5092.276203906803,\n        \"unit\": \"string\"\n      }\n    ],\n    \"key_1\": [\n      {\n        \"label\": \"string\",\n        \"quantity\": 2581.9175016263916,\n        \"unit\": \"string\"\n      },\n      {\n        \"label\": \"string\",\n        \"quantity\": 9112.157370750509,\n        \"unit\": \"string\"\n      }\n    ]\n  },\n  \"totalNutrientsKCal\": {\n    \"key_0\": [\n      {\n        \"label\": \"string\",\n        \"quantity\": 568.7080596926586,\n        \"unit\": \"string\"\n      },\n      {\n        \"label\": \"string\",\n        \"quantity\": 595.7279473639687,\n        \"unit\": \"string\"\n      }\n    ]\n  },\n  \"totalDaily\": {\n    \"key_0\": [\n      {\n        \"label\": \"string\",\n        \"quantity\": 8958.809021233243,\n        \"unit\": \"string\"\n      },\n      {\n        \"label\": \"string\",\n        \"quantity\": 889.4494156845334,\n        \"unit\": \"string\"\n      }\n    ],\n    \"key_1\": [\n      {\n        \"label\": \"string\",\n        \"quantity\": 2215.4261006816378,\n        \"unit\": \"string\"\n      },\n      {\n        \"label\": \"string\",\n        \"quantity\": 9116.528201432297,\n        \"unit\": \"string\"\n      }\n    ]\n  },\n  \"ingredientLines\": [\n    \"string\",\n    \"string\"\n  ],\n  \"label\": \"string\",\n  \"preparation\": [\n    \"string\",\n    \"string\"\n  ],\n  \"ingredients\": [\n    {\n      \"text\": \"string\",\n      \"parsed\": {\n        \"quantity\": 86.27346203546549,\n        \"measure\": \"string\",\n        \"measureURI\": \"string\",\n        \"foodMatch\": \"string\",\n        \"food\": \"string\",\n        \"foodId\": \"string\",\n        \"foodURI\": \"string\",\n        \"specificFoodURI\": \"string\",\n        \"foodCategory\": \"string\",\n        \"brand\": \"string\",\n        \"foodContentsLabel\": \"string\",\n        \"weight\": 4307.466270106943,\n        \"retainedWeight\": 9097.296108033583,\n        \"nutrients\": {\n          \"key_0\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        },\n        \"status\": \"OK\",\n        \"servingSizes\": [\n          {\n            \"uri\": \"string\",\n            \"label\": \"string\",\n            \"quantity\": 6146.175650994432\n          },\n          {\n            \"uri\": \"string\",\n            \"label\": \"string\",\n            \"quantity\": 4201.690060293455\n          }\n        ],\n        \"servingsPerContainer\": 4841.80507609426\n      }\n    },\n    {\n      \"text\": \"string\",\n      \"parsed\": {\n        \"quantity\": 8371.086318653257,\n        \"measure\": \"string\",\n        \"measureURI\": \"string\",\n        \"foodMatch\": \"string\",\n        \"food\": \"string\",\n        \"foodId\": \"string\",\n        \"foodURI\": \"string\",\n        \"specificFoodURI\": \"string\",\n        \"foodCategory\": \"string\",\n        \"brand\": \"string\",\n        \"foodContentsLabel\": \"string\",\n        \"weight\": 9351.596232540878,\n        \"retainedWeight\": 3939.7377880606186,\n        \"nutrients\": {\n          \"key_0\": [\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          ]\n        },\n        \"status\": \"OK\",\n        \"servingSizes\": [\n          {\n            \"uri\": \"string\",\n            \"label\": \"string\",\n            \"quantity\": 1446.8608029614804\n          },\n          {\n            \"uri\": \"string\",\n            \"label\": \"string\",\n            \"quantity\": 3344.9286968468496\n          }\n        ],\n        \"servingsPerContainer\": 2895.618126719098\n      }\n    }\n  ],\n  \"cuisineType\": [\n    \"nordic\",\n    \"mexican\"\n  ],\n  \"mealType\": [\n    \"breakfast\",\n    \"snack\"\n  ],\n  \"dishType\": [\n    \"soup\",\n    \"biscuits and cookies\"\n  ],\n  \"translations\": [\n    {\n      \"type\": \"health\",\n      \"id\": \"string\",\n      \"label\": \"string\"\n    },\n    {\n      \"type\": \"caution\",\n      \"id\": \"string\",\n      \"label\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b2e1d5e5-0474-4b94-b545-a25644196d33",
+              "name": "Not Modified",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "nutrition-data"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "app_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrition-type",
+                      "value": "cooking"
+                    },
+                    {
+                      "key": "ingr",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "ID of the account user. Should be used *only* if the account is configured for active user tracking.",
+                    "key": "Edamam-Account-User",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "First, each successfully processed recipe will also return a tag in the ETag response header. This value\nmust be preserved together with the recipe. Then, when resubmitting the recipe, you should include the value\nin the 'If-None-Match' request header.",
+                    "key": "If-None-Match",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Modified",
+              "code": 304,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3dd2136c-3488-4d93-b76d-5902cb83ada6",
+              "name": "Not Found - The specified URL was not found or couldn't be retrieved",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "nutrition-data"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "app_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrition-type",
+                      "value": "cooking"
+                    },
+                    {
+                      "key": "ingr",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "ID of the account user. Should be used *only* if the account is configured for active user tracking.",
+                    "key": "Edamam-Account-User",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "First, each successfully processed recipe will also return a tag in the ETag response header. This value\nmust be preserved together with the recipe. Then, when resubmitting the recipe, you should include the value\nin the 'If-None-Match' request header.",
+                    "key": "If-None-Match",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7473b60b-414e-41e2-9cad-0b52a7914d13",
+              "name": "The provided ETag token does not match the input data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "nutrition-data"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "app_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrition-type",
+                      "value": "cooking"
+                    },
+                    {
+                      "key": "ingr",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "ID of the account user. Should be used *only* if the account is configured for active user tracking.",
+                    "key": "Edamam-Account-User",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "First, each successfully processed recipe will also return a tag in the ETag response header. This value\nmust be preserved together with the recipe. Then, when resubmitting the recipe, you should include the value\nin the 'If-None-Match' request header.",
+                    "key": "If-None-Match",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b8095e6c-abe2-4487-b953-db6d930aaff8",
+              "name": "Unprocessable Entity - Couldn't parse the recipe or extract the nutritional info",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "nutrition-data"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "app_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrition-type",
+                      "value": "cooking"
+                    },
+                    {
+                      "key": "ingr",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "ID of the account user. Should be used *only* if the account is configured for active user tracking.",
+                    "key": "Edamam-Account-User",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "First, each successfully processed recipe will also return a tag in the ETag response header. This value\nmust be preserved together with the recipe. Then, when resubmitting the recipe, you should include the value\nin the 'If-None-Match' request header.",
+                    "key": "If-None-Match",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f858ab7c-2aef-4d02-868e-7226618d27fd",
+              "name": "Recipe with insufficient quality to process correctly",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "nutrition-data"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "app_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrition-type",
+                      "value": "cooking"
+                    },
+                    {
+                      "key": "ingr",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "ID of the account user. Should be used *only* if the account is configured for active user tracking.",
+                    "key": "Edamam-Account-User",
+                    "value": "<string>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "First, each successfully processed recipe will also return a tag in the ETag response header. This value\nmust be preserved together with the recipe. Then, when resubmitting the recipe, you should include the value\nin the 'If-None-Match' request header.",
+                    "key": "If-None-Match",
+                    "value": "<string>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "code": 555,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.edamam.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "5d4e2a23-f818-441e-af02-2278c2ebe268",
+    "name": "Food Database Food Nutrition Request - AI Vision (Beta) Food Nutrition Request - AI Vision (Beta) Nutrition Data API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

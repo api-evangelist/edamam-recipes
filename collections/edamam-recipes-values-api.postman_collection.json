@@ -1,0 +1,165 @@
+{
+  "item": [
+    {
+      "id": "2b148d4f-cdbc-46b6-94a9-d701fa3b8568",
+      "name": "values",
+      "description": {
+        "content": "Daily values",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "616a3e1b-a40e-4eeb-a88d-22e63dab1454",
+          "name": "Calculate Recommended Daily Intake and Tolerable Upper Limits for the Specified Metabolic Profile",
+          "request": {
+            "name": "Calculate Recommended Daily Intake and Tolerable Upper Limits for the Specified Metabolic Profile",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "daily-values",
+                "v1",
+                "values"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"gender\": \"<string>\",\n  \"conditions\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"height\": \"<number>\",\n  \"weight\": \"<number>\",\n  \"age\": \"<number>\",\n  \"activity-level\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2b57a360-3710-409c-b4eb-5acd00a37ff0",
+              "name": "Daily values calculated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "daily-values",
+                    "v1",
+                    "values"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"gender\": \"male\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"values\": {\n    \"PROCNT\": {\n      \"recommended\": 34\n    },\n    \"WATER\": {\n      \"recommended\": 2400\n    },\n    \"CHOCDF\": {\n      \"recommended\": 130\n    },\n    \"FIBTG\": {\n      \"recommended\": 31\n    },\n    \"F18D2CN6\": {\n      \"recommended\": 12\n    },\n    \"F18D3CN3\": {\n      \"recommended\": 1.2\n    },\n    \"VITA_RAE\": {\n      \"recommended\": 600,\n      \"limit\": 1700\n    },\n    \"VITC\": {\n      \"recommended\": 45,\n      \"limit\": 1200\n    },\n    \"VITD\": {\n      \"recommended\": 15,\n      \"limit\": 100\n    },\n    \"TOCPHA\": {\n      \"recommended\": 11,\n      \"limit\": 600\n    },\n    \"VITK1\": {\n      \"recommended\": 60\n    },\n    \"THIA\": {\n      \"recommended\": 0.9\n    },\n    \"RIBF\": {\n      \"recommended\": 0.9\n    },\n    \"NIA\": {\n      \"recommended\": 12,\n      \"limit\": 20\n    },\n    \"VITB6A\": {\n      \"recommended\": 1,\n      \"limit\": 60\n    },\n    \"FOLDFE\": {\n      \"recommended\": 300,\n      \"limit\": 600\n    },\n    \"VITB12\": {\n      \"recommended\": 1.8\n    },\n    \"PANTAC\": {\n      \"recommended\": 4\n    },\n    \"BIO\": {\n      \"recommended\": 20\n    },\n    \"CHOLN\": {\n      \"recommended\": 375,\n      \"limit\": 2000\n    },\n    \"CA\": {\n      \"recommended\": 1300,\n      \"limit\": 3000\n    },\n    \"CR\": {\n      \"recommended\": 25\n    },\n    \"CU\": {\n      \"recommended\": 0.7,\n      \"limit\": 5\n    },\n    \"FLD\": {\n      \"recommended\": 2000,\n      \"limit\": 10000\n    },\n    \"I\": {\n      \"recommended\": 120,\n      \"limit\": 600\n    },\n    \"FE\": {\n      \"recommended\": 8,\n      \"limit\": 40\n    },\n    \"MG\": {\n      \"recommended\": 240,\n      \"limit\": 350\n    },\n    \"MN\": {\n      \"recommended\": 1.9,\n      \"limit\": 6\n    },\n    \"MO\": {\n      \"recommended\": 34,\n      \"limit\": 1100\n    },\n    \"P\": {\n      \"recommended\": 1250,\n      \"limit\": 4000\n    },\n    \"SE\": {\n      \"recommended\": 40,\n      \"limit\": 280\n    },\n    \"ZN\": {\n      \"recommended\": 8,\n      \"limit\": 23\n    },\n    \"K\": {\n      \"recommended\": 2500\n    },\n    \"NA\": {\n      \"recommended\": 1200\n    },\n    \"CL\": {\n      \"recommended\": 2300,\n      \"limit\": 3400\n    },\n    \"B\": {\n      \"limit\": 11000\n    },\n    \"NI\": {\n      \"limit\": 600\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "200087ab-6982-4bd4-9f9c-8c5bfe88957d",
+              "name": "Malformed or inconsistent metabolic profile specification",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "daily-values",
+                    "v1",
+                    "values"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"gender\": \"male\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.edamam.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "95bfc385-f726-47ae-b88b-574216106ddd",
+    "name": "Food Database Food Nutrition Request - AI Vision (Beta) Food Nutrition Request - AI Vision (Beta) values API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Daily values",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,345 @@
+{
+  "item": [
+    {
+      "id": "de520b76-8c12-44c3-8768-b8801b6c2bc0",
+      "name": "Food Request Step 2 - Nutrients",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c7a2fc0a-6502-4186-9039-56564a8f8e29",
+          "name": "Full Nutrition Lookup",
+          "request": {
+            "name": "Full Nutrition Lookup",
+            "description": {
+              "content": "In the response to your parser request you receive the a food ID for each database match. Using the food ID and\nthe measure URI, which parser provides, you can make a request to the nutrients access point. The nutrients\naccess points returns nutrition with diet and health labels for a given quantity of the food.\n\n**Access Point:** <https://api.edamam.com/api/food-database/v2/nutrients>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "food-database",
+                "v2",
+                "nutrients"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "app_id",
+                  "value": "<string>",
+                  "description": "(Required) The application ID, obtained from the account dashboard, <https://developer.edamam.com/admin/applications>."
+                },
+                {
+                  "disabled": false,
+                  "key": "app_key",
+                  "value": "<string>",
+                  "description": "(Required) The application key, obtained from the account dashboard, <https://developer.edamam.com/admin/applications>."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "ID of the account user. Should be used *only* if the account is configured for active user tracking.",
+                "key": "Edamam-Account-User",
+                "value": "<string>"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"ingredients\": [\n    {\n      \"quantity\": \"<number>\",\n      \"measureURI\": \"<string>\",\n      \"qualifiers\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"foodId\": \"<string>\"\n    },\n    {\n      \"quantity\": \"<number>\",\n      \"measureURI\": \"<string>\",\n      \"qualifiers\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"foodId\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "280cdf41-661f-4f42-9125-2a28a9b218a9",
+              "name": "Object containing number of servings (yield), total calories for the food (calories), nutrient content by\nnutrient type (totalNutrients, totalDaily), diet and health classification (dietLabels, healthLabels)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "food-database",
+                    "v2",
+                    "nutrients"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "app_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "ID of the account user. Should be used *only* if the account is configured for active user tracking.",
+                    "key": "Edamam-Account-User",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ingredients\": [\n    {\n      \"quantity\": \"<number>\",\n      \"measureURI\": \"<string>\",\n      \"qualifiers\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"foodId\": \"<string>\"\n    },\n    {\n      \"quantity\": \"<number>\",\n      \"measureURI\": \"<string>\",\n      \"qualifiers\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"foodId\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"uri\": \"string\",\n  \"url\": \"string\",\n  \"yield\": 5785.519943274807,\n  \"calories\": 5167,\n  \"glycemicIndex\": 8155.709747772586,\n  \"inflammatoryIndex\": 692.5979216062194,\n  \"co2EmissionsClass\": \"string\",\n  \"totalWeight\": 659.9563790258788,\n  \"dietLabels\": [\n    \"HIGH_PROTEIN\",\n    \"LOW_FAT\"\n  ],\n  \"healthLabels\": [\n    \"LOW_FAT_ABS\",\n    \"MILK_FREE\"\n  ],\n  \"cautions\": [\n    \"SOY\",\n    \"SULFITES\"\n  ],\n  \"totalNutrients\": {\n    \"key_0\": {\n      \"label\": \"string\",\n      \"tag\": \"string\",\n      \"units\": \"string\"\n    }\n  },\n  \"totalNutrientsKCal\": {\n    \"key_0\": {\n      \"label\": \"string\",\n      \"quantity\": 1418.6315684419571,\n      \"unit\": \"string\"\n    }\n  },\n  \"totalDaily\": {\n    \"key_0\": {\n      \"label\": \"string\",\n      \"tag\": \"string\",\n      \"units\": \"string\"\n    }\n  },\n  \"ingredientLines\": [\n    \"string\",\n    \"string\"\n  ],\n  \"label\": \"string\",\n  \"preparation\": [\n    \"string\",\n    \"string\"\n  ],\n  \"ingredients\": [\n    {\n      \"quantity\": 2385.378641317991,\n      \"measure\": \"string\",\n      \"measureURI\": \"string\",\n      \"foodMatch\": \"string\",\n      \"food\": \"string\",\n      \"foodId\": \"string\",\n      \"foodURI\": \"string\",\n      \"specificFoodURI\": \"string\",\n      \"foodCategory\": \"string\",\n      \"brand\": \"string\",\n      \"weight\": 5660.239043611113,\n      \"retainedWeight\": 1343.052588033169,\n      \"nutrients\": {\n        \"key_0\": {\n          \"label\": \"string\",\n          \"tag\": \"string\",\n          \"units\": \"string\"\n        },\n        \"key_1\": {\n          \"label\": \"string\",\n          \"tag\": \"string\",\n          \"units\": \"string\"\n        }\n      },\n      \"status\": \"OK\",\n      \"template\": \"string\",\n      \"servingSizes\": [\n        {\n          \"uri\": \"string\",\n          \"label\": \"string\",\n          \"quantity\": 1915.2489028142695\n        },\n        {\n          \"uri\": \"string\",\n          \"label\": \"string\",\n          \"quantity\": 2670.8182776257295\n        }\n      ],\n      \"servingsPerContainer\": 2709.3995905918955\n    },\n    {\n      \"quantity\": 5660.344645588098,\n      \"measure\": \"string\",\n      \"measureURI\": \"string\",\n      \"foodMatch\": \"string\",\n      \"food\": \"string\",\n      \"foodId\": \"string\",\n      \"foodURI\": \"string\",\n      \"specificFoodURI\": \"string\",\n      \"foodCategory\": \"string\",\n      \"brand\": \"string\",\n      \"weight\": 1276.7607019150917,\n      \"retainedWeight\": 6331.09552754769,\n      \"nutrients\": {\n        \"key_0\": {\n          \"label\": \"string\",\n          \"tag\": \"string\",\n          \"units\": \"string\"\n        }\n      },\n      \"status\": \"OK\",\n      \"template\": \"string\",\n      \"servingSizes\": [\n        {\n          \"uri\": \"string\",\n          \"label\": \"string\",\n          \"quantity\": 1006.1261648475239\n        },\n        {\n          \"uri\": \"string\",\n          \"label\": \"string\",\n          \"quantity\": 8761.613962980438\n        }\n      ],\n      \"servingsPerContainer\": 466.55593389288595\n    }\n  ],\n  \"cuisineType\": [\n    \"string\",\n    \"string\"\n  ],\n  \"mealType\": [\n    \"string\",\n    \"string\"\n  ],\n  \"dishType\": [\n    \"string\",\n    \"string\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "092a42aa-9346-49ef-89d5-cde2acdd44c9",
+              "name": "The specified URL was not found or couldn't be retrieved",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "food-database",
+                    "v2",
+                    "nutrients"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "app_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "ID of the account user. Should be used *only* if the account is configured for active user tracking.",
+                    "key": "Edamam-Account-User",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ingredients\": [\n    {\n      \"quantity\": \"<number>\",\n      \"measureURI\": \"<string>\",\n      \"qualifiers\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"foodId\": \"<string>\"\n    },\n    {\n      \"quantity\": \"<number>\",\n      \"measureURI\": \"<string>\",\n      \"qualifiers\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"foodId\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"string\",\n    \"message\": \"string\",\n    \"params\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  {\n    \"errorCode\": \"string\",\n    \"message\": \"string\",\n    \"params\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "93588709-1ea4-4406-ae76-8d6c1adb98ef",
+              "name": "Couldn't parse the request or extract the nutritional info",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "food-database",
+                    "v2",
+                    "nutrients"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "app_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "ID of the account user. Should be used *only* if the account is configured for active user tracking.",
+                    "key": "Edamam-Account-User",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ingredients\": [\n    {\n      \"quantity\": \"<number>\",\n      \"measureURI\": \"<string>\",\n      \"qualifiers\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"foodId\": \"<string>\"\n    },\n    {\n      \"quantity\": \"<number>\",\n      \"measureURI\": \"<string>\",\n      \"qualifiers\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"foodId\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"string\",\n    \"message\": \"string\",\n    \"params\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  {\n    \"errorCode\": \"string\",\n    \"message\": \"string\",\n    \"params\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2c98a43e-3842-4a82-b230-83821005eb8b",
+              "name": "Text with insufficient quality to process correctly",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "food-database",
+                    "v2",
+                    "nutrients"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "app_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_key",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "ID of the account user. Should be used *only* if the account is configured for active user tracking.",
+                    "key": "Edamam-Account-User",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ingredients\": [\n    {\n      \"quantity\": \"<number>\",\n      \"measureURI\": \"<string>\",\n      \"qualifiers\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"foodId\": \"<string>\"\n    },\n    {\n      \"quantity\": \"<number>\",\n      \"measureURI\": \"<string>\",\n      \"qualifiers\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"foodId\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "code": 555,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"string\",\n    \"message\": \"string\",\n    \"params\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  {\n    \"errorCode\": \"string\",\n    \"message\": \"string\",\n    \"params\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.edamam.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "60379df0-8c19-4148-ab2f-d2b7bd926043",
+    "name": "Food Database Food Nutrition Request - AI Vision (Beta) Food Nutrition Request - AI Vision (Beta) Food Request Step 2 - Nutrients API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

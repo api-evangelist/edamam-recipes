@@ -1,0 +1,33 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Food Database Food Nutrition Request - AI Vision (Beta) Food Nutrition Request - AI Vision (Beta) values API",
+    "version": "2.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "values",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Calculate Recommended Daily Intake and Tolerable Upper Limits for the Specified Metabolic Profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.edamam.com/api/daily-values/v1/values",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Calculate Recommended Daily Intake and Tolerable Upper Limits for the Specified Metabolic Profile"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

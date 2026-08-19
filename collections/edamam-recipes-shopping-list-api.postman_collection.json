@@ -1,0 +1,193 @@
+{
+  "item": [
+    {
+      "id": "3fe4e8f6-be2c-4d93-aab6-6a90055ad590",
+      "name": "Shopping List",
+      "description": {
+        "content": "The *Shopping List API* provides aggregation of shopping item quantities over one or more ingredient lists, and\noptional referral to external shopping services.\n\nA `shopping-list` call may be issued on a recipe preparation plan, e.g. for recipes assigned to a meal plan's\nslots, to obtain total shopping quantities for the products involved.  Each item in the plan may be scaled\nindividually for the shopping list by indicating the planned consumption as a number of servings; in the absence\nof such indication, consumption (and therefore preparation) of the complete output of the recipe will be assumed.\nBoth recipes and directly consumable foodstuffs are supported as items in the plan.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9e503f0c-8bdc-4c02-8c32-cf244c701b4c",
+          "name": "Create Shopping List From Total Meal Quantities",
+          "request": {
+            "name": "Create Shopping List From Total Meal Quantities",
+            "description": {},
+            "url": {
+              "path": [
+                "api",
+                "shopping-list",
+                "v2"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "beta",
+                  "value": "<boolean>",
+                  "description": "Turn on support for beta features"
+                },
+                {
+                  "disabled": false,
+                  "key": "shopping-cart",
+                  "value": "<boolean>",
+                  "description": "(BETA only) Generate a shopping cart page for the the foods aggregated in the shopping list"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"entries\": [\n    {\n      \"quantity\": \"<number>\",\n      \"item\": \"<string>\",\n      \"measure\": \"<string>\"\n    },\n    {\n      \"quantity\": \"<number>\",\n      \"item\": \"<string>\",\n      \"measure\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0e619102-f485-4925-af72-6bb1ac33c4a0",
+              "name": "Shopping list generated successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "shopping-list",
+                    "v2"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "beta",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "shopping-cart",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"entries\": [\n    {\n      \"quantity\": 1,\n      \"measure\": \"http://www.edamam.com/ontologies/edamam.owl#Measure_serving\",\n      \"item\": \"http://www.edamam.com/ontologies/edamam.owl#recipe_1\"\n    },\n    {\n      \"quantity\": 3,\n      \"measure\": \"http://www.edamam.com/ontologies/edamam.owl#Measure_serving\",\n      \"item\": \"http://www.edamam.com/ontologies/edamam.owl#recipe_2\"\n    },\n    {\n      \"quantity\": 2,\n      \"measure\": \"http://www.edamam.com/ontologies/edamam.owl#Measure_serving\",\n      \"item\": \"http://www.edamam.com/ontologies/edamam.owl#recipe_3\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"entries\": [\n    {\n      \"foodId\": \"food_abcdefghijklmnoprqstuvwxyzab\",\n      \"food\": \"ABC\",\n      \"quantities\": [\n        {\n          \"quantity\": 2,\n          \"measure\": \"http://www.edamam.com/ontologies/edamam.owl#Measure_unit\",\n          \"qualifiers\": [\n            \"large\"\n          ]\n        },\n        {\n          \"quantity\": 5,\n          \"measure\": \"http://www.edamam.com/ontologies/edamam.owl#Measure_unit\"\n        }\n      ]\n    },\n    {\n      \"foodId\": \"food_defghijklmnoprqstuvwxyzabcde\",\n      \"food\": \"DEF\",\n      \"quantities\": [\n        {\n          \"quantity\": 1500,\n          \"measure\": \"http://www.edamam.com/ontologies/edamam.owl#Measure_milliliter\"\n        }\n      ]\n    },\n    {\n      \"foodId\": \"food_ghijklmnoprqstuvwxyzabcdefgh\",\n      \"food\": \"GHI\",\n      \"quantities\": [\n        {\n          \"quantity\": 120,\n          \"measure\": \"http://www.edamam.com/ontologies/edamam.owl#Measure_milliliter\"\n        }\n      ]\n    },\n    {\n      \"foodId\": \"food_jklmnoprqstuvwxyzabcdefghijk\",\n      \"food\": \"JKL\",\n      \"quantities\": [\n        {\n          \"quantity\": 230,\n          \"measure\": \"http://www.edamam.com/ontologies/edamam.owl#Measure_gram\"\n        }\n      ]\n    },\n    {\n      \"foodId\": \"food_xyzabcdefghijklmnoprqstuvwxy\",\n      \"food\": \"XYZ\",\n      \"quantities\": [\n        {\n          \"quantity\": 300,\n          \"measure\": \"http://www.edamam.com/ontologies/edamam.owl#Measure_gram\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8f3780f6-908b-4d09-bd09-8e2fc01efb71",
+              "name": "Malformed or invalid request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "shopping-list",
+                    "v2"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "beta",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "shopping-cart",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"entries\": [\n    {\n      \"quantity\": 1,\n      \"measure\": \"http://www.edamam.com/ontologies/edamam.owl#Measure_serving\",\n      \"item\": \"http://www.edamam.com/ontologies/edamam.owl#recipe_1\"\n    },\n    {\n      \"quantity\": 3,\n      \"measure\": \"http://www.edamam.com/ontologies/edamam.owl#Measure_serving\",\n      \"item\": \"http://www.edamam.com/ontologies/edamam.owl#recipe_2\"\n    },\n    {\n      \"quantity\": 2,\n      \"measure\": \"http://www.edamam.com/ontologies/edamam.owl#Measure_serving\",\n      \"item\": \"http://www.edamam.com/ontologies/edamam.owl#recipe_3\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.edamam.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "c2468660-2163-43cc-8634-337712b8d6b0",
+    "name": "Food Database Food Nutrition Request - AI Vision (Beta) Food Nutrition Request - AI Vision (Beta) Shopping List API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The *Shopping List API* provides aggregation of shopping item quantities over one or more ingredient lists, and\noptional referral to external shopping services.\n\nA `shopping-list` call may be issued on a recipe preparation plan, e.g. for recipes assigned to a meal plan's\nslots, to obtain total shopping quantities for the products involved.  Each item in the plan may be scaled\nindividually for the shopping list by indicating the planned consumption as a number of servings; in the absence\nof such indication, consumption (and therefore preparation) of the complete output of the recipe will be assumed.\nBoth recipes and directly consumable foodstuffs are supported as items in the plan.",
+      "type": "text/plain"
+    }
+  }
+}

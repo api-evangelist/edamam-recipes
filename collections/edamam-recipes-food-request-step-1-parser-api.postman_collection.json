@@ -1,0 +1,795 @@
+{
+  "item": [
+    {
+      "id": "80721576-83fd-4c6b-bc9f-8463f2e4fe13",
+      "name": "Food Request Step 1 - Parser",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "6d6128ec-b9ae-4298-a59f-25b9956409bf",
+          "name": "Food Search",
+          "request": {
+            "name": "Food Search",
+            "description": {
+              "content": "The parser access point handles text search for foods as well as filters for the foods like presence specific\nnutrient content or exclusion of allergens.\n\n  - Search for a phrase or keyword using NLP to get food entities from it\n  - Get basic nutrition facts and ingredients for each food\n  - Search for food by given nutrient quantity for 28 nutrients\n  - Search for foods within a given brand\n  - With the build in food-logging context it allows for requests which do not contain quantity and suggest\n       expected quantities for them.\n\n**Access Point:** <https://api.edamam.com/api/food-database/v2/parser>",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "food-database",
+                "v2",
+                "parser"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "app_id",
+                  "value": "<string>",
+                  "description": "(Required) The application ID, obtained from the account dashboard, <https://developer.edamam.com/admin/applications>."
+                },
+                {
+                  "disabled": false,
+                  "key": "app_key",
+                  "value": "<string>",
+                  "description": "(Required) The application key, obtained from the account dashboard, <https://developer.edamam.com/admin/applications>."
+                },
+                {
+                  "disabled": false,
+                  "key": "ingr",
+                  "value": "<string>",
+                  "description": "A keyword search parameter to be found in the food name. **REQUIRED** if `upc` **and** `brand` are not\nspecified. **NOT REQUIRED** if `brand` is specified. **DO NOT POPULATE** if `upc` is specified."
+                },
+                {
+                  "disabled": false,
+                  "key": "brand",
+                  "value": "<string>",
+                  "description": "A keyword search parameter to be found in the food's brand. **REQUIRED** if `ingr` **and** `upc` are not\nspecified. **NOT REQUIRED** if `ingr` is specified. **DO NOT POPULATE** if `upc` is specified."
+                },
+                {
+                  "disabled": false,
+                  "key": "upc",
+                  "value": "<string>",
+                  "description": "Valid UPC, EAN, or PLU code. **REQUIRED** if neither `ingr` **nor** `brand` are specified.\n**DO NOT POPULATE** otherwise."
+                },
+                {
+                  "disabled": false,
+                  "key": "nutrition-type",
+                  "value": "cooking",
+                  "description": "Select between cooking and food logging processor."
+                },
+                {
+                  "disabled": false,
+                  "key": "health",
+                  "value": "<string>",
+                  "description": "Health label"
+                },
+                {
+                  "disabled": false,
+                  "key": "health",
+                  "value": "<string>",
+                  "description": "Health label"
+                },
+                {
+                  "disabled": false,
+                  "key": "calories",
+                  "value": "<string>",
+                  "description": "The format is calories=RANGE where RANGE is replaced by the value in kcal. RANGE is in one of MIN+, MIN-MAX\nor MAX, where MIN and MAX are non-negative integer numbers. The + symbol needs to be properly encoded.\nExamples: “calories=100-300” will return all recipes with which have between 100 and 300 kcal per serving."
+                },
+                {
+                  "disabled": false,
+                  "key": "category",
+                  "value": "<string>",
+                  "description": "Categories"
+                },
+                {
+                  "disabled": false,
+                  "key": "category",
+                  "value": "<string>",
+                  "description": "Categories"
+                },
+                {
+                  "disabled": false,
+                  "key": "nutrients[CA]",
+                  "value": "<string>",
+                  "description": "Calcium, Ca. Unit: mg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are\nnon-negative floating point numbers.\n\nFor example: nutrients[CA]=50+ means minimum 50mg calcium, where ‘50+’ has to be properly encoded as ‘50%2B’\nnutrients[FAT]=30 means maximum 30g fat and nutrients[FE]=5-10 means iron between 5mg and 10mg inclusive."
+                },
+                {
+                  "disabled": false,
+                  "key": "nutrients[CHOCDF]",
+                  "value": "<string>",
+                  "description": "Carbohydrate, by difference. Unit: g. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and\nMAX are non-negative floating point numbers.\n\nSee calcium for an example for how to fill in the range."
+                },
+                {
+                  "disabled": false,
+                  "key": "nutrients[CHOCDF.net]",
+                  "value": "<string>",
+                  "description": "Carbohydrates (net). Unit: g. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are\nnon-negative floating point numbers.\n\nSee calcium for an example for how to fill in the range."
+                },
+                {
+                  "disabled": false,
+                  "key": "nutrients[CHOLE]",
+                  "value": "<string>",
+                  "description": "Cholesterol. Unit: mg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are\nnon-negative floating point numbers.\n\nSee calcium for an example for how to fill in the range."
+                },
+                {
+                  "disabled": false,
+                  "key": "nutrients[ENERC_KCAL]",
+                  "value": "<string>",
+                  "description": "Energy. Unit: kcal. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are non-negative\nfloating point numbers.\n\nSee calcium for an example for how to fill in the range."
+                },
+                {
+                  "disabled": false,
+                  "key": "nutrients[FAMS]",
+                  "value": "<string>",
+                  "description": "Fatty acids, total monounsaturated. Unit: g. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN\nand MAX are non-negative floating point numbers.\n\nSee calcium for an example for how to fill in the range."
+                },
+                {
+                  "disabled": false,
+                  "key": "nutrients[FAPU]",
+                  "value": "<string>",
+                  "description": "Fatty acids, total polyunsaturated. Unit: g. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN\nand MAX are non-negative floating point numbers.\n\nSee calcium for an example for how to fill in the range."
+                },
+                {
+                  "disabled": false,
+                  "key": "nutrients[FASAT]",
+                  "value": "<string>",
+                  "description": "Fatty acids, total saturated. Unit: g. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and\nMAX are non-negative floating point numbers.\n\nSee calcium for an example for how to fill in the range."
+                },
+                {
+                  "disabled": false,
+                  "key": "nutrients[FAT]",
+                  "value": "<string>",
+                  "description": "Total lipid (fat). Unit: g. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are\nnon-negative floating point numbers.\n\nSee calcium for an example for how to fill in the range."
+                },
+                {
+                  "disabled": false,
+                  "key": "nutrients[FATRN]",
+                  "value": "<string>",
+                  "description": "Fatty acids, total trans. Unit: g. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX\nare non-negative floating point numbers.\n\nSee calcium for an example for how to fill in the range."
+                },
+                {
+                  "disabled": false,
+                  "key": "nutrients[FE]",
+                  "value": "<string>",
+                  "description": "Iron, Fe. Unit: mg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are non-negative\nfloating point numbers.\n\nSee calcium for an example for how to fill in the range."
+                },
+                {
+                  "disabled": false,
+                  "key": "nutrients[FIBTG]",
+                  "value": "<string>",
+                  "description": "Fiber, total dietary. Unit: g. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are\nnon-negative floating point numbers.\n\nSee calcium for an example for how to fill in the range."
+                },
+                {
+                  "disabled": false,
+                  "key": "nutrients[FOLAC]",
+                  "value": "<string>",
+                  "description": "Folic acid. Unit: µg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are\nnon-negative floating point numbers.\n\nSee calcium for an example for how to fill in the range."
+                },
+                {
+                  "disabled": false,
+                  "key": "nutrients[FOLDFE]",
+                  "value": "<string>",
+                  "description": "Folate, DFE. Unit: µg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are\nnon-negative floating point numbers.\n\nSee calcium for an example for how to fill in the range."
+                },
+                {
+                  "disabled": false,
+                  "key": "nutrients[FOLFD]",
+                  "value": "<string>",
+                  "description": "Folate (food). Unit: µg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are\nnon-negative floating point numbers.\n\nSee calcium for an example for how to fill in the range."
+                },
+                {
+                  "disabled": false,
+                  "key": "nutrients[K]",
+                  "value": "<string>",
+                  "description": "Potassium, K. Unit: mg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are\nnon-negative floating point numbers.\n\nSee calcium for an example for how to fill in the range."
+                },
+                {
+                  "disabled": false,
+                  "key": "nutrients[MG]",
+                  "value": "<string>",
+                  "description": "Magnesium. Unit: mg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are\nnon-negative floating point numbers.\n\nSee calcium for an example for how to fill in the range."
+                },
+                {
+                  "disabled": false,
+                  "key": "nutrients[NA]",
+                  "value": "<string>",
+                  "description": "Sodium, Na. Unit: mg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are\nnon-negative floating point numbers.\n\nSee calcium for an example for how to fill in the range."
+                },
+                {
+                  "disabled": false,
+                  "key": "nutrients[NIA]",
+                  "value": "<string>",
+                  "description": "Niacin. Unit: mg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are non-negative\nfloating point numbers.\n\nSee calcium for an example for how to fill in the range."
+                },
+                {
+                  "disabled": false,
+                  "key": "nutrients[P]",
+                  "value": "<string>",
+                  "description": "Phosphorus, P. Unit: mg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are\nnon-negative floating point numbers.\n\nSee calcium for an example for how to fill in the range."
+                },
+                {
+                  "disabled": false,
+                  "key": "nutrients[PROCNT]",
+                  "value": "<string>",
+                  "description": "Protein. Unit: g. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are non-negative\nfloating point numbers.\n\nSee calcium for an example for how to fill in the range."
+                },
+                {
+                  "disabled": false,
+                  "key": "nutrients[RIBF]",
+                  "value": "<string>",
+                  "description": "Riboflavin. Unit: mg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are\nnon-negative floating point numbers.\n\nSee calcium for an example for how to fill in the range."
+                },
+                {
+                  "disabled": false,
+                  "key": "nutrients[SUGAR]",
+                  "value": "<string>",
+                  "description": "Sugars, total. Unit: g. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are\nnon-negative floating point numbers.\n\nSee calcium for an example for how to fill in the range."
+                },
+                {
+                  "disabled": false,
+                  "key": "nutrients[SUGAR.added]",
+                  "value": "<string>",
+                  "description": "Sugars, added. Unit: g. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are\nnon-negative floating point numbers.\n\nSee calcium for an example for how to fill in the range."
+                },
+                {
+                  "disabled": false,
+                  "key": "nutrients[Sugar.alcohol]",
+                  "value": "<string>",
+                  "description": "Sugar alcohols. Unit: g. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are\nnon-negative floating point numbers.\n\nSee calcium for an example for how to fill in the range."
+                },
+                {
+                  "disabled": false,
+                  "key": "nutrients[THIA]",
+                  "value": "<string>",
+                  "description": "Thiamin. Unit: mg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are non-negative\nfloating point numbers.\n\nSee calcium for an example for how to fill in the range."
+                },
+                {
+                  "disabled": false,
+                  "key": "nutrients[TOCPHA]",
+                  "value": "<string>",
+                  "description": "Vitamin E (alpha-tocopherol). Unit: mg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and\nMAX are non-negative floating point numbers.\n\nSee calcium for an example for how to fill in the range."
+                },
+                {
+                  "disabled": false,
+                  "key": "nutrients[VITA_RAE]",
+                  "value": "<string>",
+                  "description": "Vitamin A, RAE. Unit: µg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are\nnon-negative floating point numbers.\n\nSee calcium for an example for how to fill in the range."
+                },
+                {
+                  "disabled": false,
+                  "key": "nutrients[VITB12]",
+                  "value": "<string>",
+                  "description": "Vitamin B12. Unit: µg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are\nnon-negative floating point numbers.\n\nSee calcium for an example for how to fill in the range."
+                },
+                {
+                  "disabled": false,
+                  "key": "nutrients[VITB6A]",
+                  "value": "<string>",
+                  "description": "Vitamin B6. Unit: mg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are\nnon-negative floating point numbers.\n\nSee calcium for an example for how to fill in the range."
+                },
+                {
+                  "disabled": false,
+                  "key": "nutrients[VITC]",
+                  "value": "<string>",
+                  "description": "Vitamin C, total ascorbic acid. Unit: mg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN\nand MAX are non-negative floating point numbers.\n\nSee calcium for an example for how to fill in the range."
+                },
+                {
+                  "disabled": false,
+                  "key": "nutrients[VITD]",
+                  "value": "<string>",
+                  "description": "Vitamin D (D2 + D3). Unit: µg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are\nnon-negative floating point numbers.\n\nSee calcium for an example for how to fill in the range."
+                },
+                {
+                  "disabled": false,
+                  "key": "nutrients[VITK1]",
+                  "value": "<string>",
+                  "description": "Vitamin K (phylloquinone). Unit: µg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX\nare non-negative floating point numbers.\n\nSee calcium for an example for how to fill in the range."
+                },
+                {
+                  "disabled": false,
+                  "key": "nutrients[WATER]",
+                  "value": "<string>",
+                  "description": "Water. Unit: g. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are non-negative\nfloating point numbers.\n\nSee calcium for an example for how to fill in the range."
+                },
+                {
+                  "disabled": false,
+                  "key": "nutrients[ZN]",
+                  "value": "<string>",
+                  "description": "Zinc, Zn. Unit: mg. Input the range which is one of MIN+, MIN-MAX or MAX, where MIN and MAX are non-negative\nfloating point numbers.\n\nSee calcium for an example for how to fill in the range."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "ID of the account user. Should be used *only* if the account is configured for active user tracking.",
+                "key": "Edamam-Account-User",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "81819bd0-1a52-425a-9342-faec6c4bc61b",
+              "name": "List of food objects, with each food object containing: kcal per 100gr, protein per 100 grams, carbohydrates\nper 100 grams, brand of the food, if the food is generic or branded, a list of existing measures for the\nfood, contents label of the food'",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "food-database",
+                    "v2",
+                    "parser"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "app_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ingr",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "brand",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "upc",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrition-type",
+                      "value": "cooking"
+                    },
+                    {
+                      "key": "health",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "calories",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "category",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[CA]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[CHOCDF]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[CHOCDF.net]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[CHOLE]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[ENERC_KCAL]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[FAMS]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[FAPU]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[FASAT]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[FAT]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[FATRN]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[FE]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[FIBTG]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[FOLAC]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[FOLDFE]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[FOLFD]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[K]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[MG]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[NA]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[NIA]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[P]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[PROCNT]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[RIBF]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[SUGAR]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[SUGAR.added]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[Sugar.alcohol]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[THIA]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[TOCPHA]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[VITA_RAE]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[VITB12]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[VITB6A]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[VITC]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[VITD]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[VITK1]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[WATER]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[ZN]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "ID of the account user. Should be used *only* if the account is configured for active user tracking.",
+                    "key": "Edamam-Account-User",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"text\": \"string\",\n  \"count\": 4774,\n  \"parsed\": [\n    {\n      \"food\": {\n        \"foodId\": \"string\",\n        \"uri\": \"string\",\n        \"label\": \"string\",\n        \"knownAs\": \"string\",\n        \"nutrients\": {\n          \"key_0\": 7628.123777111638,\n          \"key_1\": 1752.832033098437,\n          \"key_2\": 9763.615445786882\n        },\n        \"brand\": \"string\",\n        \"category\": \"string\",\n        \"categoryLabel\": \"string\",\n        \"foodContentsLabel\": \"string\",\n        \"image\": \"string\",\n        \"servingSizes\": [\n          {\n            \"uri\": \"string\",\n            \"label\": \"string\",\n            \"quantity\": 8528.21596200097\n          },\n          {\n            \"uri\": \"string\",\n            \"label\": \"string\",\n            \"quantity\": 1882.8982725525022\n          }\n        ],\n        \"servingsPerContainer\": 5918.264250781956\n      },\n      \"quantity\": 1139.5872639554682,\n      \"measure\": {\n        \"uri\": \"string\",\n        \"label\": \"string\",\n        \"weight\": 8637.938027378885,\n        \"qualified\": [\n          {\n            \"qualifiers\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"weight\": 2573.9680115596807\n          },\n          {\n            \"qualifiers\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"weight\": 7902.042897818318\n          }\n        ]\n      }\n    },\n    {\n      \"food\": {\n        \"foodId\": \"string\",\n        \"uri\": \"string\",\n        \"label\": \"string\",\n        \"knownAs\": \"string\",\n        \"nutrients\": {\n          \"key_0\": 6155.338657650011\n        },\n        \"brand\": \"string\",\n        \"category\": \"string\",\n        \"categoryLabel\": \"string\",\n        \"foodContentsLabel\": \"string\",\n        \"image\": \"string\",\n        \"servingSizes\": [\n          {\n            \"uri\": \"string\",\n            \"label\": \"string\",\n            \"quantity\": 9267.304293591475\n          },\n          {\n            \"uri\": \"string\",\n            \"label\": \"string\",\n            \"quantity\": 5576.875709747156\n          }\n        ],\n        \"servingsPerContainer\": 523.2708794738717\n      },\n      \"quantity\": 1638.3506059430474,\n      \"measure\": {\n        \"uri\": \"string\",\n        \"label\": \"string\",\n        \"weight\": 1818.4664675906138,\n        \"qualified\": [\n          {\n            \"qualifiers\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"weight\": 9701.153674124267\n          },\n          {\n            \"qualifiers\": [\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            ],\n            \"weight\": 2994.756688341207\n          }\n        ]\n      }\n    }\n  ],\n  \"hints\": [\n    {\n      \"pluCode\": {\n        \"code\": \"string\",\n        \"category\": \"string\",\n        \"commodity\": \"string\",\n        \"variety\": \"string\",\n        \"isRetailerAssigned\": true\n      },\n      \"food\": {\n        \"foodId\": \"string\",\n        \"uri\": \"string\",\n        \"label\": \"string\",\n        \"knownAs\": \"string\",\n        \"nutrients\": {\n          \"key_0\": 9454.180337999675\n        },\n        \"brand\": \"string\",\n        \"category\": \"string\",\n        \"categoryLabel\": \"string\",\n        \"foodContentsLabel\": \"string\",\n        \"image\": \"string\",\n        \"servingSizes\": [\n          {\n            \"uri\": \"string\",\n            \"label\": \"string\",\n            \"quantity\": 2106.6116109766162\n          },\n          {\n            \"uri\": \"string\",\n            \"label\": \"string\",\n            \"quantity\": 3046.9962731298283\n          }\n        ],\n        \"servingsPerContainer\": 1549.453975602635\n      },\n      \"measures\": [\n        {\n          \"uri\": \"string\",\n          \"label\": \"string\",\n          \"weight\": 2673.9040882642116,\n          \"qualified\": [\n            {\n              \"qualifiers\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"weight\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"qualifiers\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"weight\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        {\n          \"uri\": \"string\",\n          \"label\": \"string\",\n          \"weight\": 5407.334530003416,\n          \"qualified\": [\n            {\n              \"qualifiers\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"weight\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"qualifiers\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"weight\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        }\n      ]\n    },\n    {\n      \"pluCode\": {\n        \"code\": \"string\",\n        \"category\": \"string\",\n        \"commodity\": \"string\",\n        \"variety\": \"string\",\n        \"isRetailerAssigned\": false\n      },\n      \"food\": {\n        \"foodId\": \"string\",\n        \"uri\": \"string\",\n        \"label\": \"string\",\n        \"knownAs\": \"string\",\n        \"nutrients\": {\n          \"key_0\": 3907.2626025079794\n        },\n        \"brand\": \"string\",\n        \"category\": \"string\",\n        \"categoryLabel\": \"string\",\n        \"foodContentsLabel\": \"string\",\n        \"image\": \"string\",\n        \"servingSizes\": [\n          {\n            \"uri\": \"string\",\n            \"label\": \"string\",\n            \"quantity\": 6330.219440246951\n          },\n          {\n            \"uri\": \"string\",\n            \"label\": \"string\",\n            \"quantity\": 9428.98338427852\n          }\n        ],\n        \"servingsPerContainer\": 3051.602595596984\n      },\n      \"measures\": [\n        {\n          \"uri\": \"string\",\n          \"label\": \"string\",\n          \"weight\": 9193.393725100907,\n          \"qualified\": [\n            {\n              \"qualifiers\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"weight\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"qualifiers\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"weight\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        },\n        {\n          \"uri\": \"string\",\n          \"label\": \"string\",\n          \"weight\": 1479.5085309160404,\n          \"qualified\": [\n            {\n              \"qualifiers\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"weight\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"qualifiers\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"weight\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ]\n        }\n      ]\n    }\n  ],\n  \"_links\": {\n    \"next\": {\n      \"href\": \"string\",\n      \"title\": \"string\"\n    }\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "484af647-2709-471f-ae86-034295a0e50f",
+              "name": "The specified URL was not found or couldn't be retrieved",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "food-database",
+                    "v2",
+                    "parser"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "app_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "app_key",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "ingr",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "brand",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "upc",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrition-type",
+                      "value": "cooking"
+                    },
+                    {
+                      "key": "health",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "calories",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "category",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[CA]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[CHOCDF]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[CHOCDF.net]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[CHOLE]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[ENERC_KCAL]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[FAMS]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[FAPU]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[FASAT]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[FAT]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[FATRN]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[FE]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[FIBTG]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[FOLAC]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[FOLDFE]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[FOLFD]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[K]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[MG]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[NA]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[NIA]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[P]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[PROCNT]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[RIBF]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[SUGAR]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[SUGAR.added]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[Sugar.alcohol]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[THIA]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[TOCPHA]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[VITA_RAE]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[VITB12]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[VITB6A]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[VITC]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[VITD]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[VITK1]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[WATER]",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "nutrients[ZN]",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "ID of the account user. Should be used *only* if the account is configured for active user tracking.",
+                    "key": "Edamam-Account-User",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"errorCode\": \"string\",\n    \"message\": \"string\",\n    \"params\": [\n      \"string\",\n      \"string\"\n    ]\n  },\n  {\n    \"errorCode\": \"string\",\n    \"message\": \"string\",\n    \"params\": [\n      \"string\",\n      \"string\"\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.edamam.com",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "47504282-e350-4f16-8882-23dbe3e636e2",
+    "name": "Food Database Food Nutrition Request - AI Vision (Beta) Food Nutrition Request - AI Vision (Beta) Food Request Step 1 - Parser API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}
