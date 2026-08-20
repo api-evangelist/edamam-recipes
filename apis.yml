@@ -46,7 +46,8 @@ apis:
     request - ai vision (beta).
   humanURL: https://developer.edamam.com/edamam-docs-recipe-api
   baseURL: https://api.edamam.com/api/recipes/v2
-  tags:
+  tags: []
+  tags_raw:
   - Food Nutrition Request - AI Vision (Beta)
   properties:
   - type: OpenAPI
@@ -422,6 +423,8 @@ apis:
   humanURL: https://developer.edamam.com/edamam-docs-recipe-api
   baseURL: https://api.edamam.com/api/recipes/v2
   tags:
+  - Planner
+  tags_raw:
   - planner
   properties:
   - type: OpenAPI
@@ -565,6 +568,8 @@ apis:
   humanURL: https://developer.edamam.com/edamam-docs-recipe-api
   baseURL: https://api.edamam.com/api/recipes/v2
   tags:
+  - Shopping list
+  tags_raw:
   - Shopping List
   properties:
   - type: OpenAPI
@@ -627,6 +632,8 @@ apis:
   humanURL: https://developer.edamam.com/edamam-docs-recipe-api
   baseURL: https://api.edamam.com/api/recipes/v2
   tags:
+  - Values
+  tags_raw:
   - values
   properties:
   - type: OpenAPI
