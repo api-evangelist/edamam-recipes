@@ -435,7 +435,7 @@ apis:
   humanURL: https://developer.edamam.com/edamam-docs-recipe-api
   baseURL: https://api.edamam.com/api/recipes/v2
   tags:
-  - planner
+  - Planner
   tags_raw:
   - planner
   properties:
@@ -580,7 +580,7 @@ apis:
   humanURL: https://developer.edamam.com/edamam-docs-recipe-api
   baseURL: https://api.edamam.com/api/recipes/v2
   tags:
-  - Shopping List
+  - Shopping list
   tags_raw:
   - Shopping List
   properties:
@@ -644,7 +644,7 @@ apis:
   humanURL: https://developer.edamam.com/edamam-docs-recipe-api
   baseURL: https://api.edamam.com/api/recipes/v2
   tags:
-  - values
+  - Values
   tags_raw:
   - values
   properties:
