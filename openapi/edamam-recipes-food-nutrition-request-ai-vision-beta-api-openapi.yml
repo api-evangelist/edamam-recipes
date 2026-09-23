@@ -1,7 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   version: '2.0'
-  title: Food Database Food Nutrition Request - AI Vision (Beta) Food Nutrition Request - AI Vision (Beta) Food Nutrition Request - AI Vision (Beta) API
+  title: Food Database Food Nutrition Request - AI Vision (Beta) API
   description: ''
 servers:
 - url: https://api.edamam.com
@@ -18,7 +18,7 @@ paths:
         and returns its full nutrition analysis.
 
 
-        **Access Point:** <https://api.edamam.com/api/food-database/nutrients-from-image>'
+        **Access Point:**'
       parameters:
       - name: app_id
         in: query
@@ -71,8 +71,30 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Errors'
+      operationId: postApiFoodDatabaseNutrientsFromImage
+      x-operation-id-source: derived
 components:
   schemas:
+    Measure:
+      type: object
+      properties:
+        uri:
+          type: string
+        label:
+          type: string
+        weight:
+          type: number
+        qualified:
+          type: array
+          items:
+            $ref: '#/components/schemas/WeightedMeasure'
+    Term:
+      type: object
+      properties:
+        uri:
+          type: string
+        label:
+          type: string
     VisionResponse:
       type: object
       properties:
@@ -80,30 +102,6 @@ components:
           $ref: '#/components/schemas/Parsed'
         recipe:
           $ref: '#/components/schemas/RecipeInfo'
-    Errors:
-      type: array
-      items:
-        $ref: '#/components/schemas/Error'
-    NutrientsMap:
-      type: object
-      additionalProperties:
-        type: object
-        properties:
-          label:
-            type: string
-          tag:
-            type: string
-          units:
-            type: string
-    WeightedMeasure:
-      type: object
-      properties:
-        qualifiers:
-          type: array
-          items:
-            $ref: '#/components/schemas/Term'
-        weight:
-          type: number
     Food:
       type: object
       properties:
@@ -145,58 +143,19 @@ components:
           type: array
           items:
             type: string
-    IngredientLine:
+    ImageRequest:
       type: object
+      required:
+      - image_url or image
       properties:
-        quantity:
-          type: number
-        measure:
+        image:
           type: string
-        measureURI:
+          description: An image of food, provided either as a Base64-encoded data (e.g., "data:image/jpeg;base64,...").
+          example: data:image/jpeg;base64,/9j/4AAQSkZJRgABAgEASABIAAD...
+        image_url:
           type: string
-        foodMatch:
-          type: string
-        food:
-          type: string
-        foodId:
-          type: string
-        foodURI:
-          type: string
-        specificFoodURI:
-          type: string
-        foodCategory:
-          type: string
-        brand:
-          type: string
-        weight:
-          type: number
-        retainedWeight:
-          type: number
-        nutrients:
-          $ref: '#/components/schemas/NutrientsMap'
-        status:
-          type: string
-          enum:
-          - OK
-          - MISSING_QUANTITY
-          - UNRECOGNIZED_FOOD
-        template:
-          type: string
-        servingSizes:
-          type: array
-          items:
-            $ref: '#/components/schemas/Quantity'
-        servingsPerContainer:
-          type: number
-    Quantity:
-      type: object
-      properties:
-        uri:
-          type: string
-        label:
-          type: string
-        quantity:
-          type: number
+          description: An image of food, provided either a publicly accessible URL).
+          example: https://example.com/image_xyz.jpg
     RecipeInfo:
       type: object
       properties:
@@ -330,6 +289,82 @@ components:
           type: array
           items:
             type: string
+    IngredientLine:
+      type: object
+      properties:
+        quantity:
+          type: number
+        measure:
+          type: string
+        measureURI:
+          type: string
+        foodMatch:
+          type: string
+        food:
+          type: string
+        foodId:
+          type: string
+        foodURI:
+          type: string
+        specificFoodURI:
+          type: string
+        foodCategory:
+          type: string
+        brand:
+          type: string
+        weight:
+          type: number
+        retainedWeight:
+          type: number
+        nutrients:
+          $ref: '#/components/schemas/NutrientsMap'
+        status:
+          type: string
+          enum:
+          - OK
+          - MISSING_QUANTITY
+          - UNRECOGNIZED_FOOD
+        template:
+          type: string
+        servingSizes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Quantity'
+        servingsPerContainer:
+          type: number
+    WeightedMeasure:
+      type: object
+      properties:
+        qualifiers:
+          type: array
+          items:
+            $ref: '#/components/schemas/Term'
+        weight:
+          type: number
+    Quantity:
+      type: object
+      properties:
+        uri:
+          type: string
+        label:
+          type: string
+        quantity:
+          type: number
+    Errors:
+      type: array
+      items:
+        $ref: '#/components/schemas/Error'
+    NutrientsMap:
+      type: object
+      additionalProperties:
+        type: object
+        properties:
+          label:
+            type: string
+          tag:
+            type: string
+          units:
+            type: string
     Parsed:
       type: object
       properties:
@@ -339,36 +374,3 @@ components:
           type: number
         measure:
           $ref: '#/components/schemas/Measure'
-    Measure:
-      type: object
-      properties:
-        uri:
-          type: string
-        label:
-          type: string
-        weight:
-          type: number
-        qualified:
-          type: array
-          items:
-            $ref: '#/components/schemas/WeightedMeasure'
-    ImageRequest:
-      type: object
-      required:
-      - image_url or image
-      properties:
-        image:
-          type: string
-          description: An image of food, provided either as a Base64-encoded data (e.g., "data:image/jpeg;base64,...").
-          example: data:image/jpeg;base64,/9j/4AAQSkZJRgABAgEASABIAAD...
-        image_url:
-          type: string
-          description: An image of food, provided either a publicly accessible URL).
-          example: https://example.com/image_xyz.jpg
-    Term:
-      type: object
-      properties:
-        uri:
-          type: string
-        label:
-          type: string

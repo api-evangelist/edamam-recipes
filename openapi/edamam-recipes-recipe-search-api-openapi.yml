@@ -1,7 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  version: '2.0'
-  title: Food Database Food Nutrition Request - AI Vision (Beta) Food Nutrition Request - AI Vision (Beta) Recipe Search API
+  version: '2.9'
+  title: Shopping List Recipe Search API
   description: Search or access individual recipes.
 servers:
 - url: https://api.edamam.com
@@ -20,7 +20,28 @@ paths:
       - basic: []
         Edamam-Account-User: []
       summary: Search for a Recipe
-      description: "This endpoint returns a list of recipes matching the provided criteria. Get started by placing your search query\nin the `q` parameter, fill in your 3scale credentials, and press the \"Try it out!\" button at the bottom.\nAdditionally, refine your search by using the optional parameters to specify what you are looking for.\n\n__Note:__\n- When mentioned, 'floating point values' refers to values such as `50.0`, `50.`, `0.5`, and `.5`.\n- When speaking of ranges, the API accepts values such as `1.0+`, `1.0-50.0`, or `50.0`, for floating point\n  ranges.\n\nThe parameters with __(required)__ in their value box are the required parameters and must be defined as part\nof a request, all others can be left blank if you do not wish to define them.\n\n__Access Point:__ https://api.edamam.com/api/recipes/v2"
+      description: 'This endpoint returns a list of recipes matching the provided criteria. Get started by placing your search query
+
+        in the `q` parameter, fill in your 3scale credentials, and press the "Try it out!" button at the bottom.
+
+        Additionally, refine your search by using the optional parameters to specify what you are looking for.
+
+
+        __Note:__
+
+        - When mentioned, ''floating point values'' refers to values such as `50.0`, `50.`, `0.5`, and `.5`.
+
+        - When speaking of ranges, the API accepts values such as `1.0+`, `1.0-50.0`, or `50.0`, for floating point
+
+        ranges.
+
+
+        The parameters with __(required)__ in their value box are the required parameters and must be defined as part
+
+        of a request, all others can be left blank if you do not wish to define them.
+
+
+        __Access Point:__ https://api.edamam.com/api/recipes/v2'
       parameters:
       - name: type
         in: query
@@ -777,6 +798,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Errors'
+      operationId: getApiRecipesV2
+      x-operation-id-source: derived
   /api/recipes/v2/by-uri:
     get:
       tags:
@@ -790,9 +813,7 @@ paths:
       summary: Lookup Recipe(s) using their URI(s)
       description: 'Search for recipes by their URI. Note, that the API response doesn''t directly indicate if there are missing
 
-        recipes. Instead, you need to compare he URIs to see if any are missing.
-
-        '
+        recipes. Instead, you need to compare he URIs to see if any are missing.'
       parameters:
       - name: type
         in: query
@@ -888,6 +909,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Errors'
+      operationId: getApiRecipesV2ByUri
+      x-operation-id-source: derived
   /api/recipes/v2/{id}:
     get:
       tags:
@@ -901,9 +924,7 @@ paths:
       summary: Lookup a Specific Recipe by ID
       description: 'Returns the nutritional information for given recipe. These requests are constructed automatically and can
 
-        be found in `hits[]._links.self.href`.
-
-        '
+        be found in `hits[]._links.self.href`.'
       parameters:
       - name: id
         in: path
@@ -1000,8 +1021,24 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Errors'
+      operationId: getApiRecipesV2ById
+      x-operation-id-source: derived
 components:
   schemas:
+    Hit:
+      properties:
+        recipe:
+          $ref: '#/components/schemas/Recipe'
+        _links:
+          $ref: '#/components/schemas/Links'
+    NutrientInfo:
+      properties:
+        label:
+          type: string
+        quantity:
+          type: number
+        unit:
+          type: string
     DigestEntry:
       properties:
         label:
@@ -1020,24 +1057,6 @@ components:
           type: string
         sub:
           $ref: '#/components/schemas/Digest'
-    Errors:
-      type: array
-      items:
-        $ref: '#/components/schemas/Error'
-    Response:
-      properties:
-        from:
-          type: integer
-        to:
-          type: integer
-        count:
-          type: integer
-        _links:
-          $ref: '#/components/schemas/Links'
-        hits:
-          type: array
-          items:
-            $ref: '#/components/schemas/Hit'
     Ingredient:
       properties:
         text:
@@ -1052,6 +1071,20 @@ components:
           type: number
         foodId:
           type: string
+    Links:
+      properties:
+        self:
+          $ref: '#/components/schemas/Link'
+        next:
+          $ref: '#/components/schemas/Link'
+    ImageInfo:
+      properties:
+        url:
+          type: string
+        width:
+          type: integer
+        height:
+          type: integer
     Error:
       properties:
         errorCode:
@@ -1062,37 +1095,33 @@ components:
           type: array
           items:
             type: string
+    Link:
+      properties:
+        href:
+          type: string
+        title:
+          type: string
+    Response:
+      properties:
+        from:
+          type: integer
+        to:
+          type: integer
+        count:
+          type: integer
+        _links:
+          $ref: '#/components/schemas/Links'
+        hits:
+          type: array
+          items:
+            $ref: '#/components/schemas/Hit'
+    Errors:
+      type: array
+      items:
+        $ref: '#/components/schemas/Error'
     NutrientsInfo:
       additionalProperties:
         $ref: '#/components/schemas/NutrientInfo'
-    ImageInfo:
-      properties:
-        url:
-          type: string
-        width:
-          type: integer
-        height:
-          type: integer
-    Links:
-      properties:
-        self:
-          $ref: '#/components/schemas/Link'
-        next:
-          $ref: '#/components/schemas/Link'
-    NutrientInfo:
-      properties:
-        label:
-          type: string
-        quantity:
-          type: number
-        unit:
-          type: string
-    Hit:
-      properties:
-        recipe:
-          $ref: '#/components/schemas/Recipe'
-        _links:
-          $ref: '#/components/schemas/Links'
     Recipe:
       properties:
         uri:
@@ -1188,13 +1217,26 @@ components:
           $ref: '#/components/schemas/NutrientsInfo'
         digest:
           $ref: '#/components/schemas/Digest'
-    Link:
-      properties:
-        href:
-          type: string
-        title:
-          type: string
     Digest:
       type: array
       items:
         $ref: '#/components/schemas/DigestEntry'
+  securitySchemes:
+    basic:
+      type: http
+      scheme: basic
+    app_id:
+      type: apiKey
+      in: query
+      name: app_id
+      description: The application ID, obtained from the account dashboard, https://developer.edamam.com/admin/applications.
+    app_key:
+      type: apiKey
+      in: query
+      name: app_key
+      description: The application key, obtained from the account dashboard, https://developer.edamam.com/admin/applications.
+    Edamam-Account-User:
+      type: apiKey
+      in: header
+      name: Edamam-Account-User
+      description: ID of the account user. Should be used *only* if the account is configured for active user tracking.

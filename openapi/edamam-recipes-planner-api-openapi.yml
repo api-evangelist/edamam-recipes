@@ -1,18 +1,20 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  version: '2.0'
-  title: Food Database Food Nutrition Request - AI Vision (Beta) Food Nutrition Request - AI Vision (Beta) planner API
-  description: Meal planning
+  title: Meal Planning Planner API
+  description: 'The *Meal Planning API* provides dietary planning based on a user-supplied daily meal structure and nutritional
+
+    constraints.'
+  version: 1.2 beta
 servers:
 - url: https://api.edamam.com
 tags:
-- name: planner
+- name: Planner
   description: Meal planning
 paths:
   /api/meal-planner/v1/{app_id}/select:
     post:
       tags:
-      - planner
+      - Planner
       summary: Create Dietary Plan According to Supplied Specification
       parameters:
       - name: app_id
@@ -145,297 +147,32 @@ paths:
       security:
       - basic:
         - app_id
+      operationId: postApiMealPlannerV1ByAppIdSelect
+      x-operation-id-source: derived
   /api/recipes/v2/by-uri:
     get:
       tags:
-      - planner
+      - Planner
       summary: Lookup Recipes by URI
-      description: The meal planner returns recipe URIs as part of its response. Use this endpoint to retrieve the recipes. For more information see the relevant documentation in the [Recipe Search API](https://developer.edamam.com/edamam-docs-recipe-api#operations-tag-Lookup_recipes_by_URI).
+      description: The meal planner returns recipe URIs as part of its response. Use this endpoint to retrieve the recipes. For more information see the relevant documentation in the Recipe Search API.
       responses:
         default:
           description: See the relevant documentation in the [Recipe Search API](https://developer.edamam.com/edamam-docs-recipe-api#operations-tag-Lookup_recipes_by_URI).
+      operationId: getApiRecipesV2ByUri
+      x-operation-id-source: derived
   /api/shopping-list/v2:
     post:
       tags:
-      - planner
+      - Planner
       summary: Create Shopping List From Total Meal Quantities
-      description: Once a meal plan has been generated, a shopping list can be created for the requisite quantities of all necessary ingredients across the plan, through the "Shopping List API". For more information see the relevant documentation in the [Recipe Search API](https://developer.edamam.com/edamam-docs-recipe-api).
+      description: Once a meal plan has been generated, a shopping list can be created for the requisite quantities of all necessary ingredients across the plan, through the "Shopping List API". For more information see the relevant documentation in the Recipe Search API.
       responses:
         default:
           description: See the relevant documentation in the [Recipe Search API](https://developer.edamam.com/edamam-docs-recipe-api).
+      operationId: postApiShoppingListV2
+      x-operation-id-source: derived
 components:
-  examples:
-    Vegan-plan-assignment:
-      description: Vegan meal plan, 2-day selection
-      value:
-        status: OK
-        selection:
-        - sections:
-            Breakfast:
-              assigned: http://www.edamam.com/ontologies/edamam.owl#recipe_1
-              _links:
-                self:
-                  title: Recipe №1
-                  href: https://test-cluster.edamam.com/api/recipes/v2/1?type=public
-            Lunch:
-              sections:
-                Starter:
-                  assigned: http://www.edamam.com/ontologies/edamam.owl#recipe_2
-                  _links:
-                    self:
-                      title: Recipe №2
-                      href: https://test-cluster.edamam.com/api/recipes/v2/2?type=public
-                Main:
-                  assigned: http://www.edamam.com/ontologies/edamam.owl#recipe_3
-                  _links:
-                    self:
-                      title: Recipe №3
-                      href: https://test-cluster.edamam.com/api/recipes/v2/3?type=public
-                Dessert:
-                  assigned: http://www.edamam.com/ontologies/edamam.owl#recipe_4
-                  _links:
-                    self:
-                      title: Recipe №4
-                      href: https://test-cluster.edamam.com/api/recipes/v2/4?type=public
-            Dinner:
-              sections:
-                Main:
-                  assigned: http://www.edamam.com/ontologies/edamam.owl#recipe_5
-                  _links:
-                    self:
-                      title: Recipe №5
-                      href: https://test-cluster.edamam.com/api/recipes/v2/5?type=public
-                Dessert:
-                  assigned: http://www.edamam.com/ontologies/edamam.owl#recipe_6
-                  _links:
-                    self:
-                      title: Recipe №6
-                      href: https://test-cluster.edamam.com/api/recipes/v2/6?type=public
-        - sections:
-            Breakfast:
-              assigned: http://www.edamam.com/ontologies/edamam.owl#recipe_7
-              _links:
-                self:
-                  title: Recipe №7
-                  href: https://test-cluster.edamam.com/api/recipes/v2/7?type=public
-            Lunch:
-              sections:
-                Starter:
-                  assigned: http://www.edamam.com/ontologies/edamam.owl#recipe_8
-                  _links:
-                    self:
-                      title: Recipe №8
-                      href: https://test-cluster.edamam.com/api/recipes/v2/8?type=public
-                Main:
-                  assigned: http://www.edamam.com/ontologies/edamam.owl#recipe_9
-                  _links:
-                    self:
-                      title: Recipe №9
-                      href: https://test-cluster.edamam.com/api/recipes/v2/9?type=public
-                Dessert:
-                  assigned: http://www.edamam.com/ontologies/edamam.owl#recipe_10
-                  _links:
-                    self:
-                      title: Recipe №10
-                      href: https://test-cluster.edamam.com/api/recipes/v2/10?type=public
-            Dinner:
-              sections:
-                Main:
-                  assigned: http://www.edamam.com/ontologies/edamam.owl#recipe_11
-                  _links:
-                    self:
-                      title: Recipe №11
-                      href: https://test-cluster.edamam.com/api/recipes/v2/11?type=public
-                Dessert:
-                  assigned: http://www.edamam.com/ontologies/edamam.owl#recipe_12
-                  _links:
-                    self:
-                      title: Recipe №12
-                      href: https://test-cluster.edamam.com/api/recipes/v2/12?type=public
-    7-Day-Plan-with-Allergens:
-      description: 7 Day Allergens descriptor
-      value:
-        size: 7
-        plan:
-          accept:
-            all:
-            - health:
-              - SOY_FREE
-              - FISH_FREE
-              - MEDITERRANEAN
-          fit:
-            ENERC_KCAL:
-              min: 1000
-              max: 2000
-            SUGAR.added:
-              max: 20
-          exclude:
-          - http://www.edamam.com/ontologies/edamam.owl#recipe_x
-          - http://www.edamam.com/ontologies/edamam.owl#recipe_y
-          - http://www.edamam.com/ontologies/edamam.owl#recipe_z
-          sections:
-            Breakfast:
-              accept:
-                all:
-                - dish:
-                  - drinks
-                  - egg
-                  - biscuits and cookies
-                  - bread
-                  - pancake
-                  - cereals
-                - meal:
-                  - breakfast
-              fit:
-                ENERC_KCAL:
-                  min: 100
-                  max: 600
-            Lunch:
-              accept:
-                all:
-                - dish:
-                  - main course
-                  - pasta
-                  - egg
-                  - salad
-                  - soup
-                  - sandwiches
-                  - pizza
-                  - seafood
-                - meal:
-                  - lunch/dinner
-              fit:
-                ENERC_KCAL:
-                  min: 300
-                  max: 900
-            Dinner:
-              accept:
-                all:
-                - dish:
-                  - seafood
-                  - egg
-                  - salad
-                  - pizza
-                  - pasta
-                  - main course
-                - meal:
-                  - lunch/dinner
-              fit:
-                ENERC_KCAL:
-                  min: 200
-                  max: 900
-    Vegan-plan:
-      description: Vegan meal plan descriptor
-      value:
-        size: 2
-        plan:
-          accept:
-            all:
-            - health:
-              - VEGAN
-            - cuisine:
-              - Mediterranean
-          fit:
-            ENERC_KCAL:
-              min: 1800
-              max: 2200
-            PROCNT:
-              min: 50
-              max: 300
-          sections:
-            Breakfast: {}
-            Lunch:
-              exclude:
-              - http://www.edamam.com/ontologies/edamam.owl#recipe_x
-              - http://www.edamam.com/ontologies/edamam.owl#recipe_y
-              - http://www.edamam.com/ontologies/edamam.owl#recipe_z
-              sections:
-                Starter: {}
-                Main: {}
-                Dessert: {}
-            Dinner:
-              exclude:
-              - http://www.edamam.com/ontologies/edamam.owl#recipe_a
-              - http://www.edamam.com/ontologies/edamam.owl#recipe_b
-              - http://www.edamam.com/ontologies/edamam.owl#recipe_c
-              sections:
-                Main: {}
-                Dessert: {}
   schemas:
-    CuisineType:
-      type: string
-      enum:
-      - american
-      - asian
-      - british
-      - caribbean
-      - central europe
-      - chinese
-      - eastern europe
-      - french
-      - greek
-      - indian
-      - italian
-      - japanese
-      - korean
-      - kosher
-      - mediterranean
-      - mexican
-      - middle eastern
-      - nordic
-      - south american
-      - south east asian
-      - world
-    Selection:
-      type: object
-      properties:
-        assigned:
-          description: URI of the recipe assigned for this section (leaf sections only.)
-          type: string
-        _links:
-          description: Links to resources related to the assigned recipe
-          type: object
-          properties:
-            self:
-              allOf:
-              - description: Link to the assigned recipe's details in the Recipe Search API
-              - $ref: '#/components/schemas/LinkEntry'
-        sections:
-          description: Selection tree for sub-sections, according to the structure specified by the plan descriptor.
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/Selection'
-    MealType:
-      type: string
-      enum:
-      - breakfast
-      - brunch
-      - lunch/dinner
-      - lunch
-      - dinner
-      - snack
-      - teatime
-    Range:
-      type: object
-      properties:
-        min:
-          type: number
-        max:
-          type: number
-    CautionLabel:
-      type: string
-      enum:
-      - gluten
-      - wheat
-      - eggs
-      - milk
-      - peanuts
-      - tree-nuts
-      - soy
-      - fish
-      - shellfish
-      - sulfites
-      - fodmap
     LinkEntry:
       type: object
       required:
@@ -447,6 +184,50 @@ components:
         href:
           description: Target URL
           type: string
+    HealthLabel:
+      type: string
+      enum:
+      - fat-free
+      - low-fat-abs
+      - sugar-conscious
+      - low-sugar
+      - low-potassium
+      - kidney-friendly
+      - keto-friendly
+      - plant-based
+      - vegan
+      - vegetarian
+      - pescatarian
+      - paleo
+      - specific-carbs
+      - Mediterranean
+      - DASH
+      - dairy-free
+      - gluten-free
+      - wheat-free
+      - egg-free
+      - milk-free
+      - peanut-free
+      - tree-nut-free
+      - soy-free
+      - fish-free
+      - shellfish-free
+      - pork-free
+      - red-meat-free
+      - crustacean-free
+      - celery-free
+      - mustard-free
+      - sesame-free
+      - lupine-free
+      - mollusk-free
+      - alcohol-free
+      - no-oil-added
+      - no-sugar-added
+      - sulfite-free
+      - fodmap-free
+      - kosher
+      - alcohol-cocktail
+      - immuno-supportive
     DishType:
       type: string
       enum:
@@ -476,6 +257,70 @@ components:
       - special occasions
       - starter
       - sweets
+    Range:
+      type: object
+      properties:
+        min:
+          type: number
+        max:
+          type: number
+    Selection:
+      type: object
+      properties:
+        assigned:
+          description: URI of the recipe assigned for this section (leaf sections only.)
+          type: string
+        _links:
+          description: Links to resources related to the assigned recipe
+          type: object
+          properties:
+            self:
+              allOf:
+              - description: Link to the assigned recipe's details in the Recipe Search API
+              - $ref: '#/components/schemas/LinkEntry'
+        sections:
+          description: Selection tree for sub-sections, according to the structure specified by the plan descriptor.
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/Selection'
+    CuisineType:
+      type: string
+      enum:
+      - american
+      - asian
+      - british
+      - caribbean
+      - central europe
+      - chinese
+      - eastern europe
+      - french
+      - greek
+      - indian
+      - italian
+      - japanese
+      - korean
+      - kosher
+      - mediterranean
+      - mexican
+      - middle eastern
+      - nordic
+      - south american
+      - south east asian
+      - world
+    CautionLabel:
+      type: string
+      enum:
+      - gluten
+      - wheat
+      - eggs
+      - milk
+      - peanuts
+      - tree-nuts
+      - soy
+      - fish
+      - shellfish
+      - sulfites
+      - fodmap
     Predicate:
       oneOf:
       - description: Select entries matching all of a given list of predicates
@@ -610,50 +455,16 @@ components:
         properties:
           total-time:
             $ref: '#/components/schemas/Range'
-    HealthLabel:
+    MealType:
       type: string
       enum:
-      - fat-free
-      - low-fat-abs
-      - sugar-conscious
-      - low-sugar
-      - low-potassium
-      - kidney-friendly
-      - keto-friendly
-      - plant-based
-      - vegan
-      - vegetarian
-      - pescatarian
-      - paleo
-      - specific-carbs
-      - Mediterranean
-      - DASH
-      - dairy-free
-      - gluten-free
-      - wheat-free
-      - egg-free
-      - milk-free
-      - peanut-free
-      - tree-nut-free
-      - soy-free
-      - fish-free
-      - shellfish-free
-      - pork-free
-      - red-meat-free
-      - crustacean-free
-      - celery-free
-      - mustard-free
-      - sesame-free
-      - lupine-free
-      - mollusk-free
-      - alcohol-free
-      - no-oil-added
-      - no-sugar-added
-      - sulfite-free
-      - fodmap-free
-      - kosher
-      - alcohol-cocktail
-      - immuno-supportive
+      - breakfast
+      - brunch
+      - lunch/dinner
+      - lunch
+      - dinner
+      - snack
+      - teatime
     Section:
       description: 'Plan section; may contain sub-sections.
 
@@ -693,3 +504,204 @@ components:
           type: object
           additionalProperties:
             $ref: '#/components/schemas/Section'
+  examples:
+    Vegan-plan-assignment:
+      description: Vegan meal plan, 2-day selection
+      value:
+        status: OK
+        selection:
+        - sections:
+            Breakfast:
+              assigned: http://www.edamam.com/ontologies/edamam.owl#recipe_1
+              _links:
+                self:
+                  title: Recipe №1
+                  href: https://test-cluster.edamam.com/api/recipes/v2/1?type=public
+            Lunch:
+              sections:
+                Starter:
+                  assigned: http://www.edamam.com/ontologies/edamam.owl#recipe_2
+                  _links:
+                    self:
+                      title: Recipe №2
+                      href: https://test-cluster.edamam.com/api/recipes/v2/2?type=public
+                Main:
+                  assigned: http://www.edamam.com/ontologies/edamam.owl#recipe_3
+                  _links:
+                    self:
+                      title: Recipe №3
+                      href: https://test-cluster.edamam.com/api/recipes/v2/3?type=public
+                Dessert:
+                  assigned: http://www.edamam.com/ontologies/edamam.owl#recipe_4
+                  _links:
+                    self:
+                      title: Recipe №4
+                      href: https://test-cluster.edamam.com/api/recipes/v2/4?type=public
+            Dinner:
+              sections:
+                Main:
+                  assigned: http://www.edamam.com/ontologies/edamam.owl#recipe_5
+                  _links:
+                    self:
+                      title: Recipe №5
+                      href: https://test-cluster.edamam.com/api/recipes/v2/5?type=public
+                Dessert:
+                  assigned: http://www.edamam.com/ontologies/edamam.owl#recipe_6
+                  _links:
+                    self:
+                      title: Recipe №6
+                      href: https://test-cluster.edamam.com/api/recipes/v2/6?type=public
+        - sections:
+            Breakfast:
+              assigned: http://www.edamam.com/ontologies/edamam.owl#recipe_7
+              _links:
+                self:
+                  title: Recipe №7
+                  href: https://test-cluster.edamam.com/api/recipes/v2/7?type=public
+            Lunch:
+              sections:
+                Starter:
+                  assigned: http://www.edamam.com/ontologies/edamam.owl#recipe_8
+                  _links:
+                    self:
+                      title: Recipe №8
+                      href: https://test-cluster.edamam.com/api/recipes/v2/8?type=public
+                Main:
+                  assigned: http://www.edamam.com/ontologies/edamam.owl#recipe_9
+                  _links:
+                    self:
+                      title: Recipe №9
+                      href: https://test-cluster.edamam.com/api/recipes/v2/9?type=public
+                Dessert:
+                  assigned: http://www.edamam.com/ontologies/edamam.owl#recipe_10
+                  _links:
+                    self:
+                      title: Recipe №10
+                      href: https://test-cluster.edamam.com/api/recipes/v2/10?type=public
+            Dinner:
+              sections:
+                Main:
+                  assigned: http://www.edamam.com/ontologies/edamam.owl#recipe_11
+                  _links:
+                    self:
+                      title: Recipe №11
+                      href: https://test-cluster.edamam.com/api/recipes/v2/11?type=public
+                Dessert:
+                  assigned: http://www.edamam.com/ontologies/edamam.owl#recipe_12
+                  _links:
+                    self:
+                      title: Recipe №12
+                      href: https://test-cluster.edamam.com/api/recipes/v2/12?type=public
+    Vegan-plan:
+      description: Vegan meal plan descriptor
+      value:
+        size: 2
+        plan:
+          accept:
+            all:
+            - health:
+              - VEGAN
+            - cuisine:
+              - Mediterranean
+          fit:
+            ENERC_KCAL:
+              min: 1800
+              max: 2200
+            PROCNT:
+              min: 50
+              max: 300
+          sections:
+            Breakfast: {}
+            Lunch:
+              exclude:
+              - http://www.edamam.com/ontologies/edamam.owl#recipe_x
+              - http://www.edamam.com/ontologies/edamam.owl#recipe_y
+              - http://www.edamam.com/ontologies/edamam.owl#recipe_z
+              sections:
+                Starter: {}
+                Main: {}
+                Dessert: {}
+            Dinner:
+              exclude:
+              - http://www.edamam.com/ontologies/edamam.owl#recipe_a
+              - http://www.edamam.com/ontologies/edamam.owl#recipe_b
+              - http://www.edamam.com/ontologies/edamam.owl#recipe_c
+              sections:
+                Main: {}
+                Dessert: {}
+    7-Day-Plan-with-Allergens:
+      description: 7 Day Allergens descriptor
+      value:
+        size: 7
+        plan:
+          accept:
+            all:
+            - health:
+              - SOY_FREE
+              - FISH_FREE
+              - MEDITERRANEAN
+          fit:
+            ENERC_KCAL:
+              min: 1000
+              max: 2000
+            SUGAR.added:
+              max: 20
+          exclude:
+          - http://www.edamam.com/ontologies/edamam.owl#recipe_x
+          - http://www.edamam.com/ontologies/edamam.owl#recipe_y
+          - http://www.edamam.com/ontologies/edamam.owl#recipe_z
+          sections:
+            Breakfast:
+              accept:
+                all:
+                - dish:
+                  - drinks
+                  - egg
+                  - biscuits and cookies
+                  - bread
+                  - pancake
+                  - cereals
+                - meal:
+                  - breakfast
+              fit:
+                ENERC_KCAL:
+                  min: 100
+                  max: 600
+            Lunch:
+              accept:
+                all:
+                - dish:
+                  - main course
+                  - pasta
+                  - egg
+                  - salad
+                  - soup
+                  - sandwiches
+                  - pizza
+                  - seafood
+                - meal:
+                  - lunch/dinner
+              fit:
+                ENERC_KCAL:
+                  min: 300
+                  max: 900
+            Dinner:
+              accept:
+                all:
+                - dish:
+                  - seafood
+                  - egg
+                  - salad
+                  - pizza
+                  - pasta
+                  - main course
+                - meal:
+                  - lunch/dinner
+              fit:
+                ENERC_KCAL:
+                  min: 200
+                  max: 900
+  securitySchemes:
+    basic:
+      type: http
+      scheme: basic

@@ -1,7 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   version: '2.0'
-  title: Food Database Food Nutrition Request - AI Vision (Beta) Food Nutrition Request - AI Vision (Beta) Food Request Step 1 - Parser API
+  title: Food Database Food Request Step 1 - Parser API
   description: ''
 servers:
 - url: https://api.edamam.com
@@ -13,7 +13,25 @@ paths:
       tags:
       - Food Request Step 1 - Parser
       summary: Food Search
-      description: "The parser access point handles text search for foods as well as filters for the foods like presence specific\nnutrient content or exclusion of allergens.\n\n  - Search for a phrase or keyword using NLP to get food entities from it\n  - Get basic nutrition facts and ingredients for each food\n  - Search for food by given nutrient quantity for 28 nutrients\n  - Search for foods within a given brand\n  - With the build in food-logging context it allows for requests which do not contain quantity and suggest\n       expected quantities for them.\n\n**Access Point:** <https://api.edamam.com/api/food-database/v2/parser>"
+      description: 'The parser access point handles text search for foods as well as filters for the foods like presence specific
+
+        nutrient content or exclusion of allergens.
+
+
+        - Search for a phrase or keyword using NLP to get food entities from it
+
+        - Get basic nutrition facts and ingredients for each food
+
+        - Search for food by given nutrient quantity for 28 nutrients
+
+        - Search for foods within a given brand
+
+        - With the build in food-logging context it allows for requests which do not contain quantity and suggest
+
+        expected quantities for them.
+
+
+        **Access Point:**'
       parameters:
       - name: app_id
         in: query
@@ -534,38 +552,46 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Errors'
+      operationId: getApiFoodDatabaseV2Parser
+      x-operation-id-source: derived
 components:
   schemas:
-    WeightedMeasure:
+    Measure:
       type: object
       properties:
-        qualifiers:
-          type: array
-          items:
-            $ref: '#/components/schemas/Term'
+        uri:
+          type: string
+        label:
+          type: string
         weight:
           type: number
-    Errors:
-      type: array
-      items:
-        $ref: '#/components/schemas/Error'
-    ParseResponse:
+        qualified:
+          type: array
+          items:
+            $ref: '#/components/schemas/WeightedMeasure'
+    Hint:
       type: object
       properties:
-        text:
+        pluCode:
+          $ref: '#/components/schemas/PLUCode'
+        food:
+          $ref: '#/components/schemas/Food'
+        measures:
+          type: array
+          items:
+            $ref: '#/components/schemas/Measure'
+    Term:
+      type: object
+      properties:
+        uri:
           type: string
-        count:
-          type: integer
-        parsed:
-          type: array
-          items:
-            $ref: '#/components/schemas/Parsed'
-        hints:
-          type: array
-          items:
-            $ref: '#/components/schemas/Hint'
-        _links:
-          $ref: '#/components/schemas/HATEOAS'
+        label:
+          type: string
+    HATEOAS:
+      type: object
+      properties:
+        next:
+          $ref: '#/components/schemas/Link'
     Food:
       type: object
       properties:
@@ -607,17 +633,39 @@ components:
           type: array
           items:
             type: string
-    Hint:
+    Link:
       type: object
       properties:
-        pluCode:
-          $ref: '#/components/schemas/PLUCode'
-        food:
-          $ref: '#/components/schemas/Food'
-        measures:
+        href:
+          type: string
+        title:
+          type: string
+    ParseResponse:
+      type: object
+      properties:
+        text:
+          type: string
+        count:
+          type: integer
+        parsed:
           type: array
           items:
-            $ref: '#/components/schemas/Measure'
+            $ref: '#/components/schemas/Parsed'
+        hints:
+          type: array
+          items:
+            $ref: '#/components/schemas/Hint'
+        _links:
+          $ref: '#/components/schemas/HATEOAS'
+    WeightedMeasure:
+      type: object
+      properties:
+        qualifiers:
+          type: array
+          items:
+            $ref: '#/components/schemas/Term'
+        weight:
+          type: number
     Quantity:
       type: object
       properties:
@@ -627,11 +675,10 @@ components:
           type: string
         quantity:
           type: number
-    HATEOAS:
-      type: object
-      properties:
-        next:
-          $ref: '#/components/schemas/Link'
+    Errors:
+      type: array
+      items:
+        $ref: '#/components/schemas/Error'
     PLUCode:
       type: object
       properties:
@@ -654,30 +701,3 @@ components:
           type: number
         measure:
           $ref: '#/components/schemas/Measure'
-    Measure:
-      type: object
-      properties:
-        uri:
-          type: string
-        label:
-          type: string
-        weight:
-          type: number
-        qualified:
-          type: array
-          items:
-            $ref: '#/components/schemas/WeightedMeasure'
-    Term:
-      type: object
-      properties:
-        uri:
-          type: string
-        label:
-          type: string
-    Link:
-      type: object
-      properties:
-        href:
-          type: string
-        title:
-          type: string

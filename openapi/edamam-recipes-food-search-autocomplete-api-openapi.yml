@@ -1,7 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   version: '2.0'
-  title: Food Database Food Nutrition Request - AI Vision (Beta) Food Nutrition Request - AI Vision (Beta) Food Search Autocomplete API
+  title: Food Database Food Search Autocomplete API
   description: ''
 servers:
 - url: https://api.edamam.com
@@ -20,7 +20,7 @@ paths:
         receive as the "limit" parameter.
 
 
-        **Access Point:** <https://api.edamam.com/auto-complete>'
+        **Access Point:**'
       parameters:
       - name: app_id
         in: query
@@ -63,3 +63,5 @@ paths:
                 type: array
                 items:
                   type: string
+      operationId: getAutoComplete
+      x-operation-id-source: derived

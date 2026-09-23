@@ -1,7 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   version: '2.0'
-  title: Food Database Food Nutrition Request - AI Vision (Beta) Food Nutrition Request - AI Vision (Beta) Food Request Step 2 - Nutrients API
+  title: Food Database Food Request Step 2 - Nutrients API
   description: ''
 servers:
 - url: https://api.edamam.com
@@ -20,7 +20,7 @@ paths:
         access points returns nutrition with diet and health labels for a given quantity of the food.
 
 
-        **Access Point:** <https://api.edamam.com/api/food-database/v2/nutrients>'
+        **Access Point:**'
       parameters:
       - name: app_id
         in: query
@@ -73,30 +73,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Errors'
+      operationId: postApiFoodDatabaseV2Nutrients
+      x-operation-id-source: derived
 components:
   schemas:
-    NutrientsMap:
-      type: object
-      additionalProperties:
-        type: object
-        properties:
-          label:
-            type: string
-          tag:
-            type: string
-          units:
-            type: string
-    List:
-      type: object
-      properties:
-        ingredients:
-          type: array
-          items:
-            $ref: '#/components/schemas/Ingredients'
-    Errors:
-      type: array
-      items:
-        $ref: '#/components/schemas/Error'
     Error:
       properties:
         errorCode:
@@ -107,58 +87,19 @@ components:
           type: array
           items:
             type: string
-    IngredientLine:
+    Ingredients:
       type: object
       properties:
         quantity:
           type: number
-        measure:
-          type: string
         measureURI:
           type: string
-        foodMatch:
-          type: string
-        food:
-          type: string
-        foodId:
-          type: string
-        foodURI:
-          type: string
-        specificFoodURI:
-          type: string
-        foodCategory:
-          type: string
-        brand:
-          type: string
-        weight:
-          type: number
-        retainedWeight:
-          type: number
-        nutrients:
-          $ref: '#/components/schemas/NutrientsMap'
-        status:
-          type: string
-          enum:
-          - OK
-          - MISSING_QUANTITY
-          - UNRECOGNIZED_FOOD
-        template:
-          type: string
-        servingSizes:
+        qualifiers:
           type: array
           items:
-            $ref: '#/components/schemas/Quantity'
-        servingsPerContainer:
-          type: number
-    Quantity:
-      type: object
-      properties:
-        uri:
+            type: string
+        foodId:
           type: string
-        label:
-          type: string
-        quantity:
-          type: number
     RecipeInfo:
       type: object
       properties:
@@ -292,16 +233,77 @@ components:
           type: array
           items:
             type: string
-    Ingredients:
+    IngredientLine:
       type: object
       properties:
         quantity:
           type: number
+        measure:
+          type: string
         measureURI:
           type: string
-        qualifiers:
-          type: array
-          items:
-            type: string
+        foodMatch:
+          type: string
+        food:
+          type: string
         foodId:
           type: string
+        foodURI:
+          type: string
+        specificFoodURI:
+          type: string
+        foodCategory:
+          type: string
+        brand:
+          type: string
+        weight:
+          type: number
+        retainedWeight:
+          type: number
+        nutrients:
+          $ref: '#/components/schemas/NutrientsMap'
+        status:
+          type: string
+          enum:
+          - OK
+          - MISSING_QUANTITY
+          - UNRECOGNIZED_FOOD
+        template:
+          type: string
+        servingSizes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Quantity'
+        servingsPerContainer:
+          type: number
+    Quantity:
+      type: object
+      properties:
+        uri:
+          type: string
+        label:
+          type: string
+        quantity:
+          type: number
+    Errors:
+      type: array
+      items:
+        $ref: '#/components/schemas/Error'
+    List:
+      type: object
+      properties:
+        ingredients:
+          type: array
+          items:
+            $ref: '#/components/schemas/Ingredients'
+    NutrientsMap:
+      type: object
+      additionalProperties:
+        type: object
+        properties:
+          label:
+            type: string
+          tag:
+            type: string
+          units:
+            type: string

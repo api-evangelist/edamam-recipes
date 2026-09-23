@@ -1,8 +1,8 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  version: '2.0'
-  title: Food Database Food Nutrition Request - AI Vision (Beta) Food Nutrition Request - AI Vision (Beta) Nutrition Details API
-  description: ''
+  title: Nutrition Analysis Nutrition Details API
+  description: An API for analyzing ingredients and recipes and providing nutritional and other related information.
+  version: '1.4'
 servers:
 - url: https://api.edamam.com
 tags:
@@ -148,6 +148,8 @@ paths:
           description: Recipe with insufficient quality to process correctly
       tags:
       - Nutrition Details
+      operationId: postApiNutritionDetails
+      x-operation-id-source: derived
 components:
   schemas:
     AnalyzedRecipe:
@@ -282,22 +284,15 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/TranslatedLabel'
-    Ingredient:
+    NutrientInfo:
       type: object
       properties:
-        text:
-          type: string
-        parsed:
-          $ref: '#/components/schemas/Parsed'
-    Quantity:
-      type: object
-      properties:
-        uri:
-          type: string
         label:
           type: string
         quantity:
           type: number
+        unit:
+          type: string
     TranslatedLabel:
       type: object
       properties:
@@ -318,6 +313,62 @@ components:
       - type
       - id
       - label
+    Ingredient:
+      type: object
+      properties:
+        text:
+          type: string
+        parsed:
+          $ref: '#/components/schemas/Parsed'
+    Nutrients:
+      type: object
+      additionalProperties:
+        type: array
+        items:
+          $ref: '#/components/schemas/NutrientInfo'
+    Quantity:
+      type: object
+      properties:
+        uri:
+          type: string
+        label:
+          type: string
+        quantity:
+          type: number
+    Recipe:
+      type: object
+      description: The input recipe.
+      required:
+      - title
+      - ingr
+      properties:
+        title:
+          description: The recipe title.
+          type: string
+        ingr:
+          description: The ingredients.
+          type: array
+          items:
+            type: string
+        url:
+          description: The recipe URL.
+          type: string
+        summary:
+          description: The recipe summary.
+          type: string
+        yield:
+          description: Number of servings. If this is not present the number is inferred.
+          type: string
+        time:
+          type: string
+        img:
+          description: The recipe image (URL).
+          type: string
+        prep:
+          description: Cooking instructions
+          type: array
+          items:
+            type: string
     Parsed:
       type: object
       properties:
@@ -361,52 +412,3 @@ components:
             $ref: '#/components/schemas/Quantity'
         servingsPerContainer:
           type: number
-    Nutrients:
-      type: object
-      additionalProperties:
-        type: array
-        items:
-          $ref: '#/components/schemas/NutrientInfo'
-    NutrientInfo:
-      type: object
-      properties:
-        label:
-          type: string
-        quantity:
-          type: number
-        unit:
-          type: string
-    Recipe:
-      type: object
-      description: The input recipe.
-      required:
-      - title
-      - ingr
-      properties:
-        title:
-          description: The recipe title.
-          type: string
-        ingr:
-          description: The ingredients.
-          type: array
-          items:
-            type: string
-        url:
-          description: The recipe URL.
-          type: string
-        summary:
-          description: The recipe summary.
-          type: string
-        yield:
-          description: Number of servings. If this is not present the number is inferred.
-          type: string
-        time:
-          type: string
-        img:
-          description: The recipe image (URL).
-          type: string
-        prep:
-          description: Cooking instructions
-          type: array
-          items:
-            type: string

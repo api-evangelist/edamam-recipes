@@ -1,19 +1,21 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  version: '2.0'
-  title: Food Database Food Nutrition Request - AI Vision (Beta) Food Nutrition Request - AI Vision (Beta) values API
-  description: Daily values
+  title: Meal Planning Values API
+  description: 'The *Meal Planning API* provides dietary planning based on a user-supplied daily meal structure and nutritional
+
+    constraints.'
+  version: 1.2 beta
 servers:
 - url: https://api.edamam.com
 tags:
-- name: values
+- name: Values
   description: Daily values
 paths:
   /api/daily-values/v1/values:
     post:
       tags:
-      - values
-      summary: Calculate Recommended Daily Intake and Tolerable Upper Limits for the Specified Metabolic Profile
+      - Values
+      summary: Calculate Recommended Daily Intake and Tolerable Upper Limits for the Specified…
       requestBody:
         description: Metabolic profile descriptor (possibly incomplete)
         content:
@@ -51,8 +53,79 @@ paths:
       security:
       - basic:
         - app_id
+      operationId: postApiDailyValuesV1Values
+      x-operation-id-source: derived
 components:
+  schemas:
+    Condition:
+      description: Physical or medical condition
+      type: string
+      enum:
+      - pregnant
+      - lactating
+    MetabolicProfile:
+      description: (BETA only) Collection of parameters describing a target user's metabolic profile
+      type: object
+      properties:
+        gender:
+          $ref: '#/components/schemas/Gender'
+        conditions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Condition'
+        height:
+          type: number
+        weight:
+          type: number
+        age:
+          type: number
+        activity-level:
+          $ref: '#/components/schemas/ActivityLevel'
+    ActivityLevel:
+      description: '| Activity level      | Description |
+
+        |---------------------|-------------|
+
+        | `sedentary`         | Most of the day spent sitting; example: office worker getting little or no exercise |
+
+        | `moderately-active` | Regular daily physical exercise; example: construction worker or person running one hour daily |
+
+        | `vigorously-active` | Intense daily physical exercise; example: agricultural worker (non mechanized) or person swimming two hours daily |
+
+        | `extremely-active`  | Extreme daily physical effort; example: competitive cyclist |
+
+        '
+      type: string
+      enum:
+      - sedentary
+      - moderately-active
+      - vigorously-active
+      - extremely-active
+    Gender:
+      description: User gender
+      type: string
+      enum:
+      - male
+      - female
+    Values:
+      description: Recommended daily allowance and/or intake upper limit, in nutrient-specific units
+      type: object
+      properties:
+        recommended:
+          description: Recommended daily allowance, if defined
+          type: number
+        limit:
+          description: Tolerable upper limit on nutrient intake, if defined
+          type: number
   examples:
+    profile_Male_complete:
+      description: Male profile, fully specified
+      value:
+        gender: male
+        height: 180
+        weight: 80
+        age: 26
+        activity-level: moderately-active
     values_Male_generic:
       description: Daily values for a male of unspecified age and build
       value:
@@ -151,6 +224,10 @@ components:
             limit: 11000
           NI:
             limit: 600
+    profile_Male_generic:
+      description: Male of unspecified age and build
+      value:
+        gender: male
     profile_Female_pregnant:
       description: Pregnant female, 25, of unspecified build
       value:
@@ -158,28 +235,6 @@ components:
         conditions:
         - pregnant
         age: 25
-    profile_Male_generic:
-      description: Male of unspecified age and build
-      value:
-        gender: male
-    profile_Male_complete:
-      description: Male profile, fully specified
-      value:
-        gender: male
-        height: 180
-        weight: 80
-        age: 26
-        activity-level: moderately-active
-    profile_Female_complete:
-      description: Female profile, fully specified
-      value:
-        gender: female
-        conditions:
-        - lactating
-        height: 175
-        weight: 65
-        age: 20
-        activity-level: moderately-active
     values_Female_pregnant:
       description: Daily values for a pregnant female, 25, of unspecified build
       value:
@@ -278,64 +333,17 @@ components:
             limit: 20000
           NI:
             limit: 1000
-  schemas:
-    Gender:
-      description: User gender
-      type: string
-      enum:
-      - male
-      - female
-    Condition:
-      description: Physical or medical condition
-      type: string
-      enum:
-      - pregnant
-      - lactating
-    Values:
-      description: Recommended daily allowance and/or intake upper limit, in nutrient-specific units
-      type: object
-      properties:
-        recommended:
-          description: Recommended daily allowance, if defined
-          type: number
-        limit:
-          description: Tolerable upper limit on nutrient intake, if defined
-          type: number
-    MetabolicProfile:
-      description: (BETA only) Collection of parameters describing a target user's metabolic profile
-      type: object
-      properties:
-        gender:
-          $ref: '#/components/schemas/Gender'
+    profile_Female_complete:
+      description: Female profile, fully specified
+      value:
+        gender: female
         conditions:
-          type: array
-          items:
-            $ref: '#/components/schemas/Condition'
-        height:
-          type: number
-        weight:
-          type: number
-        age:
-          type: number
-        activity-level:
-          $ref: '#/components/schemas/ActivityLevel'
-    ActivityLevel:
-      description: '| Activity level      | Description |
-
-        |---------------------|-------------|
-
-        | `sedentary`         | Most of the day spent sitting; example: office worker getting little or no exercise |
-
-        | `moderately-active` | Regular daily physical exercise; example: construction worker or person running one hour daily |
-
-        | `vigorously-active` | Intense daily physical exercise; example: agricultural worker (non mechanized) or person swimming two hours daily |
-
-        | `extremely-active`  | Extreme daily physical effort; example: competitive cyclist |
-
-        '
-      type: string
-      enum:
-      - sedentary
-      - moderately-active
-      - vigorously-active
-      - extremely-active
+        - lactating
+        height: 175
+        weight: 65
+        age: 20
+        activity-level: moderately-active
+  securitySchemes:
+    basic:
+      type: http
+      scheme: basic

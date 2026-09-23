@@ -1,32 +1,48 @@
 {
   "provider": "edamam-recipes",
   "sources": [
-    "edamam-recipes-food-nutrition-request-ai-vision-beta-api-openapi.yml",
-    "edamam-recipes-food-request-step-1-parser-api-openapi.yml",
-    "edamam-recipes-food-request-step-2-nutrients-api-openapi.yml",
-    "edamam-recipes-food-search-autocomplete-api-openapi.yml",
-    "edamam-recipes-nutrition-data-api-openapi.yml",
-    "edamam-recipes-nutrition-details-api-openapi.yml",
-    "edamam-recipes-planner-api-openapi.yml",
-    "edamam-recipes-recipe-search-api-openapi.yml",
-    "edamam-recipes-shopping-list-api-openapi.yml",
-    "edamam-recipes-values-api-openapi.yml"
+    "_original/edamam-food-database-v2-openapi.yml",
+    "_original/edamam-meal-planner-v1-openapi.yml",
+    "_original/edamam-nutrition-analysis-v1-openapi.yml",
+    "_original/edamam-recipe-search-v2-openapi.yml"
   ],
   "outputs": [
     "edamam-recipes-food-nutrition-request-ai-vision-beta-api-openapi.yml",
     "edamam-recipes-food-request-step-1-parser-api-openapi.yml",
     "edamam-recipes-food-request-step-2-nutrients-api-openapi.yml",
     "edamam-recipes-food-search-autocomplete-api-openapi.yml",
+    "edamam-recipes-planner-api-openapi.yml",
+    "edamam-recipes-values-api-openapi.yml",
     "edamam-recipes-nutrition-data-api-openapi.yml",
     "edamam-recipes-nutrition-details-api-openapi.yml",
-    "edamam-recipes-planner-api-openapi.yml",
     "edamam-recipes-recipe-search-api-openapi.yml",
-    "edamam-recipes-shopping-list-api-openapi.yml",
-    "edamam-recipes-values-api-openapi.yml"
+    "edamam-recipes-shopping-list-api-openapi.yml"
   ],
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (4 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "edamam-food-database-v2-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "edamam-meal-planner-v1-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "edamam-nutrition-analysis-v1-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "edamam-nutrition-analysis-v1-openapi.yml: tagged paths POST /api/nutrition-details -> Nutrition Details",
+    "edamam-nutrition-analysis-v1-openapi.yml: tagged paths GET /api/nutrition-data -> Nutrition Data",
+    "edamam-nutrition-analysis-v1-openapi.yml: declared missing tag: Nutrition Data",
+    "edamam-nutrition-analysis-v1-openapi.yml: declared missing tag: Nutrition Details",
+    "edamam-recipe-search-v2-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "edamam-recipes-food-nutrition-request-ai-vision-beta-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "edamam-recipes-food-request-step-1-parser-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "edamam-recipes-food-request-step-2-nutrients-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "edamam-recipes-food-search-autocomplete-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "edamam-recipes-nutrition-data-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "edamam-recipes-nutrition-details-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "edamam-recipes-planner-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "edamam-recipes-recipe-search-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "edamam-recipes-shopping-list-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "edamam-recipes-values-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

@@ -1,8 +1,8 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  version: '2.0'
-  title: Food Database Food Nutrition Request - AI Vision (Beta) Food Nutrition Request - AI Vision (Beta) Nutrition Data API
-  description: ''
+  title: Nutrition Analysis Nutrition Data API
+  description: An API for analyzing ingredients and recipes and providing nutritional and other related information.
+  version: '1.4'
 servers:
 - url: https://api.edamam.com
 tags:
@@ -15,7 +15,7 @@ paths:
 
         unstructured food text (usually an ingredient line and returns the following structured data for the text:
 
-        quantity, measure and food,) and if available: diet, health and allergen labels for the text.  With the built
+        quantity, measure and food,) and if available: diet, health and allergen labels for the text. With the built
 
         in food logging feature, this allows for change of context. For example, “rice” will normally be matched to raw
 
@@ -83,6 +83,8 @@ paths:
           description: Recipe with insufficient quality to process correctly
       tags:
       - Nutrition Data
+      operationId: getApiNutritionData
+      x-operation-id-source: derived
 components:
   schemas:
     AnalyzedRecipe:
@@ -217,22 +219,15 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/TranslatedLabel'
-    Ingredient:
+    NutrientInfo:
       type: object
       properties:
-        text:
-          type: string
-        parsed:
-          $ref: '#/components/schemas/Parsed'
-    Quantity:
-      type: object
-      properties:
-        uri:
-          type: string
         label:
           type: string
         quantity:
           type: number
+        unit:
+          type: string
     TranslatedLabel:
       type: object
       properties:
@@ -253,6 +248,28 @@ components:
       - type
       - id
       - label
+    Ingredient:
+      type: object
+      properties:
+        text:
+          type: string
+        parsed:
+          $ref: '#/components/schemas/Parsed'
+    Nutrients:
+      type: object
+      additionalProperties:
+        type: array
+        items:
+          $ref: '#/components/schemas/NutrientInfo'
+    Quantity:
+      type: object
+      properties:
+        uri:
+          type: string
+        label:
+          type: string
+        quantity:
+          type: number
     Parsed:
       type: object
       properties:
@@ -296,18 +313,3 @@ components:
             $ref: '#/components/schemas/Quantity'
         servingsPerContainer:
           type: number
-    Nutrients:
-      type: object
-      additionalProperties:
-        type: array
-        items:
-          $ref: '#/components/schemas/NutrientInfo'
-    NutrientInfo:
-      type: object
-      properties:
-        label:
-          type: string
-        quantity:
-          type: number
-        unit:
-          type: string
