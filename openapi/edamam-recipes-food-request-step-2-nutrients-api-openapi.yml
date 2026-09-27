@@ -77,29 +77,60 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    Error:
-      properties:
-        errorCode:
-          type: string
-        message:
-          type: string
-        params:
-          type: array
-          items:
+    NutrientsMap:
+      type: object
+      additionalProperties:
+        type: object
+        properties:
+          label:
             type: string
-    Ingredients:
+          tag:
+            type: string
+          units:
+            type: string
+    IngredientLine:
       type: object
       properties:
         quantity:
           type: number
+        measure:
+          type: string
         measureURI:
           type: string
-        qualifiers:
-          type: array
-          items:
-            type: string
+        foodMatch:
+          type: string
+        food:
+          type: string
         foodId:
           type: string
+        foodURI:
+          type: string
+        specificFoodURI:
+          type: string
+        foodCategory:
+          type: string
+        brand:
+          type: string
+        weight:
+          type: number
+        retainedWeight:
+          type: number
+        nutrients:
+          $ref: '#/components/schemas/NutrientsMap'
+        status:
+          type: string
+          enum:
+          - OK
+          - MISSING_QUANTITY
+          - UNRECOGNIZED_FOOD
+        template:
+          type: string
+        servingSizes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Quantity'
+        servingsPerContainer:
+          type: number
     RecipeInfo:
       type: object
       properties:
@@ -233,49 +264,6 @@ components:
           type: array
           items:
             type: string
-    IngredientLine:
-      type: object
-      properties:
-        quantity:
-          type: number
-        measure:
-          type: string
-        measureURI:
-          type: string
-        foodMatch:
-          type: string
-        food:
-          type: string
-        foodId:
-          type: string
-        foodURI:
-          type: string
-        specificFoodURI:
-          type: string
-        foodCategory:
-          type: string
-        brand:
-          type: string
-        weight:
-          type: number
-        retainedWeight:
-          type: number
-        nutrients:
-          $ref: '#/components/schemas/NutrientsMap'
-        status:
-          type: string
-          enum:
-          - OK
-          - MISSING_QUANTITY
-          - UNRECOGNIZED_FOOD
-        template:
-          type: string
-        servingSizes:
-          type: array
-          items:
-            $ref: '#/components/schemas/Quantity'
-        servingsPerContainer:
-          type: number
     Quantity:
       type: object
       properties:
@@ -296,14 +284,26 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Ingredients'
-    NutrientsMap:
+    Ingredients:
       type: object
-      additionalProperties:
-        type: object
-        properties:
-          label:
+      properties:
+        quantity:
+          type: number
+        measureURI:
+          type: string
+        qualifiers:
+          type: array
+          items:
             type: string
-          tag:
-            type: string
-          units:
+        foodId:
+          type: string
+    Error:
+      properties:
+        errorCode:
+          type: string
+        message:
+          type: string
+        params:
+          type: array
+          items:
             type: string

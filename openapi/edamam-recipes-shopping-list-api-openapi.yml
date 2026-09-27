@@ -80,83 +80,7 @@ paths:
       operationId: postApiShoppingListV2
       x-operation-id-source: derived
 components:
-  schemas:
-    ShoppingEntry:
-      type: object
-      properties:
-        foodId:
-          description: Food ID
-          type: string
-        food:
-          description: Food label
-          type: string
-        quantities:
-          description: 'Total quantity required of the specified food item for fulfillment of the requested quantities for the complete recipe preparation plan.  One sub-total is given per each specific shopping measure type.
-
-            '
-          type: array
-          items:
-            type: object
-            required:
-            - quantity
-            - measure
-            properties:
-              quantity:
-                description: Required quantity of the specified units of measure
-                type: number
-              measure:
-                description: Unit of measure (URI)
-                type: string
-              qualifiers:
-                description: Qualifiers applicable to the shopping item, e.g. "large", "small", etc.
-                type: array
-                items:
-                  type: string
-    LinkEntry:
-      type: object
-      required:
-      - href
-      properties:
-        title:
-          description: Human-readable link title
-          type: string
-        href:
-          description: Target URL
-          type: string
-    RecipeEntry:
-      type: object
-      required:
-      - quantity
-      - item
-      properties:
-        quantity:
-          description: 'Total quantity of the specified recipe''s product that will be prepared, in given units of measure (see `measure`)
-
-            '
-          type: number
-        measure:
-          description: 'Unit of measure (URI) for the total quantity; if omitted, the unit is the total quantity of a single preparation of the given recipe
-
-            '
-          type: string
-          enum:
-          - http://www.edamam.com/ontologies/edamam.owl#Measure_serving
-        item:
-          description: Item (recipe of food) URI
-          type: string
   examples:
-    Recipe_preparation_plan_-_by_servings:
-      value:
-        entries:
-        - quantity: 1
-          measure: http://www.edamam.com/ontologies/edamam.owl#Measure_serving
-          item: http://www.edamam.com/ontologies/edamam.owl#recipe_1
-        - quantity: 3
-          measure: http://www.edamam.com/ontologies/edamam.owl#Measure_serving
-          item: http://www.edamam.com/ontologies/edamam.owl#recipe_2
-        - quantity: 2
-          measure: http://www.edamam.com/ontologies/edamam.owl#Measure_serving
-          item: http://www.edamam.com/ontologies/edamam.owl#recipe_3
     Shopping_list:
       value:
         entries:
@@ -198,6 +122,82 @@ components:
           item: http://www.edamam.com/ontologies/edamam.owl#recipe_2
         - quantity: 2
           item: http://www.edamam.com/ontologies/edamam.owl#recipe_3
+    Recipe_preparation_plan_-_by_servings:
+      value:
+        entries:
+        - quantity: 1
+          measure: http://www.edamam.com/ontologies/edamam.owl#Measure_serving
+          item: http://www.edamam.com/ontologies/edamam.owl#recipe_1
+        - quantity: 3
+          measure: http://www.edamam.com/ontologies/edamam.owl#Measure_serving
+          item: http://www.edamam.com/ontologies/edamam.owl#recipe_2
+        - quantity: 2
+          measure: http://www.edamam.com/ontologies/edamam.owl#Measure_serving
+          item: http://www.edamam.com/ontologies/edamam.owl#recipe_3
+  schemas:
+    LinkEntry:
+      type: object
+      required:
+      - href
+      properties:
+        title:
+          description: Human-readable link title
+          type: string
+        href:
+          description: Target URL
+          type: string
+    ShoppingEntry:
+      type: object
+      properties:
+        foodId:
+          description: Food ID
+          type: string
+        food:
+          description: Food label
+          type: string
+        quantities:
+          description: 'Total quantity required of the specified food item for fulfillment of the requested quantities for the complete recipe preparation plan.  One sub-total is given per each specific shopping measure type.
+
+            '
+          type: array
+          items:
+            type: object
+            required:
+            - quantity
+            - measure
+            properties:
+              quantity:
+                description: Required quantity of the specified units of measure
+                type: number
+              measure:
+                description: Unit of measure (URI)
+                type: string
+              qualifiers:
+                description: Qualifiers applicable to the shopping item, e.g. "large", "small", etc.
+                type: array
+                items:
+                  type: string
+    RecipeEntry:
+      type: object
+      required:
+      - quantity
+      - item
+      properties:
+        quantity:
+          description: 'Total quantity of the specified recipe''s product that will be prepared, in given units of measure (see `measure`)
+
+            '
+          type: number
+        measure:
+          description: 'Unit of measure (URI) for the total quantity; if omitted, the unit is the total quantity of a single preparation of the given recipe
+
+            '
+          type: string
+          enum:
+          - http://www.edamam.com/ontologies/edamam.owl#Measure_serving
+        item:
+          description: Item (recipe of food) URI
+          type: string
   securitySchemes:
     basic:
       type: http

@@ -556,6 +556,51 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    WeightedMeasure:
+      type: object
+      properties:
+        qualifiers:
+          type: array
+          items:
+            $ref: '#/components/schemas/Term'
+        weight:
+          type: number
+    Hint:
+      type: object
+      properties:
+        pluCode:
+          $ref: '#/components/schemas/PLUCode'
+        food:
+          $ref: '#/components/schemas/Food'
+        measures:
+          type: array
+          items:
+            $ref: '#/components/schemas/Measure'
+    Parsed:
+      type: object
+      properties:
+        food:
+          $ref: '#/components/schemas/Food'
+        quantity:
+          type: number
+        measure:
+          $ref: '#/components/schemas/Measure'
+    Quantity:
+      type: object
+      properties:
+        uri:
+          type: string
+        label:
+          type: string
+        quantity:
+          type: number
+    Link:
+      type: object
+      properties:
+        href:
+          type: string
+        title:
+          type: string
     Measure:
       type: object
       properties:
@@ -569,24 +614,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/WeightedMeasure'
-    Hint:
-      type: object
-      properties:
-        pluCode:
-          $ref: '#/components/schemas/PLUCode'
-        food:
-          $ref: '#/components/schemas/Food'
-        measures:
-          type: array
-          items:
-            $ref: '#/components/schemas/Measure'
-    Term:
-      type: object
-      properties:
-        uri:
-          type: string
-        label:
-          type: string
     HATEOAS:
       type: object
       properties:
@@ -623,23 +650,10 @@ components:
             $ref: '#/components/schemas/Quantity'
         servingsPerContainer:
           type: number
-    Error:
-      properties:
-        errorCode:
-          type: string
-        message:
-          type: string
-        params:
-          type: array
-          items:
-            type: string
-    Link:
-      type: object
-      properties:
-        href:
-          type: string
-        title:
-          type: string
+    Errors:
+      type: array
+      items:
+        $ref: '#/components/schemas/Error'
     ParseResponse:
       type: object
       properties:
@@ -657,28 +671,13 @@ components:
             $ref: '#/components/schemas/Hint'
         _links:
           $ref: '#/components/schemas/HATEOAS'
-    WeightedMeasure:
-      type: object
-      properties:
-        qualifiers:
-          type: array
-          items:
-            $ref: '#/components/schemas/Term'
-        weight:
-          type: number
-    Quantity:
+    Term:
       type: object
       properties:
         uri:
           type: string
         label:
           type: string
-        quantity:
-          type: number
-    Errors:
-      type: array
-      items:
-        $ref: '#/components/schemas/Error'
     PLUCode:
       type: object
       properties:
@@ -692,12 +691,13 @@ components:
           type: string
         isRetailerAssigned:
           type: boolean
-    Parsed:
-      type: object
+    Error:
       properties:
-        food:
-          $ref: '#/components/schemas/Food'
-        quantity:
-          type: number
-        measure:
-          $ref: '#/components/schemas/Measure'
+        errorCode:
+          type: string
+        message:
+          type: string
+        params:
+          type: array
+          items:
+            type: string

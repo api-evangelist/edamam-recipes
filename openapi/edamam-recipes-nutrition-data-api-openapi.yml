@@ -87,6 +87,100 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
+    Nutrients:
+      type: object
+      additionalProperties:
+        type: array
+        items:
+          $ref: '#/components/schemas/NutrientInfo'
+    NutrientInfo:
+      type: object
+      properties:
+        label:
+          type: string
+        quantity:
+          type: number
+        unit:
+          type: string
+    Parsed:
+      type: object
+      properties:
+        quantity:
+          type: number
+        measure:
+          type: string
+        measureURI:
+          type: string
+        foodMatch:
+          type: string
+        food:
+          type: string
+        foodId:
+          type: string
+        foodURI:
+          type: string
+        specificFoodURI:
+          type: string
+        foodCategory:
+          type: string
+        brand:
+          type: string
+        foodContentsLabel:
+          type: string
+        weight:
+          type: number
+        retainedWeight:
+          type: number
+        nutrients:
+          $ref: '#/components/schemas/Nutrients'
+        status:
+          type: string
+          enum:
+          - OK
+          - MISSING_QUANTITY
+          - UNRECOGNIZED_FOOD
+        servingSizes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Quantity'
+        servingsPerContainer:
+          type: number
+    TranslatedLabel:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - health
+          - diet
+          - caution
+          - cuisineType
+          - mealType
+          - dishType
+        id:
+          type: string
+        label:
+          type: string
+      required:
+      - type
+      - id
+      - label
+    Quantity:
+      type: object
+      properties:
+        uri:
+          type: string
+        label:
+          type: string
+        quantity:
+          type: number
+    Ingredient:
+      type: object
+      properties:
+        text:
+          type: string
+        parsed:
+          $ref: '#/components/schemas/Parsed'
     AnalyzedRecipe:
       type: object
       description: The extracted information. Not all information is available for each recipe or for every plan.
@@ -219,97 +313,3 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/TranslatedLabel'
-    NutrientInfo:
-      type: object
-      properties:
-        label:
-          type: string
-        quantity:
-          type: number
-        unit:
-          type: string
-    TranslatedLabel:
-      type: object
-      properties:
-        type:
-          type: string
-          enum:
-          - health
-          - diet
-          - caution
-          - cuisineType
-          - mealType
-          - dishType
-        id:
-          type: string
-        label:
-          type: string
-      required:
-      - type
-      - id
-      - label
-    Ingredient:
-      type: object
-      properties:
-        text:
-          type: string
-        parsed:
-          $ref: '#/components/schemas/Parsed'
-    Nutrients:
-      type: object
-      additionalProperties:
-        type: array
-        items:
-          $ref: '#/components/schemas/NutrientInfo'
-    Quantity:
-      type: object
-      properties:
-        uri:
-          type: string
-        label:
-          type: string
-        quantity:
-          type: number
-    Parsed:
-      type: object
-      properties:
-        quantity:
-          type: number
-        measure:
-          type: string
-        measureURI:
-          type: string
-        foodMatch:
-          type: string
-        food:
-          type: string
-        foodId:
-          type: string
-        foodURI:
-          type: string
-        specificFoodURI:
-          type: string
-        foodCategory:
-          type: string
-        brand:
-          type: string
-        foodContentsLabel:
-          type: string
-        weight:
-          type: number
-        retainedWeight:
-          type: number
-        nutrients:
-          $ref: '#/components/schemas/Nutrients'
-        status:
-          type: string
-          enum:
-          - OK
-          - MISSING_QUANTITY
-          - UNRECOGNIZED_FOOD
-        servingSizes:
-          type: array
-          items:
-            $ref: '#/components/schemas/Quantity'
-        servingsPerContainer:
-          type: number

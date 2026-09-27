@@ -1025,12 +1025,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    Hit:
-      properties:
-        recipe:
-          $ref: '#/components/schemas/Recipe'
-        _links:
-          $ref: '#/components/schemas/Links'
     NutrientInfo:
       properties:
         label:
@@ -1039,89 +1033,6 @@ components:
           type: number
         unit:
           type: string
-    DigestEntry:
-      properties:
-        label:
-          type: string
-        tag:
-          type: string
-        schemaOrgTag:
-          type: string
-        total:
-          type: number
-        hasRDI:
-          type: boolean
-        daily:
-          type: number
-        unit:
-          type: string
-        sub:
-          $ref: '#/components/schemas/Digest'
-    Ingredient:
-      properties:
-        text:
-          type: string
-        quantity:
-          type: number
-        measure:
-          type: string
-        food:
-          type: string
-        weight:
-          type: number
-        foodId:
-          type: string
-    Links:
-      properties:
-        self:
-          $ref: '#/components/schemas/Link'
-        next:
-          $ref: '#/components/schemas/Link'
-    ImageInfo:
-      properties:
-        url:
-          type: string
-        width:
-          type: integer
-        height:
-          type: integer
-    Error:
-      properties:
-        errorCode:
-          type: string
-        message:
-          type: string
-        params:
-          type: array
-          items:
-            type: string
-    Link:
-      properties:
-        href:
-          type: string
-        title:
-          type: string
-    Response:
-      properties:
-        from:
-          type: integer
-        to:
-          type: integer
-        count:
-          type: integer
-        _links:
-          $ref: '#/components/schemas/Links'
-        hits:
-          type: array
-          items:
-            $ref: '#/components/schemas/Hit'
-    Errors:
-      type: array
-      items:
-        $ref: '#/components/schemas/Error'
-    NutrientsInfo:
-      additionalProperties:
-        $ref: '#/components/schemas/NutrientInfo'
     Recipe:
       properties:
         uri:
@@ -1221,6 +1132,95 @@ components:
       type: array
       items:
         $ref: '#/components/schemas/DigestEntry'
+    NutrientsInfo:
+      additionalProperties:
+        $ref: '#/components/schemas/NutrientInfo'
+    Errors:
+      type: array
+      items:
+        $ref: '#/components/schemas/Error'
+    Ingredient:
+      properties:
+        text:
+          type: string
+        quantity:
+          type: number
+        measure:
+          type: string
+        food:
+          type: string
+        weight:
+          type: number
+        foodId:
+          type: string
+    Link:
+      properties:
+        href:
+          type: string
+        title:
+          type: string
+    Response:
+      properties:
+        from:
+          type: integer
+        to:
+          type: integer
+        count:
+          type: integer
+        _links:
+          $ref: '#/components/schemas/Links'
+        hits:
+          type: array
+          items:
+            $ref: '#/components/schemas/Hit'
+    Hit:
+      properties:
+        recipe:
+          $ref: '#/components/schemas/Recipe'
+        _links:
+          $ref: '#/components/schemas/Links'
+    DigestEntry:
+      properties:
+        label:
+          type: string
+        tag:
+          type: string
+        schemaOrgTag:
+          type: string
+        total:
+          type: number
+        hasRDI:
+          type: boolean
+        daily:
+          type: number
+        unit:
+          type: string
+        sub:
+          $ref: '#/components/schemas/Digest'
+    Links:
+      properties:
+        self:
+          $ref: '#/components/schemas/Link'
+        next:
+          $ref: '#/components/schemas/Link'
+    ImageInfo:
+      properties:
+        url:
+          type: string
+        width:
+          type: integer
+        height:
+          type: integer
+    Error:
+      properties:
+        errorCode:
+          type: string
+        message:
+          type: string
+        params:
+          type: array
+          items:
+            type: string
   securitySchemes:
     basic:
       type: http

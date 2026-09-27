@@ -42,6 +42,16 @@ x-category: Food & Drink
 x-tier: 3
 x-tier-reason: bulk-registered-from-public-apis
 tags:
+  - Food and Beverage
+  - Recipes
+  - Nutrition
+  - Diet
+  - Allergens
+  - Meal Planning
+  - Sustainability
+  - Carbon Footprint
+  - Public APIs
+tags_raw:
   - Food And Drink
   - Recipes
   - Nutrition
@@ -431,7 +441,7 @@ apis:
   - type: Pricing
     url: https://developer.edamam.com/meal-planner-api
 - aid: edamam-recipes:edamam-recipes-planner-api
-  name: Edamam planner API
+  name: Edamam Planner API
   description: Meal planning
   humanURL: https://developer.edamam.com/edamam-docs-recipe-api
   baseURL: https://api.edamam.com/api/recipes/v2
@@ -640,7 +650,7 @@ apis:
   - type: Pricing
     url: https://developer.edamam.com/meal-planner-api
 - aid: edamam-recipes:edamam-recipes-values-api
-  name: Edamam values API
+  name: Edamam Values API
   description: Daily values
   humanURL: https://developer.edamam.com/edamam-docs-recipe-api
   baseURL: https://api.edamam.com/api/recipes/v2
