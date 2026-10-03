@@ -75,13 +75,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    VisionResponse:
-      type: object
-      properties:
-        parsed:
-          $ref: '#/components/schemas/Parsed'
-        recipe:
-          $ref: '#/components/schemas/RecipeInfo'
     ImageRequest:
       type: object
       required:
@@ -95,26 +88,6 @@ components:
           type: string
           description: An image of food, provided either a publicly accessible URL).
           example: https://example.com/image_xyz.jpg
-    NutrientsMap:
-      type: object
-      additionalProperties:
-        type: object
-        properties:
-          label:
-            type: string
-          tag:
-            type: string
-          units:
-            type: string
-    Parsed:
-      type: object
-      properties:
-        food:
-          $ref: '#/components/schemas/Food'
-        quantity:
-          type: number
-        measure:
-          $ref: '#/components/schemas/Measure'
     IngredientLine:
       type: object
       properties:
@@ -157,6 +130,15 @@ components:
           items:
             $ref: '#/components/schemas/Quantity'
         servingsPerContainer:
+          type: number
+    Quantity:
+      type: object
+      properties:
+        uri:
+          type: string
+        label:
+          type: string
+        quantity:
           type: number
     RecipeInfo:
       type: object
@@ -291,32 +273,42 @@ components:
           type: array
           items:
             type: string
-    Quantity:
+    Term:
       type: object
       properties:
         uri:
           type: string
         label:
           type: string
+    Parsed:
+      type: object
+      properties:
+        food:
+          $ref: '#/components/schemas/Food'
         quantity:
           type: number
-    Errors:
-      type: array
-      items:
-        $ref: '#/components/schemas/Error'
-    Measure:
+        measure:
+          $ref: '#/components/schemas/Measure'
+    WeightedMeasure:
       type: object
       properties:
-        uri:
-          type: string
-        label:
-          type: string
-        weight:
-          type: number
-        qualified:
+        qualifiers:
           type: array
           items:
-            $ref: '#/components/schemas/WeightedMeasure'
+            $ref: '#/components/schemas/Term'
+        weight:
+          type: number
+    NutrientsMap:
+      type: object
+      additionalProperties:
+        type: object
+        properties:
+          label:
+            type: string
+          tag:
+            type: string
+          units:
+            type: string
     Food:
       type: object
       properties:
@@ -348,22 +340,6 @@ components:
             $ref: '#/components/schemas/Quantity'
         servingsPerContainer:
           type: number
-    Term:
-      type: object
-      properties:
-        uri:
-          type: string
-        label:
-          type: string
-    WeightedMeasure:
-      type: object
-      properties:
-        qualifiers:
-          type: array
-          items:
-            $ref: '#/components/schemas/Term'
-        weight:
-          type: number
     Error:
       properties:
         errorCode:
@@ -374,3 +350,27 @@ components:
           type: array
           items:
             type: string
+    Errors:
+      type: array
+      items:
+        $ref: '#/components/schemas/Error'
+    VisionResponse:
+      type: object
+      properties:
+        parsed:
+          $ref: '#/components/schemas/Parsed'
+        recipe:
+          $ref: '#/components/schemas/RecipeInfo'
+    Measure:
+      type: object
+      properties:
+        uri:
+          type: string
+        label:
+          type: string
+        weight:
+          type: number
+        qualified:
+          type: array
+          items:
+            $ref: '#/components/schemas/WeightedMeasure'

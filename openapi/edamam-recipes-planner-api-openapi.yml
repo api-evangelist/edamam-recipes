@@ -173,17 +173,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    LinkEntry:
-      type: object
-      required:
-      - href
-      properties:
-        title:
-          description: Human-readable link title
-          type: string
-        href:
-          description: Target URL
-          type: string
     CuisineType:
       type: string
       enum:
@@ -208,108 +197,56 @@ components:
       - south american
       - south east asian
       - world
-    HealthLabel:
-      type: string
-      enum:
-      - fat-free
-      - low-fat-abs
-      - sugar-conscious
-      - low-sugar
-      - low-potassium
-      - kidney-friendly
-      - keto-friendly
-      - plant-based
-      - vegan
-      - vegetarian
-      - pescatarian
-      - paleo
-      - specific-carbs
-      - Mediterranean
-      - DASH
-      - dairy-free
-      - gluten-free
-      - wheat-free
-      - egg-free
-      - milk-free
-      - peanut-free
-      - tree-nut-free
-      - soy-free
-      - fish-free
-      - shellfish-free
-      - pork-free
-      - red-meat-free
-      - crustacean-free
-      - celery-free
-      - mustard-free
-      - sesame-free
-      - lupine-free
-      - mollusk-free
-      - alcohol-free
-      - no-oil-added
-      - no-sugar-added
-      - sulfite-free
-      - fodmap-free
-      - kosher
-      - alcohol-cocktail
-      - immuno-supportive
-    Selection:
+    Section:
+      description: 'Plan section; may contain sub-sections.
+
+
+        Leaf sections (i.e. those that do not contain sub-sections) represent individual dishes in the daily plan.
+
+        Upon generation of the plan, complete or partial, each leaf section will be assigned a single recipe that will
+
+        be unique throughout the complete period of the generated plan.'
       type: object
       properties:
-        assigned:
-          description: URI of the recipe assigned for this section (leaf sections only.)
-          type: string
-        _links:
-          description: Links to resources related to the assigned recipe
-          type: object
-          properties:
-            self:
-              allOf:
-              - description: Link to the assigned recipe's details in the Recipe Search API
-              - $ref: '#/components/schemas/LinkEntry'
-        sections:
-          description: Selection tree for sub-sections, according to the structure specified by the plan descriptor.
+        accept:
+          allOf:
+          - description: Acceptance criteria for all entries in the sub-tree
+          - $ref: '#/components/schemas/Predicate'
+        fit:
+          description: 'Nutritional budget (constraints for total nutrient content values in the sub-tree.) Keys must be valid **NutrientTag**-s
+
+            '
           type: object
           additionalProperties:
-            $ref: '#/components/schemas/Selection'
-    DishType:
-      type: string
-      enum:
-      - alcohol cocktail
-      - biscuits and cookies
-      - bread
-      - casserole
-      - cereals
-      - condiments and sauces
-      - desserts
-      - drinks
-      - egg
-      - ice cream and custard
-      - main course
-      - pancake
-      - pasta
-      - pastry
-      - pies and tarts
-      - pizza
-      - preps
-      - preserve
-      - salad
-      - sandwiches
-      - seafood
-      - side dish
-      - soup
-      - special occasions
-      - starter
-      - sweets
-    MealType:
-      type: string
-      enum:
-      - breakfast
-      - brunch
-      - lunch/dinner
-      - lunch
-      - dinner
-      - snack
-      - teatime
+            $ref: '#/components/schemas/Range'
+        exclude:
+          description: Recipes to exclude from this section's sub-tree, listed by URI
+          type: array
+          items:
+            type: string
+        sections:
+          description: 'Sub-sections.
+
+
+            This section''s acceptance criteria and nutritional budget will apply to its complete sub-tree of
+
+            sub-sections, potentially in conjunction will any other criteria that may apply, specifically from
+
+            containing parent sections.'
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/Section'
+    LinkEntry:
+      type: object
+      required:
+      - href
+      properties:
+        title:
+          description: Human-readable link title
+          type: string
+        href:
+          description: Target URL
+          type: string
     Predicate:
       oneOf:
       - description: Select entries matching all of a given list of predicates
@@ -444,45 +381,6 @@ components:
         properties:
           total-time:
             $ref: '#/components/schemas/Range'
-    Section:
-      description: 'Plan section; may contain sub-sections.
-
-
-        Leaf sections (i.e. those that do not contain sub-sections) represent individual dishes in the daily plan.
-
-        Upon generation of the plan, complete or partial, each leaf section will be assigned a single recipe that will
-
-        be unique throughout the complete period of the generated plan.'
-      type: object
-      properties:
-        accept:
-          allOf:
-          - description: Acceptance criteria for all entries in the sub-tree
-          - $ref: '#/components/schemas/Predicate'
-        fit:
-          description: 'Nutritional budget (constraints for total nutrient content values in the sub-tree.) Keys must be valid **NutrientTag**-s
-
-            '
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/Range'
-        exclude:
-          description: Recipes to exclude from this section's sub-tree, listed by URI
-          type: array
-          items:
-            type: string
-        sections:
-          description: 'Sub-sections.
-
-
-            This section''s acceptance criteria and nutritional budget will apply to its complete sub-tree of
-
-            sub-sections, potentially in conjunction will any other criteria that may apply, specifically from
-
-            containing parent sections.'
-          type: object
-          additionalProperties:
-            $ref: '#/components/schemas/Section'
     Range:
       type: object
       properties:
@@ -490,6 +388,35 @@ components:
           type: number
         max:
           type: number
+    DishType:
+      type: string
+      enum:
+      - alcohol cocktail
+      - biscuits and cookies
+      - bread
+      - casserole
+      - cereals
+      - condiments and sauces
+      - desserts
+      - drinks
+      - egg
+      - ice cream and custard
+      - main course
+      - pancake
+      - pasta
+      - pastry
+      - pies and tarts
+      - pizza
+      - preps
+      - preserve
+      - salad
+      - sandwiches
+      - seafood
+      - side dish
+      - soup
+      - special occasions
+      - starter
+      - sweets
     CautionLabel:
       type: string
       enum:
@@ -504,6 +431,79 @@ components:
       - shellfish
       - sulfites
       - fodmap
+    Selection:
+      type: object
+      properties:
+        assigned:
+          description: URI of the recipe assigned for this section (leaf sections only.)
+          type: string
+        _links:
+          description: Links to resources related to the assigned recipe
+          type: object
+          properties:
+            self:
+              allOf:
+              - description: Link to the assigned recipe's details in the Recipe Search API
+              - $ref: '#/components/schemas/LinkEntry'
+        sections:
+          description: Selection tree for sub-sections, according to the structure specified by the plan descriptor.
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/Selection'
+    HealthLabel:
+      type: string
+      enum:
+      - fat-free
+      - low-fat-abs
+      - sugar-conscious
+      - low-sugar
+      - low-potassium
+      - kidney-friendly
+      - keto-friendly
+      - plant-based
+      - vegan
+      - vegetarian
+      - pescatarian
+      - paleo
+      - specific-carbs
+      - Mediterranean
+      - DASH
+      - dairy-free
+      - gluten-free
+      - wheat-free
+      - egg-free
+      - milk-free
+      - peanut-free
+      - tree-nut-free
+      - soy-free
+      - fish-free
+      - shellfish-free
+      - pork-free
+      - red-meat-free
+      - crustacean-free
+      - celery-free
+      - mustard-free
+      - sesame-free
+      - lupine-free
+      - mollusk-free
+      - alcohol-free
+      - no-oil-added
+      - no-sugar-added
+      - sulfite-free
+      - fodmap-free
+      - kosher
+      - alcohol-cocktail
+      - immuno-supportive
+    MealType:
+      type: string
+      enum:
+      - breakfast
+      - brunch
+      - lunch/dinner
+      - lunch
+      - dinner
+      - snack
+      - teatime
   examples:
     Vegan-plan:
       description: Vegan meal plan descriptor
@@ -542,78 +542,6 @@ components:
               sections:
                 Main: {}
                 Dessert: {}
-    7-Day-Plan-with-Allergens:
-      description: 7 Day Allergens descriptor
-      value:
-        size: 7
-        plan:
-          accept:
-            all:
-            - health:
-              - SOY_FREE
-              - FISH_FREE
-              - MEDITERRANEAN
-          fit:
-            ENERC_KCAL:
-              min: 1000
-              max: 2000
-            SUGAR.added:
-              max: 20
-          exclude:
-          - http://www.edamam.com/ontologies/edamam.owl#recipe_x
-          - http://www.edamam.com/ontologies/edamam.owl#recipe_y
-          - http://www.edamam.com/ontologies/edamam.owl#recipe_z
-          sections:
-            Breakfast:
-              accept:
-                all:
-                - dish:
-                  - drinks
-                  - egg
-                  - biscuits and cookies
-                  - bread
-                  - pancake
-                  - cereals
-                - meal:
-                  - breakfast
-              fit:
-                ENERC_KCAL:
-                  min: 100
-                  max: 600
-            Lunch:
-              accept:
-                all:
-                - dish:
-                  - main course
-                  - pasta
-                  - egg
-                  - salad
-                  - soup
-                  - sandwiches
-                  - pizza
-                  - seafood
-                - meal:
-                  - lunch/dinner
-              fit:
-                ENERC_KCAL:
-                  min: 300
-                  max: 900
-            Dinner:
-              accept:
-                all:
-                - dish:
-                  - seafood
-                  - egg
-                  - salad
-                  - pizza
-                  - pasta
-                  - main course
-                - meal:
-                  - lunch/dinner
-              fit:
-                ENERC_KCAL:
-                  min: 200
-                  max: 900
     Vegan-plan-assignment:
       description: Vegan meal plan, 2-day selection
       value:
@@ -701,6 +629,78 @@ components:
                     self:
                       title: Recipe №12
                       href: https://test-cluster.edamam.com/api/recipes/v2/12?type=public
+    7-Day-Plan-with-Allergens:
+      description: 7 Day Allergens descriptor
+      value:
+        size: 7
+        plan:
+          accept:
+            all:
+            - health:
+              - SOY_FREE
+              - FISH_FREE
+              - MEDITERRANEAN
+          fit:
+            ENERC_KCAL:
+              min: 1000
+              max: 2000
+            SUGAR.added:
+              max: 20
+          exclude:
+          - http://www.edamam.com/ontologies/edamam.owl#recipe_x
+          - http://www.edamam.com/ontologies/edamam.owl#recipe_y
+          - http://www.edamam.com/ontologies/edamam.owl#recipe_z
+          sections:
+            Breakfast:
+              accept:
+                all:
+                - dish:
+                  - drinks
+                  - egg
+                  - biscuits and cookies
+                  - bread
+                  - pancake
+                  - cereals
+                - meal:
+                  - breakfast
+              fit:
+                ENERC_KCAL:
+                  min: 100
+                  max: 600
+            Lunch:
+              accept:
+                all:
+                - dish:
+                  - main course
+                  - pasta
+                  - egg
+                  - salad
+                  - soup
+                  - sandwiches
+                  - pizza
+                  - seafood
+                - meal:
+                  - lunch/dinner
+              fit:
+                ENERC_KCAL:
+                  min: 300
+                  max: 900
+            Dinner:
+              accept:
+                all:
+                - dish:
+                  - seafood
+                  - egg
+                  - salad
+                  - pizza
+                  - pasta
+                  - main course
+                - meal:
+                  - lunch/dinner
+              fit:
+                ENERC_KCAL:
+                  min: 200
+                  max: 900
   securitySchemes:
     basic:
       type: http

@@ -57,46 +57,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    Gender:
-      description: User gender
-      type: string
-      enum:
-      - male
-      - female
-    Condition:
-      description: Physical or medical condition
-      type: string
-      enum:
-      - pregnant
-      - lactating
-    Values:
-      description: Recommended daily allowance and/or intake upper limit, in nutrient-specific units
-      type: object
-      properties:
-        recommended:
-          description: Recommended daily allowance, if defined
-          type: number
-        limit:
-          description: Tolerable upper limit on nutrient intake, if defined
-          type: number
-    MetabolicProfile:
-      description: (BETA only) Collection of parameters describing a target user's metabolic profile
-      type: object
-      properties:
-        gender:
-          $ref: '#/components/schemas/Gender'
-        conditions:
-          type: array
-          items:
-            $ref: '#/components/schemas/Condition'
-        height:
-          type: number
-        weight:
-          type: number
-        age:
-          type: number
-        activity-level:
-          $ref: '#/components/schemas/ActivityLevel'
     ActivityLevel:
       description: '| Activity level      | Description |
 
@@ -117,105 +77,55 @@ components:
       - moderately-active
       - vigorously-active
       - extremely-active
+    Gender:
+      description: User gender
+      type: string
+      enum:
+      - male
+      - female
+    Values:
+      description: Recommended daily allowance and/or intake upper limit, in nutrient-specific units
+      type: object
+      properties:
+        recommended:
+          description: Recommended daily allowance, if defined
+          type: number
+        limit:
+          description: Tolerable upper limit on nutrient intake, if defined
+          type: number
+    Condition:
+      description: Physical or medical condition
+      type: string
+      enum:
+      - pregnant
+      - lactating
+    MetabolicProfile:
+      description: (BETA only) Collection of parameters describing a target user's metabolic profile
+      type: object
+      properties:
+        gender:
+          $ref: '#/components/schemas/Gender'
+        conditions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Condition'
+        height:
+          type: number
+        weight:
+          type: number
+        age:
+          type: number
+        activity-level:
+          $ref: '#/components/schemas/ActivityLevel'
   examples:
-    values_Female_pregnant:
-      description: Daily values for a pregnant female, 25, of unspecified build
+    profile_Male_complete:
+      description: Male profile, fully specified
       value:
-        values:
-          PROCNT:
-            recommended: 71
-          CHOCDF:
-            recommended: 175
-          FIBTG:
-            recommended: 28
-          F18D2CN6:
-            recommended: 13
-          F18D3CN3:
-            recommended: 1.4
-          WATER:
-            recommended: 3000
-          VITA_RAE:
-            recommended: 770
-            limit: 3000
-          VITC:
-            recommended: 85
-            limit: 2000
-          VITD:
-            recommended: 15
-            limit: 100
-          TOCPHA:
-            recommended: 15
-            limit: 1000
-          VITK1:
-            recommended: 90
-          THIA:
-            recommended: 1.4
-          RIBF:
-            recommended: 1.4
-          NIA:
-            recommended: 18
-            limit: 35
-          VITB6A:
-            recommended: 1.9
-            limit: 100
-          FOLDFE:
-            recommended: 600
-            limit: 1000
-          VITB12:
-            recommended: 2.6
-          PANTAC:
-            recommended: 6
-          BIO:
-            recommended: 30
-          CHOLN:
-            recommended: 450
-            limit: 3500
-          CA:
-            recommended: 1000
-            limit: 2500
-          CR:
-            recommended: 30
-          CU:
-            recommended: 1
-            limit: 10
-          FLD:
-            recommended: 3000
-            limit: 10000
-          I:
-            recommended: 220
-            limit: 1100
-          FE:
-            recommended: 27
-            limit: 45
-          MG:
-            recommended: 350
-            limit: 350
-          MN:
-            recommended: 2
-            limit: 11
-          MO:
-            recommended: 50
-            limit: 2000
-          P:
-            recommended: 700
-            limit: 3500
-          SE:
-            recommended: 60
-            limit: 400
-          ZN:
-            recommended: 11
-            limit: 40
-          K:
-            recommended: 2900
-          NA:
-            recommended: 1500
-          CL:
-            recommended: 2300
-            limit: 3600
-          B:
-            limit: 20000
-          NI:
-            limit: 1000
+        gender: male
+        height: 180
+        weight: 80
+        age: 26
+        activity-level: moderately-active
     values_Male_generic:
       description: Daily values for a male of unspecified age and build
       value:
@@ -314,6 +224,10 @@ components:
             limit: 11000
           NI:
             limit: 600
+    profile_Male_generic:
+      description: Male of unspecified age and build
+      value:
+        gender: male
     profile_Female_pregnant:
       description: Pregnant female, 25, of unspecified build
       value:
@@ -321,14 +235,6 @@ components:
         conditions:
         - pregnant
         age: 25
-    profile_Male_complete:
-      description: Male profile, fully specified
-      value:
-        gender: male
-        height: 180
-        weight: 80
-        age: 26
-        activity-level: moderately-active
     profile_Female_complete:
       description: Female profile, fully specified
       value:
@@ -339,10 +245,104 @@ components:
         weight: 65
         age: 20
         activity-level: moderately-active
-    profile_Male_generic:
-      description: Male of unspecified age and build
+    values_Female_pregnant:
+      description: Daily values for a pregnant female, 25, of unspecified build
       value:
-        gender: male
+        values:
+          PROCNT:
+            recommended: 71
+          CHOCDF:
+            recommended: 175
+          FIBTG:
+            recommended: 28
+          F18D2CN6:
+            recommended: 13
+          F18D3CN3:
+            recommended: 1.4
+          WATER:
+            recommended: 3000
+          VITA_RAE:
+            recommended: 770
+            limit: 3000
+          VITC:
+            recommended: 85
+            limit: 2000
+          VITD:
+            recommended: 15
+            limit: 100
+          TOCPHA:
+            recommended: 15
+            limit: 1000
+          VITK1:
+            recommended: 90
+          THIA:
+            recommended: 1.4
+          RIBF:
+            recommended: 1.4
+          NIA:
+            recommended: 18
+            limit: 35
+          VITB6A:
+            recommended: 1.9
+            limit: 100
+          FOLDFE:
+            recommended: 600
+            limit: 1000
+          VITB12:
+            recommended: 2.6
+          PANTAC:
+            recommended: 6
+          BIO:
+            recommended: 30
+          CHOLN:
+            recommended: 450
+            limit: 3500
+          CA:
+            recommended: 1000
+            limit: 2500
+          CR:
+            recommended: 30
+          CU:
+            recommended: 1
+            limit: 10
+          FLD:
+            recommended: 3000
+            limit: 10000
+          I:
+            recommended: 220
+            limit: 1100
+          FE:
+            recommended: 27
+            limit: 45
+          MG:
+            recommended: 350
+            limit: 350
+          MN:
+            recommended: 2
+            limit: 11
+          MO:
+            recommended: 50
+            limit: 2000
+          P:
+            recommended: 700
+            limit: 3500
+          SE:
+            recommended: 60
+            limit: 400
+          ZN:
+            recommended: 11
+            limit: 40
+          K:
+            recommended: 2900
+          NA:
+            recommended: 1500
+          CL:
+            recommended: 2300
+            limit: 3600
+          B:
+            limit: 20000
+          NI:
+            limit: 1000
   securitySchemes:
     basic:
       type: http

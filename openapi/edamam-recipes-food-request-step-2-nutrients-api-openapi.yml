@@ -77,17 +77,26 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    NutrientsMap:
+    List:
       type: object
-      additionalProperties:
-        type: object
-        properties:
-          label:
+      properties:
+        ingredients:
+          type: array
+          items:
+            $ref: '#/components/schemas/Ingredients'
+    Ingredients:
+      type: object
+      properties:
+        quantity:
+          type: number
+        measureURI:
+          type: string
+        qualifiers:
+          type: array
+          items:
             type: string
-          tag:
-            type: string
-          units:
-            type: string
+        foodId:
+          type: string
     IngredientLine:
       type: object
       properties:
@@ -130,6 +139,15 @@ components:
           items:
             $ref: '#/components/schemas/Quantity'
         servingsPerContainer:
+          type: number
+    Quantity:
+      type: object
+      properties:
+        uri:
+          type: string
+        label:
+          type: string
+        quantity:
           type: number
     RecipeInfo:
       type: object
@@ -264,39 +282,17 @@ components:
           type: array
           items:
             type: string
-    Quantity:
+    NutrientsMap:
       type: object
-      properties:
-        uri:
-          type: string
-        label:
-          type: string
-        quantity:
-          type: number
-    Errors:
-      type: array
-      items:
-        $ref: '#/components/schemas/Error'
-    List:
-      type: object
-      properties:
-        ingredients:
-          type: array
-          items:
-            $ref: '#/components/schemas/Ingredients'
-    Ingredients:
-      type: object
-      properties:
-        quantity:
-          type: number
-        measureURI:
-          type: string
-        qualifiers:
-          type: array
-          items:
+      additionalProperties:
+        type: object
+        properties:
+          label:
             type: string
-        foodId:
-          type: string
+          tag:
+            type: string
+          units:
+            type: string
     Error:
       properties:
         errorCode:
@@ -307,3 +303,7 @@ components:
           type: array
           items:
             type: string
+    Errors:
+      type: array
+      items:
+        $ref: '#/components/schemas/Error'

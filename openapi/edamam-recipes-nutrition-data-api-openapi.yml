@@ -87,21 +87,35 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    Nutrients:
-      type: object
-      additionalProperties:
-        type: array
-        items:
-          $ref: '#/components/schemas/NutrientInfo'
-    NutrientInfo:
+    Quantity:
       type: object
       properties:
+        uri:
+          type: string
         label:
           type: string
         quantity:
           type: number
-        unit:
+    TranslatedLabel:
+      type: object
+      properties:
+        type:
           type: string
+          enum:
+          - health
+          - diet
+          - caution
+          - cuisineType
+          - mealType
+          - dishType
+        id:
+          type: string
+        label:
+          type: string
+      required:
+      - type
+      - id
+      - label
     Parsed:
       type: object
       properties:
@@ -145,35 +159,6 @@ components:
             $ref: '#/components/schemas/Quantity'
         servingsPerContainer:
           type: number
-    TranslatedLabel:
-      type: object
-      properties:
-        type:
-          type: string
-          enum:
-          - health
-          - diet
-          - caution
-          - cuisineType
-          - mealType
-          - dishType
-        id:
-          type: string
-        label:
-          type: string
-      required:
-      - type
-      - id
-      - label
-    Quantity:
-      type: object
-      properties:
-        uri:
-          type: string
-        label:
-          type: string
-        quantity:
-          type: number
     Ingredient:
       type: object
       properties:
@@ -181,6 +166,21 @@ components:
           type: string
         parsed:
           $ref: '#/components/schemas/Parsed'
+    NutrientInfo:
+      type: object
+      properties:
+        label:
+          type: string
+        quantity:
+          type: number
+        unit:
+          type: string
+    Nutrients:
+      type: object
+      additionalProperties:
+        type: array
+        items:
+          $ref: '#/components/schemas/NutrientInfo'
     AnalyzedRecipe:
       type: object
       description: The extracted information. Not all information is available for each recipe or for every plan.
