@@ -556,11 +556,26 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    HATEOAS:
+    Hint:
       type: object
       properties:
-        next:
-          $ref: '#/components/schemas/Link'
+        pluCode:
+          $ref: '#/components/schemas/PLUCode'
+        food:
+          $ref: '#/components/schemas/Food'
+        measures:
+          type: array
+          items:
+            $ref: '#/components/schemas/Measure'
+    WeightedMeasure:
+      type: object
+      properties:
+        qualifiers:
+          type: array
+          items:
+            $ref: '#/components/schemas/Term'
+        weight:
+          type: number
     PLUCode:
       type: object
       properties:
@@ -574,75 +589,6 @@ components:
           type: string
         isRetailerAssigned:
           type: boolean
-    Hint:
-      type: object
-      properties:
-        pluCode:
-          $ref: '#/components/schemas/PLUCode'
-        food:
-          $ref: '#/components/schemas/Food'
-        measures:
-          type: array
-          items:
-            $ref: '#/components/schemas/Measure'
-    Quantity:
-      type: object
-      properties:
-        uri:
-          type: string
-        label:
-          type: string
-        quantity:
-          type: number
-    Link:
-      type: object
-      properties:
-        href:
-          type: string
-        title:
-          type: string
-    Term:
-      type: object
-      properties:
-        uri:
-          type: string
-        label:
-          type: string
-    Parsed:
-      type: object
-      properties:
-        food:
-          $ref: '#/components/schemas/Food'
-        quantity:
-          type: number
-        measure:
-          $ref: '#/components/schemas/Measure'
-    WeightedMeasure:
-      type: object
-      properties:
-        qualifiers:
-          type: array
-          items:
-            $ref: '#/components/schemas/Term'
-        weight:
-          type: number
-    ParseResponse:
-      type: object
-      properties:
-        text:
-          type: string
-        count:
-          type: integer
-        parsed:
-          type: array
-          items:
-            $ref: '#/components/schemas/Parsed'
-        hints:
-          type: array
-          items:
-            $ref: '#/components/schemas/Hint'
-        _links:
-          $ref: '#/components/schemas/HATEOAS'
     Food:
       type: object
       properties:
@@ -674,20 +620,34 @@ components:
             $ref: '#/components/schemas/Quantity'
         servingsPerContainer:
           type: number
-    Error:
-      properties:
-        errorCode:
-          type: string
-        message:
-          type: string
-        params:
-          type: array
-          items:
-            type: string
     Errors:
       type: array
       items:
         $ref: '#/components/schemas/Error'
+    ParseResponse:
+      type: object
+      properties:
+        text:
+          type: string
+        count:
+          type: integer
+        parsed:
+          type: array
+          items:
+            $ref: '#/components/schemas/Parsed'
+        hints:
+          type: array
+          items:
+            $ref: '#/components/schemas/Hint'
+        _links:
+          $ref: '#/components/schemas/HATEOAS'
+    Term:
+      type: object
+      properties:
+        uri:
+          type: string
+        label:
+          type: string
     Measure:
       type: object
       properties:
@@ -701,3 +661,43 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/WeightedMeasure'
+    HATEOAS:
+      type: object
+      properties:
+        next:
+          $ref: '#/components/schemas/Link'
+    Quantity:
+      type: object
+      properties:
+        uri:
+          type: string
+        label:
+          type: string
+        quantity:
+          type: number
+    Error:
+      properties:
+        errorCode:
+          type: string
+        message:
+          type: string
+        params:
+          type: array
+          items:
+            type: string
+    Link:
+      type: object
+      properties:
+        href:
+          type: string
+        title:
+          type: string
+    Parsed:
+      type: object
+      properties:
+        food:
+          $ref: '#/components/schemas/Food'
+        quantity:
+          type: number
+        measure:
+          $ref: '#/components/schemas/Measure'

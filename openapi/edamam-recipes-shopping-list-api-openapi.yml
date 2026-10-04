@@ -81,17 +81,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    LinkEntry:
-      type: object
-      required:
-      - href
-      properties:
-        title:
-          description: Human-readable link title
-          type: string
-        href:
-          description: Target URL
-          type: string
     ShoppingEntry:
       type: object
       properties:
@@ -123,6 +112,17 @@ components:
                 type: array
                 items:
                   type: string
+    LinkEntry:
+      type: object
+      required:
+      - href
+      properties:
+        title:
+          description: Human-readable link title
+          type: string
+        href:
+          description: Target URL
+          type: string
     RecipeEntry:
       type: object
       required:
@@ -145,6 +145,27 @@ components:
           description: Item (recipe of food) URI
           type: string
   examples:
+    Recipe_preparation_plan_-_by_total_quantity:
+      value:
+        entries:
+        - quantity: 1
+          item: http://www.edamam.com/ontologies/edamam.owl#recipe_1
+        - quantity: 1
+          item: http://www.edamam.com/ontologies/edamam.owl#recipe_2
+        - quantity: 2
+          item: http://www.edamam.com/ontologies/edamam.owl#recipe_3
+    Recipe_preparation_plan_-_by_servings:
+      value:
+        entries:
+        - quantity: 1
+          measure: http://www.edamam.com/ontologies/edamam.owl#Measure_serving
+          item: http://www.edamam.com/ontologies/edamam.owl#recipe_1
+        - quantity: 3
+          measure: http://www.edamam.com/ontologies/edamam.owl#Measure_serving
+          item: http://www.edamam.com/ontologies/edamam.owl#recipe_2
+        - quantity: 2
+          measure: http://www.edamam.com/ontologies/edamam.owl#Measure_serving
+          item: http://www.edamam.com/ontologies/edamam.owl#recipe_3
     Shopping_list:
       value:
         entries:
@@ -177,27 +198,6 @@ components:
           quantities:
           - quantity: 300
             measure: http://www.edamam.com/ontologies/edamam.owl#Measure_gram
-    Recipe_preparation_plan_-_by_servings:
-      value:
-        entries:
-        - quantity: 1
-          measure: http://www.edamam.com/ontologies/edamam.owl#Measure_serving
-          item: http://www.edamam.com/ontologies/edamam.owl#recipe_1
-        - quantity: 3
-          measure: http://www.edamam.com/ontologies/edamam.owl#Measure_serving
-          item: http://www.edamam.com/ontologies/edamam.owl#recipe_2
-        - quantity: 2
-          measure: http://www.edamam.com/ontologies/edamam.owl#Measure_serving
-          item: http://www.edamam.com/ontologies/edamam.owl#recipe_3
-    Recipe_preparation_plan_-_by_total_quantity:
-      value:
-        entries:
-        - quantity: 1
-          item: http://www.edamam.com/ontologies/edamam.owl#recipe_1
-        - quantity: 1
-          item: http://www.edamam.com/ontologies/edamam.owl#recipe_2
-        - quantity: 2
-          item: http://www.edamam.com/ontologies/edamam.owl#recipe_3
   securitySchemes:
     basic:
       type: http
