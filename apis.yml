@@ -36,7 +36,7 @@ humanURL: https://developer.edamam.com/
 baseURL: https://api.edamam.com
 specificationVersion: '0.23'
 created: '2026-05-28'
-modified: '2026-05-30'
+modified: '2026-10-06'
 x-source: public-apis/public-apis
 x-category: Food & Drink
 x-tier: 3
@@ -714,6 +714,10 @@ apis:
   - type: Pricing
     url: https://developer.edamam.com/meal-planner-api
 common:
+  - url: https://www.edamam.com/blog/
+    type: Blog
+  - url: https://www.edamam.com/blog/feed/
+    type: BlogRSS
   - type: AgenticAccess
     url: agentic-access/edamam-recipes-agentic-access.yml
   - type: DomainSecurity
