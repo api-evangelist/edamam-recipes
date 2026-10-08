@@ -714,6 +714,8 @@ apis:
   - type: Pricing
     url: https://developer.edamam.com/meal-planner-api
 common:
+  - type: FinOps
+    url: finops/edamam-recipes-finops.yml
   - url: https://www.edamam.com/blog/
     type: Blog
   - url: https://www.edamam.com/blog/feed/
