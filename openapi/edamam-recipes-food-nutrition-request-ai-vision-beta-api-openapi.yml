@@ -75,68 +75,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    WeightedMeasure:
-      type: object
-      properties:
-        qualifiers:
-          type: array
-          items:
-            $ref: '#/components/schemas/Term'
-        weight:
-          type: number
-    Errors:
-      type: array
-      items:
-        $ref: '#/components/schemas/Error'
-    Food:
-      type: object
-      properties:
-        foodId:
-          type: string
-        uri:
-          type: string
-        label:
-          type: string
-        knownAs:
-          type: string
-        nutrients:
-          type: object
-          additionalProperties:
-            type: number
-        brand:
-          type: string
-        category:
-          type: string
-        categoryLabel:
-          type: string
-        foodContentsLabel:
-          type: string
-        image:
-          type: string
-        servingSizes:
-          type: array
-          items:
-            $ref: '#/components/schemas/Quantity'
-        servingsPerContainer:
-          type: number
-    VisionResponse:
-      type: object
-      properties:
-        parsed:
-          $ref: '#/components/schemas/Parsed'
-        recipe:
-          $ref: '#/components/schemas/RecipeInfo'
-    NutrientsMap:
-      type: object
-      additionalProperties:
-        type: object
-        properties:
-          label:
-            type: string
-          tag:
-            type: string
-          units:
-            type: string
     RecipeInfo:
       type: object
       properties:
@@ -270,6 +208,77 @@ components:
           type: array
           items:
             type: string
+    Errors:
+      type: array
+      items:
+        $ref: '#/components/schemas/Error'
+    Quantity:
+      type: object
+      properties:
+        uri:
+          type: string
+        label:
+          type: string
+        quantity:
+          type: number
+    Term:
+      type: object
+      properties:
+        uri:
+          type: string
+        label:
+          type: string
+    Food:
+      type: object
+      properties:
+        foodId:
+          type: string
+        uri:
+          type: string
+        label:
+          type: string
+        knownAs:
+          type: string
+        nutrients:
+          type: object
+          additionalProperties:
+            type: number
+        brand:
+          type: string
+        category:
+          type: string
+        categoryLabel:
+          type: string
+        foodContentsLabel:
+          type: string
+        image:
+          type: string
+        servingSizes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Quantity'
+        servingsPerContainer:
+          type: number
+    WeightedMeasure:
+      type: object
+      properties:
+        qualifiers:
+          type: array
+          items:
+            $ref: '#/components/schemas/Term'
+        weight:
+          type: number
+    NutrientsMap:
+      type: object
+      additionalProperties:
+        type: object
+        properties:
+          label:
+            type: string
+          tag:
+            type: string
+          units:
+            type: string
     IngredientLine:
       type: object
       properties:
@@ -313,35 +322,6 @@ components:
             $ref: '#/components/schemas/Quantity'
         servingsPerContainer:
           type: number
-    Term:
-      type: object
-      properties:
-        uri:
-          type: string
-        label:
-          type: string
-    Measure:
-      type: object
-      properties:
-        uri:
-          type: string
-        label:
-          type: string
-        weight:
-          type: number
-        qualified:
-          type: array
-          items:
-            $ref: '#/components/schemas/WeightedMeasure'
-    Quantity:
-      type: object
-      properties:
-        uri:
-          type: string
-        label:
-          type: string
-        quantity:
-          type: number
     Error:
       properties:
         errorCode:
@@ -365,6 +345,13 @@ components:
           type: string
           description: An image of food, provided either a publicly accessible URL).
           example: https://example.com/image_xyz.jpg
+    VisionResponse:
+      type: object
+      properties:
+        parsed:
+          $ref: '#/components/schemas/Parsed'
+        recipe:
+          $ref: '#/components/schemas/RecipeInfo'
     Parsed:
       type: object
       properties:
@@ -374,3 +361,16 @@ components:
           type: number
         measure:
           $ref: '#/components/schemas/Measure'
+    Measure:
+      type: object
+      properties:
+        uri:
+          type: string
+        label:
+          type: string
+        weight:
+          type: number
+        qualified:
+          type: array
+          items:
+            $ref: '#/components/schemas/WeightedMeasure'

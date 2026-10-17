@@ -556,26 +556,34 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    Hint:
+    Link:
       type: object
       properties:
-        pluCode:
-          $ref: '#/components/schemas/PLUCode'
-        food:
-          $ref: '#/components/schemas/Food'
-        measures:
-          type: array
-          items:
-            $ref: '#/components/schemas/Measure'
-    WeightedMeasure:
+        href:
+          type: string
+        title:
+          type: string
+    Errors:
+      type: array
+      items:
+        $ref: '#/components/schemas/Error'
+    ParseResponse:
       type: object
       properties:
-        qualifiers:
+        text:
+          type: string
+        count:
+          type: integer
+        parsed:
           type: array
           items:
-            $ref: '#/components/schemas/Term'
-        weight:
-          type: number
+            $ref: '#/components/schemas/Parsed'
+        hints:
+          type: array
+          items:
+            $ref: '#/components/schemas/Hint'
+        _links:
+          $ref: '#/components/schemas/HATEOAS'
     PLUCode:
       type: object
       properties:
@@ -589,6 +597,22 @@ components:
           type: string
         isRetailerAssigned:
           type: boolean
+    Quantity:
+      type: object
+      properties:
+        uri:
+          type: string
+        label:
+          type: string
+        quantity:
+          type: number
+    Term:
+      type: object
+      properties:
+        uri:
+          type: string
+        label:
+          type: string
     Food:
       type: object
       properties:
@@ -620,34 +644,50 @@ components:
             $ref: '#/components/schemas/Quantity'
         servingsPerContainer:
           type: number
-    Errors:
-      type: array
-      items:
-        $ref: '#/components/schemas/Error'
-    ParseResponse:
+    WeightedMeasure:
       type: object
       properties:
-        text:
+        qualifiers:
+          type: array
+          items:
+            $ref: '#/components/schemas/Term'
+        weight:
+          type: number
+    Error:
+      properties:
+        errorCode:
           type: string
-        count:
-          type: integer
-        parsed:
+        message:
+          type: string
+        params:
           type: array
           items:
-            $ref: '#/components/schemas/Parsed'
-        hints:
-          type: array
-          items:
-            $ref: '#/components/schemas/Hint'
-        _links:
-          $ref: '#/components/schemas/HATEOAS'
-    Term:
+            type: string
+    Hint:
       type: object
       properties:
-        uri:
-          type: string
-        label:
-          type: string
+        pluCode:
+          $ref: '#/components/schemas/PLUCode'
+        food:
+          $ref: '#/components/schemas/Food'
+        measures:
+          type: array
+          items:
+            $ref: '#/components/schemas/Measure'
+    HATEOAS:
+      type: object
+      properties:
+        next:
+          $ref: '#/components/schemas/Link'
+    Parsed:
+      type: object
+      properties:
+        food:
+          $ref: '#/components/schemas/Food'
+        quantity:
+          type: number
+        measure:
+          $ref: '#/components/schemas/Measure'
     Measure:
       type: object
       properties:
@@ -661,43 +701,3 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/WeightedMeasure'
-    HATEOAS:
-      type: object
-      properties:
-        next:
-          $ref: '#/components/schemas/Link'
-    Quantity:
-      type: object
-      properties:
-        uri:
-          type: string
-        label:
-          type: string
-        quantity:
-          type: number
-    Error:
-      properties:
-        errorCode:
-          type: string
-        message:
-          type: string
-        params:
-          type: array
-          items:
-            type: string
-    Link:
-      type: object
-      properties:
-        href:
-          type: string
-        title:
-          type: string
-    Parsed:
-      type: object
-      properties:
-        food:
-          $ref: '#/components/schemas/Food'
-        quantity:
-          type: number
-        measure:
-          $ref: '#/components/schemas/Measure'

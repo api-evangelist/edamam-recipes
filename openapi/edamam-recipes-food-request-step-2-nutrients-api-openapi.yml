@@ -77,34 +77,10 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    Ingredients:
-      type: object
-      properties:
-        quantity:
-          type: number
-        measureURI:
-          type: string
-        qualifiers:
-          type: array
-          items:
-            type: string
-        foodId:
-          type: string
     Errors:
       type: array
       items:
         $ref: '#/components/schemas/Error'
-    NutrientsMap:
-      type: object
-      additionalProperties:
-        type: object
-        properties:
-          label:
-            type: string
-          tag:
-            type: string
-          units:
-            type: string
     RecipeInfo:
       type: object
       properties:
@@ -238,6 +214,39 @@ components:
           type: array
           items:
             type: string
+    Quantity:
+      type: object
+      properties:
+        uri:
+          type: string
+        label:
+          type: string
+        quantity:
+          type: number
+    Ingredients:
+      type: object
+      properties:
+        quantity:
+          type: number
+        measureURI:
+          type: string
+        qualifiers:
+          type: array
+          items:
+            type: string
+        foodId:
+          type: string
+    NutrientsMap:
+      type: object
+      additionalProperties:
+        type: object
+        properties:
+          label:
+            type: string
+          tag:
+            type: string
+          units:
+            type: string
     IngredientLine:
       type: object
       properties:
@@ -281,22 +290,6 @@ components:
             $ref: '#/components/schemas/Quantity'
         servingsPerContainer:
           type: number
-    List:
-      type: object
-      properties:
-        ingredients:
-          type: array
-          items:
-            $ref: '#/components/schemas/Ingredients'
-    Quantity:
-      type: object
-      properties:
-        uri:
-          type: string
-        label:
-          type: string
-        quantity:
-          type: number
     Error:
       properties:
         errorCode:
@@ -307,3 +300,10 @@ components:
           type: array
           items:
             type: string
+    List:
+      type: object
+      properties:
+        ingredients:
+          type: array
+          items:
+            $ref: '#/components/schemas/Ingredients'

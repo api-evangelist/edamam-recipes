@@ -1025,70 +1025,12 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    NutrientInfo:
-      properties:
-        label:
-          type: string
-        quantity:
-          type: number
-        unit:
-          type: string
-    Response:
-      properties:
-        from:
-          type: integer
-        to:
-          type: integer
-        count:
-          type: integer
-        _links:
-          $ref: '#/components/schemas/Links'
-        hits:
-          type: array
-          items:
-            $ref: '#/components/schemas/Hit'
-    Hit:
-      properties:
-        recipe:
-          $ref: '#/components/schemas/Recipe'
-        _links:
-          $ref: '#/components/schemas/Links'
-    ImageInfo:
-      properties:
-        url:
-          type: string
-        width:
-          type: integer
-        height:
-          type: integer
-    Errors:
-      type: array
-      items:
-        $ref: '#/components/schemas/Error'
     Link:
       properties:
         href:
           type: string
         title:
           type: string
-    DigestEntry:
-      properties:
-        label:
-          type: string
-        tag:
-          type: string
-        schemaOrgTag:
-          type: string
-        total:
-          type: number
-        hasRDI:
-          type: boolean
-        daily:
-          type: number
-        unit:
-          type: string
-        sub:
-          $ref: '#/components/schemas/Digest'
     Recipe:
       properties:
         uri:
@@ -1184,16 +1126,10 @@ components:
           $ref: '#/components/schemas/NutrientsInfo'
         digest:
           $ref: '#/components/schemas/Digest'
-    Digest:
+    Errors:
       type: array
       items:
-        $ref: '#/components/schemas/DigestEntry'
-    Links:
-      properties:
-        self:
-          $ref: '#/components/schemas/Link'
-        next:
-          $ref: '#/components/schemas/Link'
+        $ref: '#/components/schemas/Error'
     Error:
       properties:
         errorCode:
@@ -1204,9 +1140,56 @@ components:
           type: array
           items:
             type: string
-    NutrientsInfo:
-      additionalProperties:
-        $ref: '#/components/schemas/NutrientInfo'
+    NutrientInfo:
+      properties:
+        label:
+          type: string
+        quantity:
+          type: number
+        unit:
+          type: string
+    DigestEntry:
+      properties:
+        label:
+          type: string
+        tag:
+          type: string
+        schemaOrgTag:
+          type: string
+        total:
+          type: number
+        hasRDI:
+          type: boolean
+        daily:
+          type: number
+        unit:
+          type: string
+        sub:
+          $ref: '#/components/schemas/Digest'
+    Hit:
+      properties:
+        recipe:
+          $ref: '#/components/schemas/Recipe'
+        _links:
+          $ref: '#/components/schemas/Links'
+    Links:
+      properties:
+        self:
+          $ref: '#/components/schemas/Link'
+        next:
+          $ref: '#/components/schemas/Link'
+    ImageInfo:
+      properties:
+        url:
+          type: string
+        width:
+          type: integer
+        height:
+          type: integer
+    Digest:
+      type: array
+      items:
+        $ref: '#/components/schemas/DigestEntry'
     Ingredient:
       properties:
         text:
@@ -1221,6 +1204,23 @@ components:
           type: number
         foodId:
           type: string
+    Response:
+      properties:
+        from:
+          type: integer
+        to:
+          type: integer
+        count:
+          type: integer
+        _links:
+          $ref: '#/components/schemas/Links'
+        hits:
+          type: array
+          items:
+            $ref: '#/components/schemas/Hit'
+    NutrientsInfo:
+      additionalProperties:
+        $ref: '#/components/schemas/NutrientInfo'
   securitySchemes:
     basic:
       type: http

@@ -152,21 +152,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    NutrientInfo:
-      type: object
-      properties:
-        label:
-          type: string
-        quantity:
-          type: number
-        unit:
-          type: string
-    Nutrients:
-      type: object
-      additionalProperties:
-        type: array
-        items:
-          $ref: '#/components/schemas/NutrientInfo'
     Recipe:
       type: object
       description: The input recipe.
@@ -201,6 +186,15 @@ components:
           type: array
           items:
             type: string
+    NutrientInfo:
+      type: object
+      properties:
+        label:
+          type: string
+        quantity:
+          type: number
+        unit:
+          type: string
     Quantity:
       type: object
       properties:
@@ -210,6 +204,26 @@ components:
           type: string
         quantity:
           type: number
+    TranslatedLabel:
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - health
+          - diet
+          - caution
+          - cuisineType
+          - mealType
+          - dishType
+        id:
+          type: string
+        label:
+          type: string
+      required:
+      - type
+      - id
+      - label
     AnalyzedRecipe:
       type: object
       description: The extracted information. Not all information is available for each recipe or for every plan.
@@ -342,26 +356,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/TranslatedLabel'
-    TranslatedLabel:
-      type: object
-      properties:
-        type:
-          type: string
-          enum:
-          - health
-          - diet
-          - caution
-          - cuisineType
-          - mealType
-          - dishType
-        id:
-          type: string
-        label:
-          type: string
-      required:
-      - type
-      - id
-      - label
     Ingredient:
       type: object
       properties:
@@ -369,6 +363,12 @@ components:
           type: string
         parsed:
           $ref: '#/components/schemas/Parsed'
+    Nutrients:
+      type: object
+      additionalProperties:
+        type: array
+        items:
+          $ref: '#/components/schemas/NutrientInfo'
     Parsed:
       type: object
       properties:
